@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
+import { AppConst } from '../shared/const';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,9 @@ import { HttpClient } from '@angular/common/http'
 export class GetLatestSerieService {
 
   constructor(private http: HttpClient) { }
-  apiKey: string = 'fbf021c3b54ef79e35757c4a9f21f7cd';
 
   getLatestSerie(): Observable<any> {
-    return this.http.get<Array<String>>(`https://api.themoviedb.org/3/tv/latest?api_key=${this.apiKey}&language=en-US`)
+    return this.http.get<Array<String>>(`${AppConst.apiUrl}tv/latest?api_key=${AppConst.apiKey}&language=en-US`)
   }
 
 }

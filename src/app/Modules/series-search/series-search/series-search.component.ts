@@ -2,23 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { GetSeriesService } from '../../../Services/get-series.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router'
-import { ShowSeriesDetalService } from '../../../Services/show-series-detail.service'
-
-export interface tableElement {
-  position: number;
-  name: string;
-  first_air_date: string;
-  vote_average: number;
-  id: number;
-}
-
-export interface searchData {
-  page: number,
-  results: Array<object>,
-  total_pages: number,
-  total_results: number,
-}
-  
+import { ShowSeriesDetalService } from '../../../Services/show-series-detail.service';
+import { AppConst } from '../../../shared/const';
+import { tabelRow } from '../../../shared/models/tabelRow.model';
+import { searchData } from '../../../shared/models/searchData.model';
+import { searchedSerie } from '../../../shared/models/searchedSerie.model';
 
 @Component({
   selector: 'app-series-search',
@@ -37,8 +25,7 @@ export class SeriesSearchComponent implements OnInit {
   searchError: boolean = false;
   searchForm: FormGroup;
   searchSeriesTitle: string = '';
-  searchedSeries: Array<object> = [];
-  popularity: number = 5;
+  searchedSeries: Array<searchedSerie> = [];
   dataSourceTable: Array<any> = [];
   seriesId: number = 0;
   tillViev: boolean = false;
@@ -84,7 +71,7 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-  dataToTable(series: tableElement[]): void {
+  dataToTable(series: tabelRow[]): void {
     series.forEach(element => {
       let data = {
         'position': this.tableIndex,
@@ -101,7 +88,7 @@ export class SeriesSearchComponent implements OnInit {
   popularityVerify(serials: Array<any>) {
     let verifed = [];
     serials.forEach(element => {
-      if(element.popularity > this.popularity) {
+      if(element.popularity > AppConst.popularity) {
         verifed.push(element)
       }
     });
