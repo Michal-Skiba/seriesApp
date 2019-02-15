@@ -1,0 +1,21 @@
+
+<p class="pageTitle">Premiery</p>
+<div class="wrapper">
+  <div class="header">
+    <button mat-raised-button color='primary' (click)='dayBefore()'> <mat-icon>keyboard_arrow_left</mat-icon></button>
+    <p>{{date}}</p>
+    <button mat-raised-button color='primary' (click)='dayLater()'><mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+  <div [@openClose]="isOpen" class="content" *ngIf='loading'>
+      <div *ngFor="let serie of series; let i = index" class='serieContainer'>
+        <p>{{serie.name}}</p>
+        <div class="tillContent">
+          <img src="{{url + serie.poster_path}}" alt="serie poster" [routerLink]="[serie.id]">
+          <p> {{serie.overview}}</p>
+        </div>
+      </div>
+  </div>
+  <div *ngIf="!loading" class="loader">
+      <mat-spinner></mat-spinner>
+  </div>
+</div>

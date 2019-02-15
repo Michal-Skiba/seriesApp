@@ -1,0 +1,39 @@
+<mat-toolbar>
+  <div class="menu">
+    <button mat-raised-button color="primary" routerLink="/search" [routerLinkActive]="['isActive']">
+      Wyszukaj serial
+    </button>
+    <button mat-raised-button color="primary" routerLink="/best-rated" [routerLinkActive]="['isActive']">
+      Najlepiej oceniane seriale
+    </button>
+    <button mat-raised-button color="primary" routerLink="/trends" [routerLinkActive]="['isActive']">
+      Ostatnie trendy
+    </button>
+  </div>
+  <div class="secondaryMenu">
+      <button mat-raised-button color="primary" [routerLink]='[{ outlets: { bottomInfo: ["latest-serie"] } }]' [routerLinkActive]="['isActive']">
+        najnowszy serial
+      </button>
+      <button mat-raised-button color="primary" [routerLink]='[{ outlets: { bottomInfo: ["top-rated-serie"] } }]' [routerLinkActive]="['isActive']">
+        najlepiej oceniony serial
+      </button>
+    </div>
+  <div class="mobileMenu">
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="metMenu" >
+      <button mat-menu-item routerLink="/search" [routerLinkActive]="['isActiveMobile']">
+        Wyszukaj serial
+      </button>
+      <button mat-menu-item routerLink="/best-rated" [routerLinkActive]="['isActiveMobile']">
+        Najlepiej oceniane seriale
+      </button>
+      <button mat-menu-item routerLink="/trends" [routerLinkActive]="['isActiveMobile']">
+        Ostatnie trendy
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>
+<router-outlet name='bottomInfo'></router-outlet>

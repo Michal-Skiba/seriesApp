@@ -1,0 +1,10 @@
+<div class="tills">
+  <div *ngFor="let data of dataSource">
+    <app-movie-till
+      [id] = data.id
+      [tillViev] = true
+      (showDetailsFlag) = "showDetailsFlag($event)"
+    >
+    </app-movie-till>
+  </div>
+</div>

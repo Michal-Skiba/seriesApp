@@ -1,0 +1,142 @@
+<div  
+  *ngIf="!loading"
+  [className]="tillViev ? 'tillVievWrapper' : 'cardWrapper'"
+>
+  <mat-card>
+    <mat-card-title>
+      <div 
+        [routerLink]="[id]"
+        (click)='showDetails()'
+        class="movieTitle"
+      >
+        {{ title }} 
+      </div>
+    </mat-card-title>
+    <img mat-card-image src="{{fullUrl}}" alt={{title}}>
+    <mat-card-content>
+      <div class="collapse">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <p>Informacje o serialu</p>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p><b>Premiera: </b>{{ premiere }}</p>
+            <p><b>Liczba sezonów: </b>{{ numberOfSeasons }}</p>
+            <p><b>Liczba odcinków: </b>{{ numberOfEpisodes }}</p>
+            <p><b>Popularność: </b>{{ popularity | populatiryToString }}</p>
+            <p><b>Opis: </b>{{ overview }}</p>
+            <p><b>Status: </b>{{ status | statusTranslate }}</p>
+            <p>
+              <b>Producenci: </b>
+              <span *ngFor="let producer of producers; let i = index">
+                {{ producer.name }}<span *ngIf="i+1 <  producers.length">,</span>
+              </span>
+              <span *ngIf="0 >=  producers.length">
+                Brak danych
+              </span>       
+            </p>
+            <p>
+              <b>Kraj pochodzenia: </b>
+              <span *ngFor="let country of countryOfOrigin; let i = index">
+                {{ country }}
+                <span *ngIf="i+1 <  countryOfOrigin.length">,</span>
+              </span>
+              <span *ngIf="0 >=  countryOfOrigin.length">
+                Brak danych
+              </span>       
+            </p>
+            <p>
+              <b>Getunek: </b>
+              <span *ngFor="let genre of genres; let i = index">
+                {{ genre.name | translateGenres }}<span *ngIf="i+1 < genres.length">,</span>
+              </span>
+              <span *ngIf="0 >=  genres.length">
+                Brak danych
+              </span>       
+            </p>
+            <p *ngIf="similarSeriesDisplay">
+              <b>Podobne seriale: </b>
+              <span *ngFor="let serie of similarSeries; let i = index">
+                {{ serie.name }}<span *ngIf="i+1 < similarSeries.length">,</span>
+              </span>
+              <span *ngIf="0 >=  similarSeries.length">
+                Brak danych
+              </span>       
+            </p>
+            <p>
+              <b>Linki do podobnych witryn: </b>
+              <a target="_blank" href="{{filmwebLink + title}}">Filmweb</a>&nbsp;
+              <a target="_blank" href="{{imdbLink + title}}">Imdb</a>
+            </p>
+            <p *ngIf="nextEpisodeDate">
+                <b>Następny nowy odcinek za: </b>{{countDownTime}}
+            </p>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div class="collapse">
+        <mat-accordion>
+          <mat-expansion-panel >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <p>Występujący aktorzy</p>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="underCollapseContainer">
+              <div *ngIf="actorsError">
+                  Brak danych
+              </div>
+              <div  *ngIf="!actorsError">
+                <div *ngFor="let actor of actors" class="rowDisplay actors">                     
+                  <mat-panel-title>
+                    {{actor.name}}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    {{actor.character}}
+                  </mat-panel-description>  
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div class="collapse">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <p>Informacje o sezonach</p>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          <mat-expansion-panel  *ngFor="let season of seasons; let i = index" class="seasonsCollapse">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{i+1}}. {{season.name || 'brak danych'}}
+              </mat-panel-title>
+              <mat-panel-description>
+                premiera: {{season.air_date || 'brak danych'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+              <div *ngFor="let episode of seasonsEpisodes[i]; let j = index" class="rowDisplay">
+                  <mat-panel-title
+                    matTooltip={{episode.overview}}
+                    aria-label=""
+                  >
+                      {{j + 1}}. {{episode.name || 'brak danych'}}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                      {{episode.air_date || 'brak danych'}}
+                  </mat-panel-description>
+              </div>
+          </mat-expansion-panel>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div *ngIf="loading" class="loader">
+    <mat-spinner></mat-spinner>
+</div>

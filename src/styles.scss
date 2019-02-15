@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+* {
+    box-sizing: border-box;
+}
+
+body {
+    // background-color: #f2f4f7;
+    background: lightblue url("./assets/background.jpg") no-repeat fixed center; 
+    overflow-x: hidden;
+}
+
+.tabGroup {
+    margin-top: 20px;
+    .mat-elevation-z8 {
+        background-color:rgba(255, 255, 255, 0.6); 
+    }
+    .mat-tab-header {
+        background-color:rgba(255, 255, 255, 0.5); 
+        .mat-tab-label  {
+            width: 20%;
+            &:hover {
+                border: 2px solid gray;
+            }
+            .mat-tab-label-content {
+                font-size: 22px;
+                font-weight: bold;    
+                color: black; 
+            }
+        }
+    }
+}

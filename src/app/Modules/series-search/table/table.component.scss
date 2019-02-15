@@ -1,0 +1,45 @@
+.searchTable {
+    width: 90%;
+    margin: 20px 5% 0 5%;
+    .searchCol {
+        width: 40px;
+    }
+    .mat-icon {
+        cursor: pointer;
+    }
+    table {
+        width: 100%;
+        tr {
+            td {
+                font-size: 9px;
+            }
+        }
+    }
+    @media only screen and (min-width: 500px) {
+        table {
+            tr {
+                td {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    @media only screen and (min-width: 768px) {
+        .mat-card {
+            width: 610px; 
+        }
+    }
+    @media only screen and (min-width: 1200px) {
+        display: flex;
+        flex-direction: row-reverse;
+        .appMovieTillWrapper {
+            margin-top: 0;
+            margin-left: 2%;
+            width: 48%;
+        }
+    }
+}
+
+.appMovieTillWrapper {
+    margin: 30px 0
+}

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="formWrapper">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width">
+        <input matInput (keyup)="inputListener($event)" placeholder="Tytuł serialu" formControlName="seriesTitle">
+      </mat-form-field>
+      <div>
+        <button type="submit" color="primary" routerLink="/search" mat-raised-button [disabled]="!searchForm.valid">
+          <mat-icon>search</mat-icon>Wyszukaj
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="slideToggle" *ngIf="startSearch">
+    <span>Widok tabelki</span>
+    <mat-slide-toggle color="primary" [(ngModel)]="tillViev"></mat-slide-toggle>
+    <span>Widok kafelek</span>
+  </div>
+</div>
+<div *ngIf="searchError" class="searchError">
+    <mat-card><mat-icon>error</mat-icon>Wpisz bardziej szczegółową nazwę !!!</mat-card>
+</div>
+<div *ngIf="loadingSeries" class="loader">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!loadingSeries && emptySearch && !searchError" class="noFiles">
+  <mat-card><mat-icon>warning</mat-icon>Brak znalezionych filmów</mat-card>
+</div>
+<div *ngIf="!this.loadingSeries && !this.emptySearch && !this.searchError && this.startSearch && this.showSearchedItems && !showPremiere">
+  <div *ngIf='!this.tillViev'>
+    <app-table
+      [dataSourceTable] = dataSourceTable
+      [id] = seriesId
+      (showDetails) = "showDetails($event)"
+    >
+    </app-table>
+  </div>
+  <div *ngIf='this.tillViev'>
+    <app-till-viev
+      [dataSource] = dataSourceTable
+      (showDetails) = "showDetails($event)"
+    >
+    </app-till-viev>
+  </div>
+</div>
+<div *ngIf='showPremiere'>
+  <app-premiere>
+  </app-premiere>
+</div>
+<router-outlet></router-outlet>
+

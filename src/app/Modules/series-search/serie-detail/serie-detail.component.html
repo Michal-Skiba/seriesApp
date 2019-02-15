@@ -1,0 +1,16 @@
+<div class="wrapper" *ngIf='!loading'>
+    <p class="title">{{title}}</p>
+    <div class="content">
+        <img src={{imageFullUrl}} alt="movie image">
+        <div class="info">
+            <p>data premiery: {{premiereDate}}</p>
+            <p>ilość odcinków: {{numberOfEpisodes}}</p>
+            <p>liczba sezonów: {{numberOfSesons}}</p>
+            <p>ocena: {{rating}}</p>
+            <p>{{overview}}</p>
+        </div>
+    </div>
+</div>
+<div *ngIf="loading" class="loader">
+    <mat-spinner></mat-spinner>
+</div>
