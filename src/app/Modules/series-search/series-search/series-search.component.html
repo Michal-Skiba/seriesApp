@@ -17,16 +17,32 @@
     <span>Widok kafelek</span>
   </div>
 </div>
-<div *ngIf="searchError" class="searchError">
+<div *ngIf="!loadingSeries &&
+            !showPremiere &&
+            startSearch &&
+            dataSourceTable.length <= 0 &&
+            (searchSeriesTitle.length <= 3  || !searchSeriesTitle)"
+      class="searchError"
+  >
     <mat-card><mat-icon>error</mat-icon>Wpisz bardziej szczegółową nazwę !!!</mat-card>
 </div>
 <div *ngIf="loadingSeries" class="loader">
   <mat-spinner></mat-spinner>
 </div>
-<div *ngIf="!loadingSeries && emptySearch && !searchError" class="noFiles">
+<div *ngIf="!loadingSeries &&
+            !showPremiere &&
+            dataSourceTable.length <= 0 && dataSourceTable.length <= 39 &&
+            searchSeriesTitle.length > 3 &&
+            startSearch"
+      class="noFiles"
+>
   <mat-card><mat-icon>warning</mat-icon>Brak znalezionych filmów</mat-card>
 </div>
-<div *ngIf="!this.loadingSeries && !this.emptySearch && !this.searchError && this.startSearch && this.showSearchedItems && !showPremiere">
+<div *ngIf="!this.loadingSeries &&
+            dataSourceTable.length > 0 && dataSourceTable.length <= 39 &&     
+            this.showSearchedItems &&
+            !showPremiere"
+  >
   <div *ngIf='!this.tillViev'>
     <app-table
       [dataSourceTable] = dataSourceTable

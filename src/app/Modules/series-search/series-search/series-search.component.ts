@@ -6,7 +6,6 @@ import { ShowSeriesDetalService } from '../../../Services/show-series-detail.ser
 import { AppConst } from '../../../shared/const';
 import { tabelRow } from '../../../shared/models/tabelRow.model';
 import { searchData } from '../../../shared/models/searchData.model';
-import { searchedSerie } from '../../../shared/models/searchedSerie.model';
 
 @Component({
   selector: 'app-series-search',
@@ -17,15 +16,10 @@ export class SeriesSearchComponent implements OnInit {
 
   constructor(private getSeriesService: GetSeriesService, private router: Router, private showSeriesDetalService: ShowSeriesDetalService) {}
 
-
   startSearch: boolean = false;
-  tableIndex: number = 1;
-  emptySearch: boolean = false;
   loadingSeries: boolean = false;
-  searchError: boolean = false;
   searchForm: FormGroup;
   searchSeriesTitle: string = '';
-  searchedSeries: Array<searchedSerie> = [];
   dataSourceTable: Array<any> = [];
   seriesId: number = 0;
   tillViev: boolean = false;
@@ -50,12 +44,12 @@ export class SeriesSearchComponent implements OnInit {
 
 
   inputListener(event: any) {
+    this.searchSeriesTitle = event.target.value;
+    this.startSearch = false;
     if(!event.target.value) {
       this.isSerieDetailThere = false;
       this.changeRoute('search');
       this.showPremiere = true;
-      this.emptySearch = false;
-      this.searchError = false;
       this.startSearch = false;
     }
   }
@@ -72,50 +66,32 @@ export class SeriesSearchComponent implements OnInit {
   }
 
   dataToTable(series: tabelRow[]): void {
-    series.forEach(element => {
+    series.forEach((element, index) => {
       let data = {
-        'position': this.tableIndex,
+        'position': index + 1,
         'title': element.name,
         'premiereDate': element.first_air_date,
         'rating': element.vote_average,
         'id': element.id,
       }
       this.dataSourceTable.push(data);
-      this.tableIndex++
     })
-  }
-
-  popularityVerify(serials: Array<any>) {
-    let verifed = [];
-    serials.forEach(element => {
-      if(element.popularity > AppConst.popularity) {
-        verifed.push(element)
-      }
-    });
-    if (verifed.length > 0) {
-      this.emptySearch = false;
-    }
-    return verifed
+    this.loadingSeries = false;
   }
 
   searchSeries(searchData: searchData): void {
-    if(searchData.total_pages < 40) {
-      this.searchError = false;
+    this.startSearch = true;
+    if(this.searchSeriesTitle.length > 3) {
       for(let i = 1; i <= searchData.total_pages; i++) {
         this.getSeriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
-          let verifedSeriesByPopularity = this.popularityVerify(dataSeries.results)  
-          this.searchedSeries.push(...verifedSeriesByPopularity) 
-          this.dataToTable(verifedSeriesByPopularity);
+          this.dataToTable(dataSeries.results.filter(data => data.popularity > AppConst.popularity));
           if(i === searchData.total_pages) {
-            this.startSearch = true;
             this.dataSourceTable.length > 0 ? this.seriesId = this.dataSourceTable[0].id : this.seriesId = 0;
           }
         },
-        error => console.log(error, 'searchSeries')
+        error => console.log(error, 'searchSeriessError')
         )
-      }
-    } else {
-      this.searchError = true;
+      }  
     }
     this.loadingSeries = false;
   }
@@ -123,19 +99,19 @@ export class SeriesSearchComponent implements OnInit {
   resetValues(): void {
     this.startSearch = false;
     this.dataSourceTable = [];
-    this.tableIndex = 1;
     this.loadingSeries = true;
-    this.emptySearch = true;
-    this.searchedSeries = [];
     this.showPremiere = false;
     this.showSearchedItems = true;
   }
 
   onSubmit(): void {
     this.resetValues();
-    this.searchSeriesTitle = this.searchForm.get('seriesTitle').value;
     this.getSeriesService.searchSeries(this.searchSeriesTitle, 1).subscribe(dataSeries => {
       this.searchSeries(dataSeries)
     })
+    if(!this.searchSeriesTitle) {
+      this.loadingSeries = false;
+    }
+    
   }
 }

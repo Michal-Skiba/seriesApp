@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { GetSeriesService } from '../../../Services/get-series.service';
+import { AppConst } from '../../../shared/const';
 
 export interface nextEpisodData {
   air_date: string;
@@ -16,7 +17,6 @@ export class MovieTillComponent implements OnInit, OnChanges {
   constructor(private getSeriesService: GetSeriesService) { }
 
   loading: boolean = true;
-  url: string = 'https://image.tmdb.org/t/p/w500/';
   fullUrl: string;
   title: string;
   popularity: string;
@@ -26,8 +26,8 @@ export class MovieTillComponent implements OnInit, OnChanges {
   overview: string;
   seasons: Array<object>;
   seasonsEpisodes: object = {};
-  filmwebLink: string = 'https://www.filmweb.pl/search?q=';
-  imdbLink: string = 'https://www.imdb.com/find?ref_=nv_sr_fn&q=';
+  filmwebLink: string = AppConst.filmwebLink;
+  imdbLink: string = AppConst.imdbLink;
   producents: Array<object>;
   actors: Array<object>;
   actorsError: boolean = false;
@@ -54,6 +54,8 @@ export class MovieTillComponent implements OnInit, OnChanges {
       this.similarSeriesErr = true;
     })
 
+    console.log(AppConst.posterUrl)
+
     this.getSeriesService.getCredits(this.id).subscribe(dataCredits => {
       this.actors = dataCredits.cast;
     }, error => {
@@ -71,16 +73,11 @@ export class MovieTillComponent implements OnInit, OnChanges {
   @Input() tillViev: boolean
 
   getEpisodesInfo(): void {
-    let episodId = []
-    let id: number;
     for(let i = 0; i < this.seasons.length; i++) {
       this.getSeriesService.getSeasonEpisode(this.id, i).subscribe(seasonsInfo => {
         this.seasonsEpisodes[i] = seasonsInfo.episodes;
-      }, error => {
-        console.log(error, 'getSeasonEpisod', error.status)
-      }), () => { console.log('dzialam', this.id)}
-    }
-    
+      }, error => console.log(error, 'getSeasonEpisod', error.status)
+      )}
   }
 
   showDetails(): void {
@@ -108,7 +105,7 @@ export class MovieTillComponent implements OnInit, OnChanges {
 
   getSeriesInfo(id: number): void {
     this.getSeriesService.getSeriesDetail(id).subscribe(dataSeries => {
-      this.fullUrl = this.url + dataSeries.backdrop_path;
+      this.fullUrl = AppConst.posterUrl + dataSeries.backdrop_path;
       this.title = dataSeries.name;
       this.popularity = dataSeries.popularity;
       this.numberOfEpisodes = dataSeries.number_of_episodes;

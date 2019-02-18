@@ -32,7 +32,6 @@ export class PremiereComponent implements OnInit {
   
   ngOnInit() { 
     this.getPremieres() 
-    console.log(this.series)
   }
 
   isOpen:string  = 'nothing';
@@ -42,9 +41,6 @@ export class PremiereComponent implements OnInit {
   url: string = 'https://image.tmdb.org/t/p/w500/';
   fullUrl: string;
   title: string;
-  showDetails() {
-    console.log('test')
-  }
 
   dayLater() {
       this.date = moment(this.date).add("days", 1).format('YYYY-MM-DD')
@@ -63,8 +59,6 @@ export class PremiereComponent implements OnInit {
     }, 900);
   }
 
-
-
   getPremieres() {
     this.series = [];
     this.loading = true;
@@ -74,10 +68,8 @@ export class PremiereComponent implements OnInit {
       for(let i = 0; data.results.length -1 >= i; i++) {
         this.series.push(data.results[i]) 
       }
-      console.log(this.series)
     }), error => console.log(error),
     () => {
-      console.log('sss')
       if (numberOfPages > 1) {
         for(let i = 2; numberOfPages <= 1; i++) {
           this.getPremiereService.getPremieres(this.date, i).subscribe((data: seriesData) => {    

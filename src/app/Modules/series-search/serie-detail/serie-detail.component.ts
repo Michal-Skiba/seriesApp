@@ -33,7 +33,6 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
       this.id = param.get('id')
     })
     this.getSeriesService.getSeriesDetail(this.id).subscribe((dataSerie) => {
-      console.log(dataSerie)
       this.imageFullUrl = this.url + dataSerie.backdrop_path;
       this.title = dataSerie.name;
       this.overview = dataSerie.overview;
@@ -41,7 +40,6 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
       this.numberOfSesons = dataSerie.number_of_seasons;
       this.premiereDate = dataSerie.first_air_date;
       this.rating = dataSerie.vote_average;
-      console.log(this.premiereDate)
     }, error => console.log(error),
       () => {
         this.loading = false;

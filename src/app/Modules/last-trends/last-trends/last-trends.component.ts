@@ -16,7 +16,6 @@ export class LastTrendsComponent implements OnInit {
 
   ngOnInit() {
     this.getLastTrendsService.getLastTrends(1).subscribe((data) => {
-      console.log(data, 'aaaaaaaaaaaaaaaa')
       data.results.forEach(element => {
         let data = {
           'position': this.tableIndex,
