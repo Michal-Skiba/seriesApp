@@ -20,6 +20,10 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
   premiereDate: string;
   rating: string;
   loading: boolean = true;
+  similarSeries: Array<any> = [];  //stworz model !
+  similarSeriesLoader: boolean = false;
+  similarSeriesPageNumber: number = 2;
+  similarSeriesLastPage: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,10 +45,34 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
       this.premiereDate = dataSerie.first_air_date;
       this.rating = dataSerie.vote_average;
     }, error => console.log(error),
-      () => {
-        this.loading = false;
-      }
+    () => {
+      this.loading = false;
+    }
     )
+    this.getSeriesService.getSimilarSeries(this.id).subscribe((data) => {
+      this.similarSeries = data.results;
+      this.similarSeriesLastPage = data.total_pages;
+    })
+  }
+
+  loadMore(): void {
+    this.similarSeriesLoader = true;
+    console.log('działam')
+    console.log(this.similarSeriesPageNumber, 'similar rpzed')
+    this.getSeriesService.getSimilarSeries(this.id).subscribe((data) => {
+      this.similarSeries.push(...data.results);
+      console.log(this.similarSeries, ' po dodanie')
+    }, error => console.log(error),
+    () => {
+      console.log('ssssssssssssssssssssssssssssss')
+      this.similarSeriesLoader = false;
+    })
+    this.similarSeriesPageNumber += 1;
+    console.log(this.similarSeriesPageNumber, 'similar po')
+  }
+
+  reload(): void {
+    location.reload();
   }
 
   ngOnDestroy() {

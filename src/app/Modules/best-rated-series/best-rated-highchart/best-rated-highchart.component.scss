@@ -1,3 +1,10 @@
 .chart {
-    margin: 30px 5% 0 5%;
+    width: 100%;
+    @media only screen and (min-width: 768px) {
+        width: 80%
+    }
+    @media only screen and (min-width: 1200px) {
+        width: 60%
+    }
+    margin: 30px auto 20px auto;
 }

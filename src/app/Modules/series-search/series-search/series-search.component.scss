@@ -79,10 +79,11 @@
 }
 
 .slideToggle {
+    margin-top: 10px;
+    display: flex;
     position: absolute;
     right: 20px;
-    span {
-        font-size:  16px;
-        margin: 0 10px;
+    mat-icon {
+        margin: 0 5px;
     }
 }

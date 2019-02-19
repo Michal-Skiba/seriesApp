@@ -17,6 +17,7 @@ import { PageNotFoundComponent } from './Components/page-not-found/page-not-foun
 import { HttpClientModule } from '@angular/common/http';
 import { LatestSeriesComponent } from './Components/latest-series/latest-series.component';
 import { TopRatedSerieComponent } from './Components/top-rated-serie/top-rated-serie.component';
+import { FooterComponent } from './Components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { TopRatedSerieComponent } from './Components/top-rated-serie/top-rated-s
     PageNotFoundComponent,
     LatestSeriesComponent,
     TopRatedSerieComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

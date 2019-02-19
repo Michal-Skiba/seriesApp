@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GetTopRatedSeriesService } from '../../../Services/get-top-rated-series.service';
+import { tabelRowBestRated } from '../../../shared/models/tabelRow.model';
 
 @Component({
   selector: 'app-best-rated-table',
@@ -34,7 +35,7 @@ export class BestRatedTableComponent implements OnInit {
   @Input() tab: number;
 
   actualId: number;
-  dataSourceTable: Array<object>
+  dataSourceTable: Array<tabelRowBestRated>
   displayedColumns: string[] = ['position', 'name', 'vote_average', 'vote_count', 'id'];
   loading: boolean = true;
   displayChartComponent: boolean = false;

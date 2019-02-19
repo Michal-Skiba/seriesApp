@@ -12,9 +12,9 @@
     </form>
   </div>
   <div class="slideToggle" *ngIf="startSearch">
-    <span>Widok tabelki</span>
+    <mat-icon>table_chart</mat-icon>
     <mat-slide-toggle color="primary" [(ngModel)]="tillViev"></mat-slide-toggle>
-    <span>Widok kafelek</span>
+    <mat-icon>apps</mat-icon>
   </div>
 </div>
 <div *ngIf="!loadingSeries &&

@@ -1,13 +1,36 @@
 <div class="wrapper" *ngIf='!loading'>
     <p class="title">{{title}}</p>
-    <div class="content">
-        <img src={{imageFullUrl}} alt="movie image">
-        <div class="info">
-            <p>data premiery: {{premiereDate}}</p>
-            <p>ilość odcinków: {{numberOfEpisodes}}</p>
-            <p>liczba sezonów: {{numberOfSesons}}</p>
-            <p>ocena: {{rating}}</p>
-            <p>{{overview}}</p>
+    <div class="contentWrapper">
+        <div class="content">
+            <img src={{imageFullUrl}} alt="movie image">
+            <div class="info">
+                <p>data premiery: {{premiereDate}}</p>
+                <p>ilość odcinków: {{numberOfEpisodes}}</p>
+                <p>liczba sezonów: {{numberOfSesons}}</p>
+                <p>ocena: {{rating}}</p>
+                <p>{{overview}}</p>
+            </div>
+        </div>
+        <div class="collapse">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                        <p>Lista podobnych seriali</p>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let serie of similarSeries; let i = index" class="similarSeriesRow">
+                        <p class="similarSerieName"  routerLink="/search/{{serie.id}}" (click)="reload()" >{{i+1}}. {{serie.name}}</p>
+                        <p>{{serie.first_air_date}}</p>
+                    </div>
+                    <div *ngIf="similarSeriesLoader" class="seriesLoader">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <div *ngIf="similarSeriesPageNumber < similarSeriesLastPage">
+                        <p class="moreSeries" (click)="loadMore()">More</p>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
         </div>
     </div>
 </div>

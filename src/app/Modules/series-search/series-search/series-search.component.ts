@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router'
 import { ShowSeriesDetalService } from '../../../Services/show-series-detail.service';
 import { AppConst } from '../../../shared/const';
-import { tabelRow } from '../../../shared/models/tabelRow.model';
+import { tabelRowSearch } from '../../../shared/models/tabelRow.model';
 import { searchData } from '../../../shared/models/searchData.model';
 
 @Component({
@@ -65,7 +65,7 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-  dataToTable(series: tabelRow[]): void {
+  dataToTable(series: tabelRowSearch[]): void {
     series.forEach((element, index) => {
       let data = {
         'position': index + 1,

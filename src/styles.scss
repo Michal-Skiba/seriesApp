@@ -8,6 +8,7 @@ body {
     // background-color: #f2f4f7;
     background: lightblue url("./assets/background.jpg") no-repeat fixed center; 
     overflow-x: hidden;
+    position: relative;
 }
 
 .tabGroup {
@@ -29,4 +30,10 @@ body {
             }
         }
     }
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 120px;
 }

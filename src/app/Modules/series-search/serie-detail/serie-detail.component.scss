@@ -1,4 +1,12 @@
 .wrapper {
+    .contentWrapper {
+        padding-bottom: 10px;
+        background-color:rgba(255, 255, 255, 0.8); 
+        .collapse {
+            margin: 0 auto;
+            max-width: 600px;
+        }
+    }
     .title {
         margin: 10px 0 20px 0;
         width: 100%;
@@ -13,7 +21,7 @@
     width: 90%;
     margin: 20px auto 0 auto;
     .content {
-        background-color:rgba(255, 255, 255, 0.8); 
+        
         img {
             margin: auto 0;
             width: 100%;
@@ -40,5 +48,26 @@
     .mat-spinner {
         margin: 60px auto 20px auto;
     }
+}
+
+.similarSeriesRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.similarSerieName {
+    cursor: pointer;
+}
+
+.moreSeries {
+    float: right;
+    color: blue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.seriesLoader {
+    margin: 0 auto;
+    width: fit-content;
 }
 

@@ -1,6 +1,8 @@
-<p *ngIf="!loading">
-  Najnowszy serial to: <span>{{ latestSerieName}}</span> ,  najbliszy odcinek za: <span>{{countDownTime}}</span>
-</p>
+<div class="wrapper" *ngIf="!loading">
+  <p >
+    Najnowszy serial to: <span>{{ latestSerieName}}</span> ,  najbliszy odcinek za: <span>{{countDownTime}}</span>
+  </p>
+</div>
 <div *ngIf='loading' class='loader'>
-  <mat-spinner></mat-spinner>
+    <mat-spinner></mat-spinner>
 </div>

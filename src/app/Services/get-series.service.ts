@@ -38,8 +38,8 @@ export class GetSeriesService {
     )
   }
 
-  getSimilarSeries(seriesId: number): Observable<any> {
-    return this.http.get<Array<String>>(`${AppConst.apiUrl}tv/${seriesId}/similar?api_key=${AppConst.apiKey}&language=en-US&page=1`)
+  getSimilarSeries(seriesId: number, page: number = 1): Observable<any> {
+    return this.http.get<Array<String>>(`${AppConst.apiUrl}tv/${seriesId}/similar?api_key=${AppConst.apiKey}&language=en-US&page=${page}`)
     .pipe(
       retry(20),
     )
