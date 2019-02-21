@@ -3,7 +3,7 @@ import { GetSeriesService } from '../../../Services/get-series.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router'
 import { ShowSeriesDetalService } from '../../../Services/show-series-detail.service';
-import { AppConst } from '../../../shared/const';
+import { environment } from '../../../../environments/environment';
 import { tabelRowSearch } from '../../../shared/models/tabelRow.model';
 import { searchData } from '../../../shared/models/searchData.model';
 
@@ -29,7 +29,7 @@ export class SeriesSearchComponent implements OnInit {
   isSerieDetailThere: boolean;
 
   ngOnInit() {
-    this.showSeriesDetalService.getShowInfo().subscribe((data: boolean) => {    
+    this.showSeriesDetalService.getShowInfo().subscribe((data: boolean) => { 
       this.isSerieDetailThere = data;
       setTimeout(()=> {
         if(data) {
@@ -84,7 +84,7 @@ export class SeriesSearchComponent implements OnInit {
     if(this.searchSeriesTitle.length > 3) {
       for(let i = 1; i <= searchData.total_pages; i++) {
         this.getSeriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
-          this.dataToTable(dataSeries.results.filter(data => data.popularity > AppConst.popularity));
+          this.dataToTable(dataSeries.results.filter(data => data.popularity > environment.popularity));
           if(i === searchData.total_pages) {
             this.dataSourceTable.length > 0 ? this.seriesId = this.dataSourceTable[0].id : this.seriesId = 0;
           }
@@ -112,6 +112,5 @@ export class SeriesSearchComponent implements OnInit {
     if(!this.searchSeriesTitle) {
       this.loadingSeries = false;
     }
-    
   }
 }

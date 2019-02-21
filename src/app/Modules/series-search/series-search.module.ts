@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SeriesSearchComponent } from './series-search/series-search.component';
 import { GetSeriesService } from '../../Services/get-series.service'
-import { routing } from './series-search.routing';
+import { routing } from './serie-search.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
@@ -24,6 +24,7 @@ import { StatusTranslatePipe } from '../../Pipes/status-translate.pipe';
 import { PopulatiryToStringPipe } from '../../Pipes/populatiry-to-string.pipe';
 import { SerieDetailComponent } from './serie-detail/serie-detail.component';
 import { PremiereComponent } from './premiere/premiere.component';
+import { SerieInformationsComponent } from './serie-informations/serie-informations.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PremiereComponent } from './premiere/premiere.component';
     PopulatiryToStringPipe,
     SerieDetailComponent,
     PremiereComponent,
+    SerieInformationsComponent,
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router'
 import { ShowSeriesDetalService } from '../../../Services/show-series-detail.service'
 import { GetSeriesService } from '../../../Services/get-series.service';
+import { searchedSerie } from '../../../shared/models/searchedSerie.model';
 
 @Component({
   selector: 'app-serie-detail',
@@ -20,7 +21,7 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
   premiereDate: string;
   rating: string;
   loading: boolean = true;
-  similarSeries: Array<any> = [];  //stworz model !
+  similarSeries: Array<searchedSerie> = [];
   similarSeriesLoader: boolean = false;
   similarSeriesPageNumber: number = 2;
   similarSeriesLastPage: number;
@@ -57,18 +58,13 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
 
   loadMore(): void {
     this.similarSeriesLoader = true;
-    console.log('działam')
-    console.log(this.similarSeriesPageNumber, 'similar rpzed')
     this.getSeriesService.getSimilarSeries(this.id).subscribe((data) => {
       this.similarSeries.push(...data.results);
-      console.log(this.similarSeries, ' po dodanie')
     }, error => console.log(error),
     () => {
-      console.log('ssssssssssssssssssssssssssssss')
       this.similarSeriesLoader = false;
     })
     this.similarSeriesPageNumber += 1;
-    console.log(this.similarSeriesPageNumber, 'similar po')
   }
 
   reload(): void {

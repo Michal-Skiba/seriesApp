@@ -17,10 +17,10 @@
       <div class="secondaryMenu">
         <ul>
           <li [routerLink]='[{ outlets: { bottomInfo: ["latest-serie"] } }]' [routerLinkActive]="['active']">
-            <mat-icon>movie</mat-icon>najnowszy serial
+            <mat-icon>movie</mat-icon>Najnowszy serial
           </li>
           <li [routerLink]='[{ outlets: { bottomInfo: ["top-rated-serie"] } }]' [routerLinkActive]="['active']">
-            <mat-icon>star</mat-icon>najlepiej oceniony serial
+            <mat-icon>star</mat-icon>Najlepiej oceniony serial
           </li>
         </ul>
       </div>
@@ -49,7 +49,10 @@
         </mat-menu>
       </div>
     </mat-toolbar>
-
+    <div class="langaugeSwitch">
+      <img src="../assets/pl.png" alt="pl" [className]="(getLanguage()=== 'pl') && 'flagBorder'" (click)='changeLanguage("pl")'>
+      <img src="../assets/en.png" alt="en" [className]="(getLanguage() === 'en') && 'flagBorder'" (click)='changeLanguage("en")'>
+    </div>
     <router-outlet class="test"></router-outlet>
     <router-outlet name='bottomInfo'></router-outlet>
   </div>

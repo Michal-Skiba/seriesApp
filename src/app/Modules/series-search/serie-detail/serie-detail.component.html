@@ -4,11 +4,10 @@
         <div class="content">
             <img src={{imageFullUrl}} alt="movie image">
             <div class="info">
-                <p>data premiery: {{premiereDate}}</p>
-                <p>ilość odcinków: {{numberOfEpisodes}}</p>
-                <p>liczba sezonów: {{numberOfSesons}}</p>
-                <p>ocena: {{rating}}</p>
-                <p>{{overview}}</p>
+                <app-serie-informations
+                    [id] = id
+                >
+                </app-serie-informations>
             </div>
         </div>
         <div class="collapse">
@@ -27,7 +26,7 @@
                         <mat-spinner></mat-spinner>
                     </div>
                     <div *ngIf="similarSeriesPageNumber < similarSeriesLastPage">
-                        <p class="moreSeries" (click)="loadMore()">More</p>
+                        <p class="moreSeries" (click)="loadMore()">Więcej</p>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>

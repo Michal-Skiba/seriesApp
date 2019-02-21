@@ -3,7 +3,7 @@
   display: flex;
   justify-content: flex-end;
 
-  @media only screen and (min-width: 1150px) {
+  @media only screen and (min-width: 1200px) {
     display: none;
   }
 
@@ -52,7 +52,7 @@
     }
   }
   display: none;
-  @media only screen and (min-width: 1150px) {
+  @media only screen and (min-width: 1200px) {
     display: block;
     position: absolute;
     right: 30px;
@@ -65,7 +65,7 @@
 
 .menu {
   display: none;
-  @media only screen and (min-width: 1150px) {
+  @media only screen and (min-width: 1200px) {
     display: block;
   }
   ul {
@@ -104,7 +104,7 @@
 }
 
 .pageWrapper {
-  min-height: 79vh;
+  min-height: 81vh;
   .footer {
     position: absolute;
     bottom: 0;
@@ -115,4 +115,25 @@
 
 .secondaryMobileMenu {
   margin-top: 25px;
+}
+
+
+.langaugeSwitch {
+  position: absolute;
+  top: 10px;
+  @media only screen and (min-width: 1200px) {
+    top: 65px;
+  }
+  display: flex;
+  align-items: center;
+  img {
+    cursor: pointer;
+    margin: 10px 10px;
+    height: 25px;
+    width: 45px;
+  }
+}
+
+.flagBorder {
+  border: 2px solid black;
 }

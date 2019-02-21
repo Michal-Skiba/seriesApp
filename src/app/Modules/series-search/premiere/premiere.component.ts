@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { GetPremiereService } from '../../../Services/get-premiere.service'
-import { trigger, transition, useAnimation, state, style, animate } from '@angular/animations';
+import { trigger, transition, useAnimation } from '@angular/animations';
 import { slideInLeft, slideInRight  } from 'ng-animate';
+import { searchedSerie } from '../../../shared/models/searchedSerie.model';
+
 import * as moment from 'moment';
 
 export interface seriesData {
-  results: Array<object>;
+  results: Array<searchedSerie>;
   total_pages: number;
+  page: number;
+  total_results: number;
 }
 
 
@@ -15,7 +19,6 @@ export interface seriesData {
   templateUrl: './premiere.component.html',
   styleUrls: ['./premiere.component.scss'],
   animations: [
-
     trigger('openClose', [
       transition('nothing => right', [
         useAnimation(slideInRight, {})
@@ -36,20 +39,20 @@ export class PremiereComponent implements OnInit {
 
   isOpen:string  = 'nothing';
   date: string = moment().format('YYYY-MM-DD');
-  series: Array<object> = [];
+  series: Array<searchedSerie> = [];
   loading: boolean = false;
   url: string = 'https://image.tmdb.org/t/p/w500/';
   fullUrl: string;
   title: string;
 
   dayLater() {
-      this.date = moment(this.date).add("days", 1).format('YYYY-MM-DD')
-      this.getPremieres() 
-      this.isOpen = 'right'
-      setTimeout(() => { 
-        this.isOpen = 'nothing'; 
-      }, 900);
-    }
+    this.date = moment(this.date).add("days", 1).format('YYYY-MM-DD')
+    this.getPremieres() 
+    this.isOpen = 'right'
+    setTimeout(() => { 
+      this.isOpen = 'nothing'; 
+    }, 900);
+  }
   dayBefore() {
     this.date = moment(this.date).subtract("days", 1).format('YYYY-MM-DD')
     this.getPremieres() 
@@ -64,9 +67,11 @@ export class PremiereComponent implements OnInit {
     this.loading = true;
     let numberOfPages: number;
     this.getPremiereService.getPremieres(this.date, 1).subscribe((data: seriesData) => {   
+      console.log(data)
       numberOfPages = data.total_pages; 
       for(let i = 0; data.results.length -1 >= i; i++) {
         this.series.push(data.results[i]) 
+        console.log(this.series, 'aa')
       }
     }), error => console.log(error),
     () => {

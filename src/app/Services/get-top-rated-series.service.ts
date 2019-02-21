@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { AppConst } from '../shared/const';
+import { environment } from '../../environments/environment';
+import { ChangeLanguageService } from './change-language.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetTopRatedSeriesService {
-  constructor(private http: HttpClient) { }
+
+  language: string;
+
+  constructor(private http: HttpClient, private changeLanguageService: ChangeLanguageService) { 
+    this.language = this.changeLanguageService.getInfoLanguage();
+  }
   
   getTopratedSeries(page: number): Observable<any> {
-    return this.http.get<Array<String>>(`${AppConst.apiUrl}tv/top_rated?api_key=${AppConst.apiKey}&language=en-US&page=${page}`)
+    return this.http.get<Array<String>>(`${environment.apiUrl}tv/top_rated?api_key=${environment.apiKey}&language=${this.language}-US&page=${page}`)
   }
 
 }

@@ -12,6 +12,7 @@ export class tabelRowBestRated {
     vote_count: string;
     vote_average: number;
     id: number;
+    original_name: string;
 }
 
 export class tabelRowLastTrends {

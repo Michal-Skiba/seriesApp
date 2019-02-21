@@ -9,6 +9,7 @@ import {
   MatProgressSpinnerModule,
   MatIconModule,
   MatTooltipModule,
+  MatDialogModule,
 } from '@angular/material';
 import { BestRatedTableComponent } from './best-rated-table/best-rated-table.component';
 import { HighchartsChartModule } from 'highcharts-angular';
@@ -28,9 +29,11 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatIconModule,
     MatTooltipModule,
     HighchartsChartModule,
+    MatDialogModule,
   ],
   exports: [
     BestRatedSeriesComponent,
-  ]
+  ],
+  entryComponents: [BestRatedHighchartComponent],
 })
 export class BestRatedSeriesModule { }

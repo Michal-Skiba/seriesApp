@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GetTopRatedSeriesService } from '../../../Services/get-top-rated-series.service';
 import { tabelRowBestRated } from '../../../shared/models/tabelRow.model';
+import { MatDialog } from '@angular/material';
+import { BestRatedHighchartComponent } from '../best-rated-highchart/best-rated-highchart.component'
+import { ChangeLanguageService } from '../../../Services/change-language.service';
 
 @Component({
   selector: 'app-best-rated-table',
@@ -9,22 +12,28 @@ import { tabelRowBestRated } from '../../../shared/models/tabelRow.model';
 })
 export class BestRatedTableComponent implements OnInit {
 
-  constructor(private getTopRatedService: GetTopRatedSeriesService) {}
+  constructor(
+    private getTopRatedService: GetTopRatedSeriesService,
+    public dialog: MatDialog,
+    private changeLanguageService: ChangeLanguageService,
+    ) {}
 
   ngOnInit() {
+    this.language = this.changeLanguageService.getInfoLanguage()
     const dataSourceArr = [];
     let position = this.tablePositonCalculate();
     this.getTopRatedService.getTopratedSeries(this.tab).subscribe(dataSeries => {
-      dataSeries.results.forEach(element => {
-        let data = {
+      dataSeries.results.forEach(element => {    
+        let dataTable = {
           'position': position,
           'name': element.name,
           'vote_average': element.vote_average,
           'vote_count': element.vote_count,
+          'original_name': element.original_name,
           'id': element.id,
         }
-        dataSourceArr.push(data);
-        position++
+        dataSourceArr.push(dataTable);
+        position++      
       })
     }, error => console.log(error),
     () => {
@@ -39,11 +48,15 @@ export class BestRatedTableComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'vote_average', 'vote_count', 'id'];
   loading: boolean = true;
   displayChartComponent: boolean = false;
-
+  language: string;
 
   displayChart(id: number) {
     this.displayChartComponent = true;
     this.actualId = id;
+    this.dialog.open(BestRatedHighchartComponent, {
+      width: '90%',
+      data: id,
+    });
   }
 
 

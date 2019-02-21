@@ -4,10 +4,14 @@
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
     </ng-container>
-
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element">
+        {{element.name}}
+        <span *ngIf="element.name != element.original_name && language === 'pl'">
+          ({{element.original_name}})
+        </span>  
+    </td>
     </ng-container>
     <ng-container matColumnDef="vote_average">
       <th mat-header-cell *matHeaderCellDef> Średnia ocena </th>
@@ -37,12 +41,4 @@
 </div>
 <div *ngIf="loading" class="loader">
     <mat-spinner></mat-spinner>
-</div>
-<div class="aditionalInfoComponents">
-  <div *ngIf="displayChartComponent">
-    <app-best-rated-highchart
-      [id]= this.actualId
-    >
-    </app-best-rated-highchart>
-  </div> 
 </div>
