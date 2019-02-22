@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetTopRatedSeriesService } from '../../Services/get-top-rated-series.service';
+import { SearchedSerie } from 'src/app/shared/models/searchedSerie.model';
 
 @Component({
   selector: 'app-top-rated-serie',
@@ -15,9 +16,10 @@ export class TopRatedSerieComponent implements OnInit {
       this.bestRatedSerie = dataSeries.results[0];
     }, error => console.log(error),
     () => {
+      
       this.loading = false;
     })
   }
   loading: boolean = true;
-  bestRatedSerie: object; 
+  bestRatedSerie: SearchedSerie; 
 }

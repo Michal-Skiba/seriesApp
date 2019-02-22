@@ -72,7 +72,7 @@
                 premiera: {{season.air_date || 'brak danych'}}
               </mat-panel-description>
             </mat-expansion-panel-header>
-              <div *ngFor="let episode of seasonsEpisodes[i]; let j = index" class="rowDisplay">
+              <div *ngFor="let episode of seasonsEpisodes[i+1]; let j = index" class="rowDisplay">
                   <mat-panel-title
                     matTooltip={{episode.overview}}
                     aria-label=""

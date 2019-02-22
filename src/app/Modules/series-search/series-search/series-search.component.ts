@@ -6,6 +6,7 @@ import { ShowSeriesDetalService } from '../../../Services/show-series-detail.ser
 import { environment } from '../../../../environments/environment';
 import { tabelRowSearch } from '../../../shared/models/tabelRow.model';
 import { searchData } from '../../../shared/models/searchData.model';
+import { SerieData } from '../../../shared/models/serieData.model'
 
 @Component({
   selector: 'app-series-search',
@@ -20,7 +21,7 @@ export class SeriesSearchComponent implements OnInit {
   loadingSeries: boolean = false;
   searchForm: FormGroup;
   searchSeriesTitle: string = '';
-  dataSourceTable: Array<any> = [];
+  dataSourceTable: Array<SerieData> = [];
   seriesId: number = 0;
   tillViev: boolean = false;
   showPremiere: boolean = true;
@@ -43,7 +44,7 @@ export class SeriesSearchComponent implements OnInit {
   }
 
 
-  inputListener(event: any) {
+  inputListener(event: any): void {
     this.searchSeriesTitle = event.target.value;
     this.startSearch = false;
     if(!event.target.value) {
@@ -59,7 +60,7 @@ export class SeriesSearchComponent implements OnInit {
     this.router.navigate([data])
   }
 
-  showDetails($event: boolean) {
+  showDetails($event: boolean): void {
     if($event === true) {
       this.showSearchedItems = false;
     }

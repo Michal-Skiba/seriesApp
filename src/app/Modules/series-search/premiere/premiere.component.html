@@ -4,16 +4,19 @@
     <p>{{date}}</p>
     <button mat-raised-button color='primary' (click)='dayLater()'><mat-icon>keyboard_arrow_right</mat-icon></button>
   </div>
-  <div [@openClose]="isOpen" class="content" *ngIf='loading'>
+  <div [@openClose]="isOpen" class="content" *ngIf='!loading'>
       <div *ngFor="let serie of series; let i = index" class='serieContainer'>
         <p>{{serie.name}}</p>
         <div class="tillContent">
-          <img src="{{url + serie.poster_path}}" alt="serie poster" [routerLink]="[serie.id]">
-          <p> {{serie.overview}}</p>
+          <img src="{{url + serie.poster_path}}" onError="this.src='../../../assets/noimage.png'" alt="serie poster" [routerLink]="[serie.id]">
+          <p> {{serie.overview || 'Opis serialu jeszcze jest niedostępny'}}</p>
         </div>
       </div>
+      <div *ngIf='series.length === 0' class='noPremieres'>
+        brak premier w tym dniu
+      </div>
   </div>
-  <div *ngIf="!loading" class="loader">
+  <div *ngIf="loading" class="loader">
       <mat-spinner></mat-spinner>
   </div>
 </div>

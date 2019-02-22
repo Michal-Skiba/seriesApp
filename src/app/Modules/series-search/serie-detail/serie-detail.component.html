@@ -2,7 +2,7 @@
     <p class="title">{{title}}</p>
     <div class="contentWrapper">
         <div class="content">
-            <img src={{imageFullUrl}} alt="movie image">
+            <img src={{imageFullUrl}} onError="this.src='../../../assets/noimage.png'" alt="movie image">
             <div class="info">
                 <app-serie-informations
                     [id] = id

@@ -17,8 +17,6 @@
         .mat-card {
             background: rgb(237, 237, 237);
         }
-        border: 1px solid gray;
-        box-shadow: 6px 3px gray;
     }
     .mat-card {
         margin: 0 auto;
@@ -56,6 +54,7 @@
             }    
             .mat-expansion-panel-header-title {
                 font-size: 14px;
+            
             }
             .mat-expansion-panel-header-description {
                 font-size: 14px;
@@ -97,8 +96,6 @@
         .mat-card {
             background: rgb(237, 237, 237);
         }
-        border: 1px solid gray;
-        box-shadow: 6px 3px gray;
     }
     .mat-card {
         .actors {
@@ -141,9 +138,6 @@
     }
     .mat-expansion-panel-header {
         border: 1px solid gray;
-        &:hover {
-            border: 2px solid gray;
-        }
     }
     .seasonsCollapse {
         margin: 5px 0;

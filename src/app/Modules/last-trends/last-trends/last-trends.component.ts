@@ -28,12 +28,10 @@ export class LastTrendsComponent implements OnInit {
         }
         this.dataSourceTable.push(data);
         this.tableIndex++
-        console.log(data)
       })
     }, error => console.log(error),
     () => {
       this.loading = false;
-      console.log(this.dataSourceTable)
     })
     
   }

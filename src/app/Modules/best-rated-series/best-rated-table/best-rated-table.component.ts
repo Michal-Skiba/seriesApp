@@ -18,6 +18,13 @@ export class BestRatedTableComponent implements OnInit {
     private changeLanguageService: ChangeLanguageService,
     ) {}
 
+  actualId: number;
+  dataSourceTable: Array<tabelRowBestRated>
+  displayedColumns: string[] = ['position', 'name', 'vote_average', 'vote_count', 'id'];
+  loading: boolean = true;
+  displayChartComponent: boolean = false;
+  language: string;
+
   ngOnInit() {
     this.language = this.changeLanguageService.getInfoLanguage()
     const dataSourceArr = [];
@@ -43,14 +50,7 @@ export class BestRatedTableComponent implements OnInit {
   }
   @Input() tab: number;
 
-  actualId: number;
-  dataSourceTable: Array<tabelRowBestRated>
-  displayedColumns: string[] = ['position', 'name', 'vote_average', 'vote_count', 'id'];
-  loading: boolean = true;
-  displayChartComponent: boolean = false;
-  language: string;
-
-  displayChart(id: number) {
+  displayChart(id: number): void {
     this.displayChartComponent = true;
     this.actualId = id;
     this.dialog.open(BestRatedHighchartComponent, {

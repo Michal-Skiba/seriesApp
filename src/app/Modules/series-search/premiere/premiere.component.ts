@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { GetPremiereService } from '../../../Services/get-premiere.service'
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { slideInLeft, slideInRight  } from 'ng-animate';
-import { searchedSerie } from '../../../shared/models/searchedSerie.model';
+import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
 
 import * as moment from 'moment';
 
 export interface seriesData {
-  results: Array<searchedSerie>;
+  results: Array<SearchedSerie>;
   total_pages: number;
   page: number;
   total_results: number;
@@ -37,50 +37,52 @@ export class PremiereComponent implements OnInit {
     this.getPremieres() 
   }
 
-  isOpen:string  = 'nothing';
+  isOpen: string = 'nothing';
   date: string = moment().format('YYYY-MM-DD');
-  series: Array<searchedSerie> = [];
-  loading: boolean = false;
+  series: Array<SearchedSerie> = [];
+  loading: boolean = true;
   url: string = 'https://image.tmdb.org/t/p/w500/';
   fullUrl: string;
   title: string;
 
-  dayLater() {
-    this.date = moment(this.date).add("days", 1).format('YYYY-MM-DD')
-    this.getPremieres() 
-    this.isOpen = 'right'
+  dayLater(): void {
+    this.loading = true;
+    this.date = moment(this.date).add("days", 1).format('YYYY-MM-DD');
+    
+    this.getPremieres();
+    this.isOpen = 'right';
     setTimeout(() => { 
       this.isOpen = 'nothing'; 
     }, 900);
   }
-  dayBefore() {
-    this.date = moment(this.date).subtract("days", 1).format('YYYY-MM-DD')
-    this.getPremieres() 
-    this.isOpen = 'left'
+  dayBefore(): void {
+    this.loading = true;
+    this.date = moment(this.date).subtract("days", 1).format('YYYY-MM-DD');
+    
+    this.getPremieres();
+    this.isOpen = 'left';
     setTimeout(() => { 
       this.isOpen = 'nothing'; 
     }, 900);
   }
 
-  getPremieres() {
+  getPremieres(): void {
     this.series = [];
     this.loading = true;
     let numberOfPages: number;
     this.getPremiereService.getPremieres(this.date, 1).subscribe((data: seriesData) => {   
-      console.log(data)
       numberOfPages = data.total_pages; 
       for(let i = 0; data.results.length -1 >= i; i++) {
         this.series.push(data.results[i]) 
-        console.log(this.series, 'aa')
       }
-    }), error => console.log(error),
+    }, error => console.log(error),
     () => {
       if (numberOfPages > 1) {
         for(let i = 2; numberOfPages <= 1; i++) {
           this.getPremiereService.getPremieres(this.date, i).subscribe((data: seriesData) => {    
             for(let i = 0; data.results.length -1 >= i; i++) {
               this.series.push(data.results[i]) 
-            }        
+            }    
           }), error => console.log(error),
           () => {
             this.loading = false
@@ -89,6 +91,6 @@ export class PremiereComponent implements OnInit {
       } else {
         this.loading = false
       }
-    }
+    })
   }
 }

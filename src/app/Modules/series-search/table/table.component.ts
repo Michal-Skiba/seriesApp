@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { SerieData } from '../../../shared/models/serieData.model'
 
 @Component({
   selector: 'app-table',
@@ -12,7 +13,7 @@ export class TableComponent {
   displayTill:boolean = false;
   displayedColumns: string[] = ['position', 'title', 'premiereDate', 'rating', 'id'];
 
-  @Input() dataSourceTable: Array<any>;
+  @Input() dataSourceTable: Array<SerieData>;
   @Input() id: number;
   @Output() showDetails = new EventEmitter<boolean>();
 
@@ -21,7 +22,6 @@ export class TableComponent {
     this.displayTill = true;
   }
 
- 
   showDetailsFlag($event: boolean) {
     if($event === true) {
       this.showDetails.emit(true)

@@ -1,8 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { GetSeriesService } from '../../../Services/get-series.service';
+import { Producers } from 'src/app/shared/models/producers.model';
+import { Genres } from 'src/app/shared/models/genres.model';
+import { SearchedSerie } from 'src/app/shared/models/searchedSerie.model';
 
-export interface nextEpisodData {
+
+export interface nextEpisodeData {
   air_date: string;
   name: string;
 }
@@ -25,14 +29,14 @@ export class SerieInformationsComponent implements OnInit {
   premiere: string;
   overview: string;
   status: string;
-  producers: Array<object>;
+  producers: Array<Producers>;
   countryOfOrigin: Array<string>;
-  genres: Array<object>; // ok zmien object
-  similarSeries: Array<object>;
+  genres: Array<Genres>;
+  similarSeries: Array<SearchedSerie>;
   similarSeriesDisplay: Boolean = false;
-  nextEpisodeDate: nextEpisodData;
+  nextEpisodeDate: nextEpisodeData;
   countDownTime: string;
-  seasons: Array<object>;
+
 
   constructor(private getSeriesService: GetSeriesService) { }
 
@@ -44,7 +48,7 @@ export class SerieInformationsComponent implements OnInit {
     this.getSeriesInfo(this.id)
   }
 
-  countDownTimer() {
+  countDownTimer(): void | string {
     if(this.nextEpisodeDate) {
       const countDownDate = new Date(this.nextEpisodeDate.air_date + " " + " 10:00:00").getTime();
       setInterval(() => {

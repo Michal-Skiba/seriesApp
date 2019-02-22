@@ -1,10 +1,10 @@
-export class searchedSerie {
+export class SearchedSerie {
     backdrop_path: string;
     first_air_date: string;
-    genre_ids: Array<any>;
+    genre_ids: Array<Array<number>>;
     id: number;
     name: string;
-    origin_country: Array<any>
+    origin_country: Array<string>
     original_language: string;
     original_name: string;
     overview: string;

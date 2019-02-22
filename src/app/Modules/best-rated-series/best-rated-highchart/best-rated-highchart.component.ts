@@ -23,7 +23,7 @@ export class BestRatedHighchartComponent implements OnInit {
         voteAverage = dataSeries.vote_average;
         voteToTen  = parseFloat((10 - voteAverage).toFixed(2));
         name = dataSeries.name;
-        dataSeries.seasons.forEach((data, index) => {
+        dataSeries.seasons.forEach((data) => {
           episodesCount.push(data.episode_count)
         })
         this.chartOptions = {
@@ -33,30 +33,29 @@ export class BestRatedHighchartComponent implements OnInit {
             pointInterval: 1,
           }],
           title: {
-            text: `${name}: ilość odcinków w sezonie`
+            text: `${name}: ilość odcinków w sezonie`,
           },
           yAxis: {
             title: {
-                text: 'Liczba odcinków'
+                text: 'Liczba odcinków',
             }
           },
           tooltip: {
-            enabled: false
+            enabled: false,
           },
         };
-        this.PieChartOptions = {
-          
+        this.PieChartOptions = {      
           chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
-            type: 'pie'
+            type: 'pie',
           },
           dataLabels: {
             enabled: true,
           },
           title: {
-              text: 'Ocena filmu'
+              text: 'Ocena filmu',
           },
           series: [{
               colorByPoint: true,

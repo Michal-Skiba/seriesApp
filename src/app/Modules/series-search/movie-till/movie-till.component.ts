@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { GetSeriesService } from '../../../Services/get-series.service';
 import { environment } from '../../../../environments/environment';
-import { searchedSerie } from '../../../shared/models/searchedSerie.model';
+import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
 import { Season } from 'src/app/shared/models/season.model';
 import { Actors } from 'src/app/shared/models/actors.model';
+import { Episode } from 'src/app/shared/models/episode.model';
 
 export interface nextEpisodData {
   air_date: string;
@@ -26,11 +27,10 @@ export class MovieTillComponent implements OnInit, OnChanges {
   fullUrl: string;
   title: string;
   seasons: Array<Season>;
-  seasonsEpisodes: object = {};
+  seasonsEpisodes: Episode = {} as Episode;
   actors: Array<Actors>;
   actorsError: boolean = false;
-  similarSeries: Array<searchedSerie>;
-  similarSeriesErr: Boolean = false;
+  similarSeries: Array<SearchedSerie>;
   similarSeriesDisplay: Boolean = false;
 
   @Output()
@@ -42,9 +42,7 @@ export class MovieTillComponent implements OnInit, OnChanges {
       this.similarSeriesDisplay = true;
     }, error => {
       console.log(error, 'similar')
-      this.similarSeriesErr = true;
     })
-
     this.getSeriesService.getCredits(this.id).subscribe(dataCredits => {
       this.actors = dataCredits.cast;
     }, error => {
@@ -53,17 +51,18 @@ export class MovieTillComponent implements OnInit, OnChanges {
     })
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.loading = true;
     this.getSeriesInfo(this.id);  
   }
 
   getEpisodesInfo(): void {
-    for(let i = 1; i < this.seasons.length; i++) {
+    for(let i = 1; i < this.seasons.length + 1; i++) {
       this.getSeriesService.getSeasonEpisode(this.id, i).subscribe(seasonsInfo => {
         this.seasonsEpisodes[i] = seasonsInfo.episodes;
       }, error => console.log(error, 'getSeasonEpisod', error.status)
-      )}
+    )}
+    
   }
 
   showDetails(): void {

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router'
 import { ShowSeriesDetalService } from '../../../Services/show-series-detail.service'
 import { GetSeriesService } from '../../../Services/get-series.service';
-import { searchedSerie } from '../../../shared/models/searchedSerie.model';
+import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
 
 @Component({
   selector: 'app-serie-detail',
@@ -21,7 +21,7 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
   premiereDate: string;
   rating: string;
   loading: boolean = true;
-  similarSeries: Array<searchedSerie> = [];
+  similarSeries: Array<SearchedSerie> = [];
   similarSeriesLoader: boolean = false;
   similarSeriesPageNumber: number = 2;
   similarSeriesLastPage: number;
@@ -48,9 +48,9 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
     }, error => console.log(error),
     () => {
       this.loading = false;
-    }
-    )
+    })
     this.getSeriesService.getSimilarSeries(this.id).subscribe((data) => {
+      console.log(data, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
       this.similarSeries = data.results;
       this.similarSeriesLastPage = data.total_pages;
     })
@@ -71,9 +71,8 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
     location.reload();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.showSeriesDetalService.showDown();
   }
-
 
 }
