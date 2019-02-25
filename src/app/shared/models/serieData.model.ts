@@ -5,3 +5,9 @@ export class SerieData {
     rating: number;
     title: string;
 }
+
+// export class BaseModel<T> {
+//     static transform(T: Object){
+//         return Object.assign(new T(), T);
+//     }
+// }

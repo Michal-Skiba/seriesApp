@@ -6,11 +6,6 @@ import { Season } from 'src/app/shared/models/season.model';
 import { Actors } from 'src/app/shared/models/actors.model';
 import { Episode } from 'src/app/shared/models/episode.model';
 
-export interface nextEpisodData {
-  air_date: string;
-  name: string;
-}
-
 @Component({
   selector: 'app-movie-till',
   templateUrl: './movie-till.component.html',
@@ -74,7 +69,7 @@ export class MovieTillComponent implements OnInit, OnChanges {
     this.getSeriesService.getSeriesDetail(id).subscribe(dataSeries => {
       this.fullUrl = environment.posterUrl + dataSeries.backdrop_path;
       this.title = dataSeries.name;
-      this.seasons = dataSeries.seasons.slice(1);
+      this.seasons = dataSeries.seasons;
     }, error => console.log(error, 'seriesss'),
     () => {
       this.getEpisodesInfo();

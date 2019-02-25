@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router'
 import { ShowSeriesDetalService } from '../../../Services/show-series-detail.service'
 import { GetSeriesService } from '../../../Services/get-series.service';
 import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
+import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-serie-detail',
@@ -11,20 +12,14 @@ import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
 })
 export class SerieDetailComponent implements OnInit, OnDestroy {
   
-  id: number;
-  url: string = 'https://image.tmdb.org/t/p/w500/';
-  imageFullUrl: string;
   title: string;
-  overview: string;
-  numberOfEpisodes: number;
-  numberOfSesons: number;
-  premiereDate: string;
-  rating: string;
+  id: number;
   loading: boolean = true;
   similarSeries: Array<SearchedSerie> = [];
   similarSeriesLoader: boolean = false;
   similarSeriesPageNumber: number = 2;
   similarSeriesLastPage: number;
+  imageFullUrl: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,19 +33,13 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
       this.id = param.get('id')
     })
     this.getSeriesService.getSeriesDetail(this.id).subscribe((dataSerie) => {
-      this.imageFullUrl = this.url + dataSerie.backdrop_path;
       this.title = dataSerie.name;
-      this.overview = dataSerie.overview;
-      this.numberOfEpisodes = dataSerie.number_of_episodes;
-      this.numberOfSesons = dataSerie.number_of_seasons;
-      this.premiereDate = dataSerie.first_air_date;
-      this.rating = dataSerie.vote_average;
+      this.imageFullUrl = environment.posterUrl + dataSerie.backdrop_path;
     }, error => console.log(error),
     () => {
       this.loading = false;
     })
     this.getSeriesService.getSimilarSeries(this.id).subscribe((data) => {
-      console.log(data, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
       this.similarSeries = data.results;
       this.similarSeriesLastPage = data.total_pages;
     })

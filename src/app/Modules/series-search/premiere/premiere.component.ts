@@ -3,16 +3,9 @@ import { GetPremiereService } from '../../../Services/get-premiere.service'
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { slideInLeft, slideInRight  } from 'ng-animate';
 import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
-
 import * as moment from 'moment';
-
-export interface seriesData {
-  results: Array<SearchedSerie>;
-  total_pages: number;
-  page: number;
-  total_results: number;
-}
-
+import { PremieresData } from 'src/app/shared/models/premieresData.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-premiere',
@@ -41,7 +34,7 @@ export class PremiereComponent implements OnInit {
   date: string = moment().format('YYYY-MM-DD');
   series: Array<SearchedSerie> = [];
   loading: boolean = true;
-  url: string = 'https://image.tmdb.org/t/p/w500/';
+  url: string = environment.posterUrl;
   fullUrl: string;
   title: string;
 
@@ -70,7 +63,7 @@ export class PremiereComponent implements OnInit {
     this.series = [];
     this.loading = true;
     let numberOfPages: number;
-    this.getPremiereService.getPremieres(this.date, 1).subscribe((data: seriesData) => {   
+    this.getPremiereService.getPremieres(this.date, 1).subscribe((data: PremieresData) => {   
       numberOfPages = data.total_pages; 
       for(let i = 0; data.results.length -1 >= i; i++) {
         this.series.push(data.results[i]) 
@@ -79,7 +72,7 @@ export class PremiereComponent implements OnInit {
     () => {
       if (numberOfPages > 1) {
         for(let i = 2; numberOfPages <= 1; i++) {
-          this.getPremiereService.getPremieres(this.date, i).subscribe((data: seriesData) => {    
+          this.getPremiereService.getPremieres(this.date, i).subscribe((data: PremieresData) => {    
             for(let i = 0; data.results.length -1 >= i; i++) {
               this.series.push(data.results[i]) 
             }    

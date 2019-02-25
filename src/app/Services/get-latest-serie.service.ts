@@ -16,6 +16,6 @@ export class GetLatestSerieService {
   }
 
   getLatestSerie(): Observable<any> {
-    return this.http.get<Array<String>>(`${environment.apiUrl}tv/latest?api_key=${environment.apiKey}&language=${this.language}-US`)
+    return this.http.get<Array<String>>(`${environment.apiUrl}tv/latest?api_key=${environment.apiKey}&language=${this.language}-US`); // zmodyfikuj na obiekty
   }
 }

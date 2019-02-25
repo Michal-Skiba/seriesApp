@@ -1,35 +1,35 @@
 <div class="detailWrapper" *ngIf="similarSeriesDisplay && !loading">
-  <p><b>Premiera: </b>{{ premiere }}</p>
-  <p><b>Liczba sezonów: </b>{{ numberOfSeasons }}</p>
-  <p><b>Liczba odcinków: </b>{{ numberOfEpisodes }}</p>
-  <p><b>Popularność: </b>{{ popularity }}</p>
-  <p><b>Opis: </b>{{ overview }}</p>
-  <p><b>Status: </b>{{ status }}</p>
+  <p><b>Premiera: </b>{{ serieInformations.first_air_date }}</p>
+  <p><b>Liczba sezonów: </b>{{ serieInformations.number_of_seasons }}</p>
+  <p><b>Liczba odcinków: </b>{{ serieInformations.number_of_episodes }}</p>
+  <p><b>Popularność: </b>{{ serieInformations.popularity }}</p>
+  <p><b>Opis: </b>{{ serieInformations.overview }}</p>
+  <p><b>Status: </b>{{ serieInformations.status }}</p>
   <p>
     <b>Producenci: </b>
-    <span *ngFor="let producer of producers; let i = index">
-      {{ producer.name }}<span *ngIf="i+1 <  producers.length">,</span>
+    <span *ngFor="let producer of serieInformations.production_companies; let i = index">
+      {{ producer.name }}<span *ngIf="i+1 <  serieInformations.production_companies.length">,</span>
     </span>
-    <span *ngIf="0 >=  producers.length">
+    <span *ngIf="0 >=   serieInformations.production_companies.length">
       Brak danych
     </span>       
   </p>
   <p>
     <b>Kraj pochodzenia: </b>
-    <span *ngFor="let country of countryOfOrigin; let i = index">
+    <span *ngFor="let country of serieInformations.origin_country; let i = index">
       {{ country }}
-      <span *ngIf="i+1 <  countryOfOrigin.length">,</span>
+      <span *ngIf="i+1 <  serieInformations.origin_country.length">,</span>
     </span>
-    <span *ngIf="0 >=  countryOfOrigin.length">
+    <span *ngIf="0 >=  serieInformations.origin_country.length">
       Brak danych
     </span>       
   </p>
   <p>
     <b>Getunek: </b>
-    <span *ngFor="let genre of genres; let i = index">
-      {{ genre.name }}<span *ngIf="i+1 < genres.length">,</span>
+    <span *ngFor="let genre of  serieInformations.genres; let i = index">
+      {{ genre.name }}<span *ngIf="i+1 < serieInformations.genres.length">,</span>
     </span>
-    <span *ngIf="0 >=  genres.length">
+    <span *ngIf="0 >= serieInformations.genres.length">
       Brak danych
     </span>       
   </p>
@@ -47,7 +47,7 @@
     <a target="_blank" href="{{filmwebLink + title}}">Filmweb</a>&nbsp;
     <a target="_blank" href="{{imdbLink + title}}">Imdb</a>
   </p>
-  <p *ngIf="nextEpisodeDate">
+  <p *ngIf="serieInformations.next_episode_to_air">
       <b>Następny nowy odcinek za: </b>{{countDownTime}}
   </p>
 </div>

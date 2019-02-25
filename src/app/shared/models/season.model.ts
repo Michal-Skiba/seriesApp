@@ -3,7 +3,7 @@ export class Season {
     episode_count: number;
     id: number;
     name: string;
-    overview: string;
+    overview: string | null;
     poster_path: string;
     season_number: number;
 }

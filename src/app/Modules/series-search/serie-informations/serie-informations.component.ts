@@ -1,15 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { GetSeriesService } from '../../../Services/get-series.service';
-import { Producers } from 'src/app/shared/models/producers.model';
-import { Genres } from 'src/app/shared/models/genres.model';
 import { SearchedSerie } from 'src/app/shared/models/searchedSerie.model';
-
-
-export interface nextEpisodeData {
-  air_date: string;
-  name: string;
-}
+import { NextEpisode } from 'src/app/shared/models/nextEpisode.model';
+import { SerieDetail } from 'src/app/shared/models/serieDetail.model';
 
 @Component({
   selector: 'app-serie-informations',
@@ -23,20 +17,10 @@ export class SerieInformationsComponent implements OnInit {
   filmwebLink: string = environment.filmwebLink;
   imdbLink: string = environment.imdbLink;
   loading: boolean = true;
-  popularity: string;
-  numberOfEpisodes: string;
-  numberOfSeasons: number;
-  premiere: string;
-  overview: string;
-  status: string;
-  producers: Array<Producers>;
-  countryOfOrigin: Array<string>;
-  genres: Array<Genres>;
   similarSeries: Array<SearchedSerie>;
   similarSeriesDisplay: Boolean = false;
-  nextEpisodeDate: nextEpisodeData;
   countDownTime: string;
-
+  serieInformations: SerieDetail;
 
   constructor(private getSeriesService: GetSeriesService) { }
 
@@ -49,8 +33,8 @@ export class SerieInformationsComponent implements OnInit {
   }
 
   countDownTimer(): void | string {
-    if(this.nextEpisodeDate) {
-      const countDownDate = new Date(this.nextEpisodeDate.air_date + " " + " 10:00:00").getTime();
+    if(this.serieInformations.next_episode_to_air) {
+      const countDownDate = new Date(this.serieInformations.next_episode_to_air.air_date + " " + " 10:00:00").getTime();
       setInterval(() => {
         const now = new Date().getTime();
         const distance = countDownDate - now;
@@ -61,24 +45,15 @@ export class SerieInformationsComponent implements OnInit {
         this.countDownTime = days + "d " + hours + "h "
         + minutes + "m " + seconds + "s "
       }, 1000)
-      this.nextEpisodeDate.air_date;
+      this.serieInformations.next_episode_to_air.air_date;
     } else {
       return 'Brak danych'
     }
   }
-
+  
   getSeriesInfo(id: number): void {
     this.getSeriesService.getSeriesDetail(id).subscribe(dataSeries => {
-      this.popularity = dataSeries.popularity;
-      this.numberOfEpisodes = dataSeries.number_of_episodes;
-      this.premiere = dataSeries.first_air_date;
-      this.overview = dataSeries.overview;
-      this.producers = dataSeries.production_companies;
-      this.numberOfSeasons = dataSeries.seasons.slice(1).length;
-      this.countryOfOrigin = dataSeries.origin_country;
-      this.status = dataSeries.status;
-      this.genres = dataSeries.genres;
-      this.nextEpisodeDate = dataSeries.next_episode_to_air;
+      this.serieInformations = new SerieDetail(dataSeries)
       this.countDownTimer()
     }, error => console.log(error, 'seriesss'),
     () => {
