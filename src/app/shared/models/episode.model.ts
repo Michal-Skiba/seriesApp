@@ -2,7 +2,7 @@ export class Episode {
     air_date: string;
     crew: Array<Crew>;
     episode_number: number;
-    guest_stars: Array<GuastStars>;
+    guest_stars: Array<GuestStars>;
     id: number;
     name: string;
     overview: string;
@@ -24,7 +24,7 @@ export class Crew {
     profile_path: string | null;
 }
 
-export class GuastStars {
+export class GuestStars {
     character: string;
     credit_id: string;
     gender: number;

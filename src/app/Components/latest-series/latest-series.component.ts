@@ -8,6 +8,11 @@ import { GetLatestSerieService } from '../../Services/get-latest-serie.service';
 })
 export class LatestSeriesComponent implements OnInit {
 
+  loading: boolean = true;
+  latestSerieName: string;
+  nextAirDate: string;
+  countDownTime: string = 'brak danych';
+
   constructor(private getLatestSeriesService: GetLatestSerieService) { }
 
   ngOnInit() {
@@ -22,10 +27,6 @@ export class LatestSeriesComponent implements OnInit {
       this.loading = false;
     })
   }
-  loading: boolean = true;
-  latestSerieName: string;
-  nextAirDate: string;
-  countDownTime: string = 'brak danych';
 
   countDownTimer() {
     if(this.nextAirDate) {

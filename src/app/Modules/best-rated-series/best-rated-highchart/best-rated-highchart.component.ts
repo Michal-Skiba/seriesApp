@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { GetSeriesService } from '../../../Services/get-series.service';
 import * as Highcharts from 'highcharts/highstock';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -8,7 +8,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: './best-rated-highchart.component.html',
   styleUrls: ['./best-rated-highchart.component.scss']
 })
-export class BestRatedHighchartComponent implements OnInit {
+export class BestRatedHighchartComponent {
+
+  loading: boolean = true;
+  chartOptions: object = {};
+  PieChartOptions: object = {}
+  Highcharts = Highcharts;
 
   constructor(
     private getSeriesService: GetSeriesService,
@@ -78,12 +83,4 @@ export class BestRatedHighchartComponent implements OnInit {
       }) 
     }
 
-  loading: boolean = true;
-
-  chartOptions: object = {};
-
-  PieChartOptions: object = {}
-  Highcharts = Highcharts;
-  ngOnInit() {
-  }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { GetSeriesService } from '../../../Services/get-series.service';
 import { SearchedSerie } from 'src/app/shared/models/searchedSerie.model';
-import { NextEpisode } from 'src/app/shared/models/nextEpisode.model';
 import { SerieDetail } from 'src/app/shared/models/serieDetail.model';
 
 @Component({
@@ -14,11 +13,11 @@ export class SerieInformationsComponent implements OnInit {
 
   @Input() id: number;
 
+  loading: boolean = true;
+  similarSeriesDisplay: Boolean = false;
   filmwebLink: string = environment.filmwebLink;
   imdbLink: string = environment.imdbLink;
-  loading: boolean = true;
   similarSeries: Array<SearchedSerie>;
-  similarSeriesDisplay: Boolean = false;
   countDownTime: string;
   serieInformations: SerieDetail;
 
@@ -60,5 +59,4 @@ export class SerieInformationsComponent implements OnInit {
       this.loading = false;
     })
   }
-
 }

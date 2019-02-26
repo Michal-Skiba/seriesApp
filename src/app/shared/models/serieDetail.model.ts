@@ -1,20 +1,20 @@
 import { Season } from './season.model';
-import { Genres } from './genres.model';
+import { Genre } from './genre.model';
 import { NextEpisode } from './nextEpisode.model';
 import { Producers } from './producers.model';
 
 export class SerieDetail {
     backdrop_path: string;
-    created_by: Array<object>
+    created_by: Array<CreatedBy>
     episode_run_time: Array<number>
     first_air_date: string
-    genres: Array<Genres>
+    genres: Array<Genre>
     homepage: string
     id: number
     in_production: boolean
     languages: Array<string>
     last_air_date: string
-    last_episode_to_air: object
+    last_episode_to_air: LastEpisodeToAir
     name: string
     networks: Array<Producers>
     next_episode_to_air: null | NextEpisode
@@ -36,3 +36,25 @@ export class SerieDetail {
         Object.assign(this, args);
       }
   }
+
+  export class CreatedBy {
+    credit_id: string
+    gender: number
+    id: number
+    name: string
+    profile_path: string
+  }
+
+  export class LastEpisodeToAir {
+    air_date: string
+    episode_number: number
+    id: number
+    name: string
+    overview: string
+    production_code: string
+    season_number: number
+    show_id: number
+    still_path: null | string
+    vote_average: number
+    vote_count: number
+}

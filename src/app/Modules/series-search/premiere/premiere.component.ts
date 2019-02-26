@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { GetPremiereService } from '../../../Services/get-premiere.service'
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { slideInLeft, slideInRight  } from 'ng-animate';
+import { slideInLeft, slideInRight, bounce  } from 'ng-animate';
 import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
 import * as moment from 'moment';
-import { PremieresData } from 'src/app/shared/models/premieresData.model';
+import { SearchData } from 'src/app/shared/models/searchData.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,10 +14,10 @@ import { environment } from 'src/environments/environment';
   animations: [
     trigger('openClose', [
       transition('nothing => right', [
-        useAnimation(slideInRight, {})
+        useAnimation(slideInRight)
       ]),
       transition('nothing => left', [
-        useAnimation(slideInLeft, {})
+        useAnimation(slideInLeft)
       ]),
     ]),
   ],
@@ -41,17 +41,16 @@ export class PremiereComponent implements OnInit {
   dayLater(): void {
     this.loading = true;
     this.date = moment(this.date).add("days", 1).format('YYYY-MM-DD');
-    
     this.getPremieres();
     this.isOpen = 'right';
     setTimeout(() => { 
-      this.isOpen = 'nothing'; 
+      this.isOpen = 'nothing';
     }, 900);
   }
+
   dayBefore(): void {
     this.loading = true;
     this.date = moment(this.date).subtract("days", 1).format('YYYY-MM-DD');
-    
     this.getPremieres();
     this.isOpen = 'left';
     setTimeout(() => { 
@@ -63,7 +62,8 @@ export class PremiereComponent implements OnInit {
     this.series = [];
     this.loading = true;
     let numberOfPages: number;
-    this.getPremiereService.getPremieres(this.date, 1).subscribe((data: PremieresData) => {   
+    this.getPremiereService.getPremieres(this.date, 1).subscribe((data: SearchData) => {
+      console.log(data, 'aaaaaaaaaaaaaaaaaaaaaaa')
       numberOfPages = data.total_pages; 
       for(let i = 0; data.results.length -1 >= i; i++) {
         this.series.push(data.results[i]) 
@@ -72,7 +72,7 @@ export class PremiereComponent implements OnInit {
     () => {
       if (numberOfPages > 1) {
         for(let i = 2; numberOfPages <= 1; i++) {
-          this.getPremiereService.getPremieres(this.date, i).subscribe((data: PremieresData) => {    
+          this.getPremiereService.getPremieres(this.date, i).subscribe((data: SearchData) => {
             for(let i = 0; data.results.length -1 >= i; i++) {
               this.series.push(data.results[i]) 
             }    

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ChangeLanguageService } from './change-language.service';
+import { SerieDetail } from '../shared/models/serieDetail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class GetLatestSerieService {
     this.language = this.changeLanguageService.getInfoLanguage();
   }
 
-  getLatestSerie(): Observable<any> {
-    return this.http.get<Array<String>>(`${environment.apiUrl}tv/latest?api_key=${environment.apiKey}&language=${this.language}-US`); // zmodyfikuj na obiekty
+  getLatestSerie(): Observable<SerieDetail> {
+    return this.http.get<SerieDetail>(`${environment.apiUrl}tv/latest?api_key=${environment.apiKey}&language=${this.language}-US`);
   }
 }

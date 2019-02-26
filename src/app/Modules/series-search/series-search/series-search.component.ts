@@ -4,8 +4,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router'
 import { ShowSeriesDetalService } from '../../../Services/show-series-detail.service';
 import { environment } from '../../../../environments/environment';
-import { tabelRowSearch } from '../../../shared/models/tabelRow.model';
-import { searchData } from '../../../shared/models/searchData.model';
+import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
+import { SearchData } from '../../../shared/models/searchData.model';
 import { SerieData } from '../../../shared/models/serieData.model'
 
 @Component({
@@ -15,18 +15,22 @@ import { SerieData } from '../../../shared/models/serieData.model'
 })
 export class SeriesSearchComponent implements OnInit {
 
-  constructor(private getSeriesService: GetSeriesService, private router: Router, private showSeriesDetalService: ShowSeriesDetalService) {}
+  constructor(
+    private getSeriesService: GetSeriesService,
+    private router: Router,
+    private showSeriesDetalService: ShowSeriesDetalService
+  ) {}
 
   startSearch: boolean = false;
   loadingSeries: boolean = false;
+  tillViev: boolean = false;
+  showPremiere: boolean = true;
+  showSearchedItems: boolean = true;
   searchForm: FormGroup;
   searchSeriesTitle: string = '';
   dataSourceTable: Array<SerieData> = [];
   seriesId: number = 0;
-  tillViev: boolean = false;
-  showPremiere: boolean = true;
   value: string;
-  showSearchedItems: boolean = true;
   isSerieDetailThere: boolean;
 
   ngOnInit() {
@@ -43,7 +47,6 @@ export class SeriesSearchComponent implements OnInit {
     })
   }
 
-
   inputListener(event: any): void {
     this.searchSeriesTitle = event.target.value;
     this.startSearch = false;
@@ -55,7 +58,6 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-
   changeRoute(data:string): void {
     this.router.navigate([data])
   }
@@ -66,7 +68,7 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-  dataToTable(series: tabelRowSearch[]): void {
+  dataToTable(series: Array<SearchedSerie>): void {
     series.forEach((element, index) => {
       let data = {
         'position': index + 1,
@@ -80,7 +82,7 @@ export class SeriesSearchComponent implements OnInit {
     this.loadingSeries = false;
   }
 
-  searchSeries(searchData: searchData): void {
+  searchSeries(searchData: SearchData): void {
     this.startSearch = true;
     if(this.searchSeriesTitle.length > 3) {
       for(let i = 1; i <= searchData.total_pages; i++) {

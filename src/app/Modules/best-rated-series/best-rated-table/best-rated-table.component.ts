@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GetTopRatedSeriesService } from '../../../Services/get-top-rated-series.service';
-import { tabelRowBestRated } from '../../../shared/models/tabelRow.model';
+import { TabelRowBestRated } from '../../../shared/models/tabelRow.model';
 import { MatDialog } from '@angular/material';
 import { BestRatedHighchartComponent } from '../best-rated-highchart/best-rated-highchart.component'
 import { ChangeLanguageService } from '../../../Services/change-language.service';
@@ -12,18 +12,20 @@ import { ChangeLanguageService } from '../../../Services/change-language.service
 })
 export class BestRatedTableComponent implements OnInit {
 
-  constructor(
-    private getTopRatedService: GetTopRatedSeriesService,
-    public dialog: MatDialog,
-    private changeLanguageService: ChangeLanguageService,
-    ) {}
+  @Input() tab: number;
 
   actualId: number;
-  dataSourceTable: Array<tabelRowBestRated>
+  dataSourceTable: Array<TabelRowBestRated>
   displayedColumns: string[] = ['position', 'name', 'vote_average', 'vote_count', 'id'];
   loading: boolean = true;
   displayChartComponent: boolean = false;
   language: string;
+
+  constructor(
+    private getTopRatedService: GetTopRatedSeriesService,
+    public dialog: MatDialog,
+    private changeLanguageService: ChangeLanguageService,
+  ) {}
 
   ngOnInit() {
     this.language = this.changeLanguageService.getInfoLanguage()
@@ -48,7 +50,7 @@ export class BestRatedTableComponent implements OnInit {
       this.dataSourceTable = dataSourceArr;
     }) 
   }
-  @Input() tab: number;
+  
 
   displayChart(id: number): void {
     this.displayChartComponent = true;

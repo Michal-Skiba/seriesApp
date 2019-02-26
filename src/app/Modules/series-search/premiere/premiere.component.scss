@@ -54,7 +54,6 @@
                    font-weight: normal;
                    margin: 0 10px;
                }
-
             }
             img {
                 margin: 0 10px;
@@ -67,11 +66,10 @@
                 }
             }
         }
-        
     }
-    
 }
 
 .loader {
-    margin: 50px auto 0 auto;
+    margin: 50px auto 50px auto;
+    width: fit-content;
 }

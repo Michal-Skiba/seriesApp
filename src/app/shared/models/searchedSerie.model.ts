@@ -1,7 +1,7 @@
 export class SearchedSerie {
     backdrop_path: string;
     first_air_date: string;
-    genre_ids: Array<Array<number>>;
+    genre_ids: Array<number>;
     id: number;
     name: string;
     origin_country: Array<string>

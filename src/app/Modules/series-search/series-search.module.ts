@@ -19,7 +19,7 @@ import {
 import { MovieTillComponent } from './movie-till/movie-till.component';
 import { TableComponent } from '../../Modules/series-search/table/table.component';
 import { TillVievComponent } from '../../Modules/series-search/till-viev/till-viev.component';
-import { TranslateGenresPipe } from '../../Pipes/translate-genres.pipe';
+import { TranslateGenrePipe } from '../../Pipes/translate-genre.pipe';
 import { StatusTranslatePipe } from '../../Pipes/status-translate.pipe';
 import { PopulatiryToStringPipe } from '../../Pipes/populatiry-to-string.pipe';
 import { SerieDetailComponent } from './serie-detail/serie-detail.component';
@@ -32,7 +32,7 @@ import { SerieInformationsComponent } from './serie-informations/serie-informati
     MovieTillComponent,
     TableComponent,
     TillVievComponent,
-    TranslateGenresPipe,
+    TranslateGenrePipe,
     StatusTranslatePipe,
     PopulatiryToStringPipe,
     SerieDetailComponent,

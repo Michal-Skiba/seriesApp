@@ -1,8 +1,8 @@
-import { TranslateGenresPipe } from './translate-genres.pipe';
+import { TranslateGenrePipe } from './translate-genre.pipe';
 
-describe('TranslateGenresPipe', () => {
+describe('TranslateGenrePipe', () => {
   it('create an instance', () => {
-    const pipe = new TranslateGenresPipe();
+    const pipe = new TranslateGenrePipe();
     expect(pipe).toBeTruthy();
   });
 });

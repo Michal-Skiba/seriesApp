@@ -1,6 +1,8 @@
-export class searchData {
+import { SearchedSerie } from './searchedSerie.model'
+
+export class SearchData {
     page: number;
-    results: Array<object>;
+    results: Array<SearchedSerie>;
     total_pages: number;
     total_results: number;
 }

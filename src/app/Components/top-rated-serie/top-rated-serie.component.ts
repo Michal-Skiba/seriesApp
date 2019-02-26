@@ -16,10 +16,10 @@ export class TopRatedSerieComponent implements OnInit {
       this.bestRatedSerie = dataSeries.results[0];
     }, error => console.log(error),
     () => {
-      
       this.loading = false;
     })
   }
+  
   loading: boolean = true;
   bestRatedSerie: SearchedSerie; 
 }

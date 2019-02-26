@@ -27,6 +27,4 @@ export class TableComponent {
       this.showDetails.emit(true)
     }
   }
-
-
 }

@@ -19,6 +19,7 @@ export class MovieTillComponent implements OnInit, OnChanges {
   @Input() tillViev: boolean
 
   loading: boolean = true;
+  similarSeriesDisplay: Boolean = false;
   fullUrl: string;
   title: string;
   seasons: Array<Season>;
@@ -26,7 +27,6 @@ export class MovieTillComponent implements OnInit, OnChanges {
   actors: Array<Actors>;
   actorsError: boolean = false;
   similarSeries: Array<SearchedSerie>;
-  similarSeriesDisplay: Boolean = false;
 
   @Output()
   showDetailsFlag = new EventEmitter<boolean>();
@@ -57,13 +57,11 @@ export class MovieTillComponent implements OnInit, OnChanges {
         this.seasonsEpisodes[i] = seasonsInfo.episodes;
       }, error => console.log(error, 'getSeasonEpisod', error.status)
     )}
-    
   }
 
   showDetails(): void {
     this.showDetailsFlag.emit(true)
   }
-
 
   getSeriesInfo(id: number): void {
     this.getSeriesService.getSeriesDetail(id).subscribe(dataSeries => {

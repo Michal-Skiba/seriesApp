@@ -44,8 +44,8 @@
   </p>
   <p>
     <b>Linki do podobnych witryn: </b>
-    <a target="_blank" href="{{filmwebLink + title}}">Filmweb</a>&nbsp;
-    <a target="_blank" href="{{imdbLink + title}}">Imdb</a>
+    <a target="_blank" href="{{filmwebLink + serieInformations.name}}">Filmweb</a>&nbsp;
+    <a target="_blank" href="{{imdbLink + serieInformations.name}}">Imdb</a>
   </p>
   <p *ngIf="serieInformations.next_episode_to_air">
       <b>Następny nowy odcinek za: </b>{{countDownTime}}

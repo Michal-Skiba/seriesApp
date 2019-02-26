@@ -25,7 +25,7 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private showSeriesDetalService: ShowSeriesDetalService,
     private getSeriesService: GetSeriesService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.showSeriesDetalService.showUp();

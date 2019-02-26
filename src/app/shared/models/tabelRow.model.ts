@@ -1,4 +1,4 @@
-export class tabelRowSearch {
+export class TabelRowSearch {
     position: number;
     name: string;
     first_air_date: string;
@@ -6,7 +6,7 @@ export class tabelRowSearch {
     id: number;
 }
 
-export class tabelRowBestRated {
+export class TabelRowBestRated {
     position: number;
     name: string;
     vote_count: string;
@@ -15,7 +15,7 @@ export class tabelRowBestRated {
     original_name: string;
 }
 
-export class tabelRowLastTrends {
+export class TabelRowLastTrends {
     position: number;
     title: string;
     premiereDate: string;

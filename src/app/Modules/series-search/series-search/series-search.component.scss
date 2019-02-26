@@ -1,27 +1,23 @@
 .formWrapper {
     margin-top: 20px;
+    width: 100%;
     form {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;     
     }
-    
-    width: 100%;
     .mat-form-field {
         width: 100%;
     }
-
     button {
         margin-left: 20px
     }
-
     @media only screen and (min-width: 500px) {
         form {
             flex-direction: row;     
         }
     }
-
     @media only screen and (min-width: 768px) {
         .mat-form-field {
             width: 610px;
@@ -65,8 +61,7 @@
         color: black;
         font-weight: bold;
         margin: 20px auto 0 auto;
-    }
-    
+    } 
     @media only screen and (min-width: 768px) {
         .mat-card {
             width: 610px; 

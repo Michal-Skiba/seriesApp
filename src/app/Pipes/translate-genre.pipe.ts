@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'translateGenres'
+  name: 'translateGenre'
 })
-export class TranslateGenresPipe implements PipeTransform {
+export class TranslateGenrePipe implements PipeTransform {
   transform(value: string): string {
     switch (value) {
       case 'Action & Adventure':

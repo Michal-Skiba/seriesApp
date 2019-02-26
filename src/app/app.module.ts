@@ -14,10 +14,11 @@ import {
   MatProgressSpinnerModule,
 } from '@angular/material';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LatestSeriesComponent } from './Components/latest-series/latest-series.component';
 import { TopRatedSerieComponent } from './Components/top-rated-serie/top-rated-serie.component';
 import { FooterComponent } from './Components/footer/footer.component';
+import { InterceptorService } from './Services/interceptor';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,13 @@ import { FooterComponent } from './Components/footer/footer.component';
     HttpClientModule,
     MatProgressSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
