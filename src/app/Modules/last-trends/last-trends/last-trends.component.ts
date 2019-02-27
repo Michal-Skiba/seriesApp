@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GetLastTrendsService } from '../../../Services/get-last-trends.service'
-import { TabelRowLastTrends } from '../../../shared/models/tabelRow.model';
+import { GetLastTrendsService } from '@services/get-last-trends.service'
+import { TabelRowLastTrends } from '@models/tabelRow.model';
 
 @Component({
   selector: 'app-last-trends',

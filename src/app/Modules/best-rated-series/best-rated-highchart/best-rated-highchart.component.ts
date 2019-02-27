@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { GetSeriesService } from '../../../Services/get-series.service';
+import { GetSeriesService } from '@services/get-series.service';
 import * as Highcharts from 'highcharts/highstock';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 

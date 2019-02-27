@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GetTopRatedSeriesService } from '../../Services/get-top-rated-series.service';
-import { SearchedSerie } from 'src/app/shared/models/searchedSerie.model';
+import { GetTopRatedSeriesService } from '@services/get-top-rated-series.service';
+import { SearchedSerie } from '@models/searchedSerie.model';
 
 @Component({
   selector: 'app-top-rated-serie',

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ChangeLanguageService } from './change-language.service';
-import { SearchData } from '../shared/models/searchData.model'
+import { SearchData } from '@models/searchData.model'
 
 @Injectable({
   providedIn: 'root'

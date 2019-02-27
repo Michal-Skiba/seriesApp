@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { GetSeriesService } from '../../../Services/get-series.service';
-import { environment } from '../../../../environments/environment';
-import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
-import { Season } from 'src/app/shared/models/season.model';
-import { Actors } from 'src/app/shared/models/actors.model';
-import { Episode } from 'src/app/shared/models/episode.model';
+import { GetSeriesService } from '@services/get-series.service';
+import { environment } from '@environments/environment';
+import { SearchedSerie } from '@models/searchedSerie.model';
+import { Season } from '@models/season.model';
+import { Actors } from '@models/actors.model';
+import { Episode } from '@models/episode.model';
 
 @Component({
   selector: 'app-movie-till',

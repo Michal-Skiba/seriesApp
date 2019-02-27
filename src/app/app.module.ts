@@ -19,6 +19,7 @@ import { LatestSeriesComponent } from './Components/latest-series/latest-series.
 import { TopRatedSerieComponent } from './Components/top-rated-serie/top-rated-serie.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { InterceptorService } from './Services/interceptor';
+import { CountdownPipe } from './Pipes/countdown.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { InterceptorService } from './Services/interceptor';
     LatestSeriesComponent,
     TopRatedSerieComponent,
     FooterComponent,
+    CountdownPipe,
   ],
   imports: [
     BrowserModule,

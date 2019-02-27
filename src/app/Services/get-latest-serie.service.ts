@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ChangeLanguageService } from './change-language.service';
-import { SerieDetail } from '../shared/models/serieDetail.model';
+import { SerieDetail } from '@models/serieDetail.model';
 
 @Injectable({
   providedIn: 'root'

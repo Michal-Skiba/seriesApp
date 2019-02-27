@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GetTopRatedSeriesService } from '../../../Services/get-top-rated-series.service';
-import { TabelRowBestRated } from '../../../shared/models/tabelRow.model';
+import { GetTopRatedSeriesService } from '@services/get-top-rated-series.service';
+import { TabelRowBestRated } from '@models/tabelRow.model';
 import { MatDialog } from '@angular/material';
 import { BestRatedHighchartComponent } from '../best-rated-highchart/best-rated-highchart.component'
-import { ChangeLanguageService } from '../../../Services/change-language.service';
+import { ChangeLanguageService } from '@services/change-language.service';
 
 @Component({
   selector: 'app-best-rated-table',

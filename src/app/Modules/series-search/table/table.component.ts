@@ -1,15 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SerieData } from '../../../shared/models/serieData.model'
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { SerieData } from '@models/serieData.model'
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent {
+export class TableComponent implements OnInit{
 
   constructor() { }
-
+  ngOnInit() {
+    console.log(this.dataSourceTable, 'aaaaaaaaaaaa')
+  }
   displayTill:boolean = false;
   displayedColumns: string[] = ['position', 'title', 'premiereDate', 'rating', 'id'];
 

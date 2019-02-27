@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SerieData } from '../../../shared/models/serieData.model'
+import { SerieData } from '@models/serieData.model'
 
 @Component({
   selector: 'app-till-viev',
@@ -9,6 +9,7 @@ import { SerieData } from '../../../shared/models/serieData.model'
 export class TillVievComponent {
 
   constructor() {}
+  
   @Input() dataSource: Array<SerieData>;
   @Output() showDetails = new EventEmitter<boolean>();
   
@@ -17,5 +18,4 @@ export class TillVievComponent {
       this.showDetails.emit(true)
     }
   }
-
 }

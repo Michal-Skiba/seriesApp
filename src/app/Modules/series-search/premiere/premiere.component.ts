@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { GetPremiereService } from '../../../Services/get-premiere.service'
+import { GetPremiereService } from '@services/get-premiere.service'
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { slideInLeft, slideInRight, bounce  } from 'ng-animate';
-import { SearchedSerie } from '../../../shared/models/searchedSerie.model';
+import { SearchedSerie } from '@models/searchedSerie.model';
 import * as moment from 'moment';
-import { SearchData } from 'src/app/shared/models/searchData.model';
-import { environment } from 'src/environments/environment';
+import { SearchData } from '@models/searchData.model';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-premiere',
@@ -63,7 +63,6 @@ export class PremiereComponent implements OnInit {
     this.loading = true;
     let numberOfPages: number;
     this.getPremiereService.getPremieres(this.date, 1).subscribe((data: SearchData) => {
-      console.log(data, 'aaaaaaaaaaaaaaaaaaaaaaa')
       numberOfPages = data.total_pages; 
       for(let i = 0; data.results.length -1 >= i; i++) {
         this.series.push(data.results[i]) 

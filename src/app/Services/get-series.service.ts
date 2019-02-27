@@ -4,10 +4,10 @@ import { retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ChangeLanguageService } from './change-language.service';
-import { SerieDetail } from '../shared/models/serieDetail.model';
-import { SearchData } from '../shared/models/searchData.model';
-import { Credits } from '../shared/models/credits.model';
-import { SeasonEpiosodes } from '../shared/models/seasonEpiosed.model';
+import { SerieDetail } from '@models/serieDetail.model';
+import { SearchData } from '@models/searchData.model';
+import { Credits } from '@models/credits.model';
+import { SeasonEpiosodes } from '@models/seasonEpiosed.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,7 @@ export class GetSeriesService {
     .pipe(
       retry(20),
     )
+    
   }
 
   getSimilarSeries(seriesId: number, page: number = 1): Observable<SearchData> {
@@ -68,3 +69,14 @@ export class GetSeriesService {
   //     retry(20),
   //   )
   // }
+
+
+  // .pipe(
+    //   retryWhen(error => 
+    //     error.pipe(
+    //       tap(val => console.log(`Value ${val} was too high!`)),
+    //       delayWhen(val => timer(val*1000)
+    //     )
+    //   )
+    // ))
+    // import { map, tap, retryWhen, delayWhen } from 'rxjs/operators';
