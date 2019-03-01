@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MovieTillComponent } from './movie-till.component';
+import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('MovieTillComponent', () => {
   let component: MovieTillComponent;
@@ -8,7 +11,13 @@ describe('MovieTillComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MovieTillComponent ]
+      declarations: [ MovieTillComponent ],
+      imports: [
+        HttpClientModule,
+        RouterModule,
+        MatCardModule,
+      ],
+      schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ] 
     })
     .compileComponents();
   }));

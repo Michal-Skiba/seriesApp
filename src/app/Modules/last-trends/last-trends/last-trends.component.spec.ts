@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LastTrendsComponent } from './last-trends.component';
+import { MatTableModule, MatProgressSpinnerModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('LastTrendsComponent', () => {
   let component: LastTrendsComponent;
@@ -8,7 +9,12 @@ describe('LastTrendsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LastTrendsComponent ]
+      imports: [
+        MatTableModule,
+        MatProgressSpinnerModule,
+        HttpClientModule,
+      ],
+      declarations: [ LastTrendsComponent ],
     })
     .compileComponents();
   }));

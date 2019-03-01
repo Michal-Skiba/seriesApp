@@ -21,10 +21,10 @@
             !showPremiere &&
             startSearch &&
             dataSourceTable.length <= 0 &&
-            (searchSeriesTitle.length <= 3  || !searchSeriesTitle)"
-      class="searchError"
-  >
-    <mat-card><mat-icon>error</mat-icon>Wpisz bardziej szczegółową nazwę !!!</mat-card>
+            (searchSeriesTitle.length <= 3  || !searchSeriesTitle)" class="searchError">
+  <mat-card>
+    <mat-icon>error</mat-icon>Wpisz bardziej szczegółową nazwę !!!
+  </mat-card>
 </div>
 <div *ngIf="loadingSeries" class="loader">
   <mat-spinner></mat-spinner>
@@ -33,29 +33,21 @@
             !showPremiere &&
             dataSourceTable.length <= 0 && dataSourceTable.length <= 39 &&
             searchSeriesTitle.length > 3 &&
-            startSearch"
-      class="noFiles"
->
-  <mat-card><mat-icon>warning</mat-icon>Brak znalezionych filmów</mat-card>
+            startSearch" class="noFiles">
+  <mat-card>
+    <mat-icon>warning</mat-icon>Brak znalezionych filmów
+  </mat-card>
 </div>
 <div *ngIf="!this.loadingSeries &&
             dataSourceTable.length > 0 && dataSourceTable.length <= 39 &&     
             this.showSearchedItems &&
-            !showPremiere"
-  >
+            !showPremiere">
   <div *ngIf='!this.tillViev'>
-    <app-table
-      [dataSourceTable] = dataSourceTable
-      [id] = seriesId
-      (showDetails) = "showDetails($event)"
-    >
+    <app-table [dataSourceTable]=dataSourceTable [id]=seriesId (showDetails)="showDetails($event)">
     </app-table>
   </div>
   <div *ngIf='this.tillViev'>
-    <app-till-viev
-      [dataSource] = dataSourceTable
-      (showDetails) = "showDetails($event)"
-    >
+    <app-till-viev [dataSource]=dataSourceTable (showDetails)="showDetails($event)">
     </app-till-viev>
   </div>
 </div>
@@ -64,4 +56,3 @@
   </app-premiere>
 </div>
 <router-outlet></router-outlet>
-

@@ -19,12 +19,13 @@ import {
 import { MovieTillComponent } from './movie-till/movie-till.component';
 import { TableComponent } from '../../Modules/series-search/table/table.component';
 import { TillVievComponent } from '../../Modules/series-search/till-viev/till-viev.component';
-import { TranslateGenrePipe } from '../../Pipes/translate-genre.pipe';
-import { StatusTranslatePipe } from '../../Pipes/status-translate.pipe';
-import { PopulatiryToStringPipe } from '../../Pipes/populatiry-to-string.pipe';
+import { TranslateGenrePipe } from '@pipes/translate-genre.pipe';
+import { StatusTranslatePipe } from '@pipes/status-translate.pipe';
+import { PopulatiryToStringPipe } from '@pipes/populatiry-to-string.pipe';
 import { SerieDetailComponent } from './serie-detail/serie-detail.component';
 import { PremiereComponent } from './premiere/premiere.component';
 import { SerieInformationsComponent } from './serie-informations/serie-informations.component';
+import { CountdownDirective } from '../../directives/countdown.directive';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SerieInformationsComponent } from './serie-informations/serie-informati
     SerieDetailComponent,
     PremiereComponent,
     SerieInformationsComponent,
+    CountdownDirective,
   ],
   imports: [
     CommonModule,

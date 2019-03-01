@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
-import { LatestSeriesComponent } from './Components/latest-series/latest-series.component';
-import { TopRatedSerieComponent } from './Components/top-rated-serie/top-rated-serie.component';
-
 
 const routes: Routes = [
   {
@@ -25,18 +22,8 @@ const routes: Routes = [
   },
   { 
     path: '**',
-    component: PageNotFoundComponent
+    component: PageNotFoundComponent,
   },
-  { 
-    path: 'latest-serie',
-    component: LatestSeriesComponent,
-    outlet: 'bottomInfo'
-  },
-  { 
-    path: 'top-rated-serie',
-    component: TopRatedSerieComponent,
-    outlet: 'bottomInfo'
-  }
 ];
 
 @NgModule({

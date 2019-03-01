@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BestRatedTableComponent } from './best-rated-table.component';
+import { MatDialog, MatTableModule } from '@angular/material';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { BestRatedSeriesComponent } from '../best-rated-series/best-rated-series.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('BestRatedTableComponent', () => {
   let component: BestRatedTableComponent;
@@ -8,7 +11,15 @@ describe('BestRatedTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BestRatedTableComponent ]
+      declarations: [ BestRatedTableComponent, BestRatedSeriesComponent ],
+      imports: [
+        MatTableModule,
+        HttpClientModule,
+      ],
+      schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
+      providers: [
+        { provide: MatDialog, useValue: {} }, 
+      ] 
     })
     .compileComponents();
   }));

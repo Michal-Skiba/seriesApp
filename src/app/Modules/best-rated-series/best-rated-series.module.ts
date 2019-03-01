@@ -18,7 +18,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
   declarations: [
     BestRatedSeriesComponent,
     BestRatedHighchartComponent,
-    BestRatedTableComponent
+    BestRatedTableComponent,
   ],
   imports: [
     CommonModule,

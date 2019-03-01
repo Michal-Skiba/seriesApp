@@ -11,14 +11,14 @@ import { SerieData } from '@models/serieData.model'
 @Component({
   selector: 'app-series-search',
   templateUrl: './series-search.component.html',
-  styleUrls: ['./series-search.component.scss']
+  styleUrls: ['./series-search.component.scss'],
 })
 export class SeriesSearchComponent implements OnInit {
 
   constructor(
     private getSeriesService: GetSeriesService,
     private router: Router,
-    private showSeriesDetalService: ShowSeriesDetalService
+    private showSeriesDetalService: ShowSeriesDetalService,
   ) {}
 
   startSearch: boolean = false;
@@ -103,7 +103,6 @@ export class SeriesSearchComponent implements OnInit {
   resetValues(): void {
     this.startSearch = false;
     this.dataSourceTable = [];
-    this.loadingSeries = true;
     this.showPremiere = false;
     this.showSearchedItems = true;
     this.tableIndex = 1;

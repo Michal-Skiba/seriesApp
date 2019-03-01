@@ -55,28 +55,9 @@ export class GetSeriesService {
       retry(20),
     )
   }
+
+  getLastTrends(): Observable<SearchData> {
+    return this.http.get<SearchData>(`${environment.apiUrl}trending/tv/week?api_key=${environment.apiKey}`);
+  }
+
 }
-
-  // getSeriesDetailAnotherLanguage(seriesId: number): Observable<any> {
-  //   let language = '';
-  //   if (this.language = 'en') {
-  //     language = 'pl'
-  //   } else if (this.language = 'pl') {
-  //     language = 'en'
-  //   }
-  //   return this.http.get<Array<String>>(`${environment.apiUrl}tv/${seriesId}?api_key=${environment.apiKey}&language=${language}-US`)
-  //   .pipe(
-  //     retry(20),
-  //   )
-  // }
-
-
-  // .pipe(
-    //   retryWhen(error => 
-    //     error.pipe(
-    //       tap(val => console.log(`Value ${val} was too high!`)),
-    //       delayWhen(val => timer(val*1000)
-    //     )
-    //   )
-    // ))
-    // import { map, tap, retryWhen, delayWhen } from 'rxjs/operators';
