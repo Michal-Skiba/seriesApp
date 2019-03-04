@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetLastTrendsService } from '@services/get-last-trends.service'
+import { LastTrendsService } from '@services/last-trends.service'
 import { TabelRowLastTrends } from '@models/tabelRow.model';
 
 @Component({
@@ -9,7 +9,7 @@ import { TabelRowLastTrends } from '@models/tabelRow.model';
 })
 export class LastTrendsComponent implements OnInit {
 
-  constructor(private getLastTrendsService: GetLastTrendsService) { }
+  constructor(private lastTrendsService: LastTrendsService) { }
 
   tableIndex: number = 1;
   dataSourceTable: Array<TabelRowLastTrends> = [];
@@ -17,7 +17,7 @@ export class LastTrendsComponent implements OnInit {
   loading: boolean = true;
 
   ngOnInit() {
-    this.getLastTrendsService.getLastTrends(1).subscribe((data) => {
+    this.lastTrendsService.getLastTrends(1).subscribe((data) => {
       data.results.forEach(element => {
         let data = {
           'position': this.tableIndex,

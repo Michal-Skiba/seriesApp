@@ -3,20 +3,20 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ChangeLanguageService } from './change-language.service';
-import { SearchData } from '@models/searchData.model'
+import { SerieDetail } from '@models/serieDetail.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GetLastTrendsService {
-  
+export class LatestSerieService {
+
   language: string;
 
   constructor(private http: HttpClient, private changeLanguageService: ChangeLanguageService) { 
     this.language = this.changeLanguageService.getInfoLanguage();
   }
 
-  getLastTrends(page: number): Observable<SearchData> {
-    return this.http.get<SearchData>(`${environment.apiUrl}tv/popular?api_key=${environment.apiKey}&language=${this.language}-US&page=${page}`)
+  getLatestSerie(): Observable<SerieDetail> {
+    return this.http.get<SerieDetail>(`${environment.apiUrl}tv/latest?api_key=${environment.apiKey}&language=${this.language}-US`);
   }
 }

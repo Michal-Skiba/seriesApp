@@ -14,7 +14,8 @@ import {
 } from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './Services/interceptor';
-import { ComponentsModule } from './Components/components.module'
+import { ComponentsModule } from './Components/components.module';
+import { TestModuleModule } from './testClasses/test-module.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ComponentsModule } from './Components/components.module'
     HttpClientModule,
     MatProgressSpinnerModule,
     ComponentsModule,
+    TestModuleModule,
   ],
   providers: [
     {

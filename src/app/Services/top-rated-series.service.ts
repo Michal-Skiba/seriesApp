@@ -8,16 +8,16 @@ import { SearchData } from '@models/searchData.model';
 @Injectable({
   providedIn: 'root'
 })
-export class GetPremiereService {
+export class TopRatedSeriesService {
 
   language: string;
 
   constructor(private http: HttpClient, private changeLanguageService: ChangeLanguageService) { 
     this.language = this.changeLanguageService.getInfoLanguage();
   }
-
-  getPremieres(date: string, page: number): Observable<SearchData> {
-    return this.http.get<SearchData>(`${environment.apiUrl}discover/tv?api_key=${environment.apiKey}&language=${this.language}-US&sort_by=vote_average.asc&first_air_date.gte=${date}&first_air_date.lte=${date}&page=${page}&timezone=America%2FNew_York&include_null_first_air_dates=false`);
+  
+  getTopratedSeries(page: number): Observable<SearchData> {
+    return this.http.get<SearchData>(`${environment.apiUrl}tv/top_rated?api_key=${environment.apiKey}&language=${this.language}-US&page=${page}`)
   }
 
 }

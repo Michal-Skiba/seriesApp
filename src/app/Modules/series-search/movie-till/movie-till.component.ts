@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { GetSeriesService } from '@services/get-series.service';
+import { SeriesService } from '@services/series.service';
 import { environment } from '@environments/environment';
 import { SearchedSerie } from '@models/searchedSerie.model';
 import { Season } from '@models/season.model';
@@ -13,7 +13,7 @@ import { Episode } from '@models/episode.model';
 })
 export class MovieTillComponent implements OnInit, OnChanges {
  
-  constructor(private getSeriesService: GetSeriesService) { }
+  constructor(private getSeriesService: SeriesService) { }
 
   @Input() id: number
   @Input() tillViev: boolean

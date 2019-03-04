@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router'
 import { ShowSeriesDetalService } from '@services/show-series-detail.service'
-import { GetSeriesService } from '@services/get-series.service';
+import { SeriesService } from '@services/series.service';
 import { SearchedSerie } from '@models/searchedSerie.model';
 import { environment } from '@environments/environment'
 
@@ -24,7 +24,7 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private showSeriesDetalService: ShowSeriesDetalService,
-    private getSeriesService: GetSeriesService
+    private SeriesService: SeriesService
   ) { }
 
   ngOnInit() {
@@ -32,14 +32,14 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((param: Params) => {
       this.id = param.get('id')
     })
-    this.getSeriesService.getSeriesDetail(this.id).subscribe(dataSerie => {
+    this.SeriesService.getSeriesDetail(this.id).subscribe(dataSerie => {
       this.title = dataSerie.name;
       this.imageFullUrl = environment.posterUrl + dataSerie.backdrop_path;
     }, error => console.log(error),
     () => {
       this.loading = false;
     })
-    this.getSeriesService.getSimilarSeries(this.id).subscribe(data => {
+    this.SeriesService.getSimilarSeries(this.id).subscribe(data => {
       this.similarSeries = data.results;
       this.similarSeriesLastPage = data.total_pages;
     })
@@ -47,7 +47,7 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
 
   loadMore(): void {
     this.similarSeriesLoader = true;
-    this.getSeriesService.getSimilarSeries(this.id).subscribe(data => {
+    this.SeriesService.getSimilarSeries(this.id).subscribe(data => {
       this.similarSeries.push(...data.results);
     }, error => console.log(error),
     () => {

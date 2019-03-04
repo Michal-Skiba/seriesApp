@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetSeriesService } from '@services/get-series.service';
+import { SeriesService } from '@services/series.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router'
 import { ShowSeriesDetalService } from '@services/show-series-detail.service';
@@ -16,7 +16,7 @@ import { SerieData } from '@models/serieData.model'
 export class SeriesSearchComponent implements OnInit {
 
   constructor(
-    private getSeriesService: GetSeriesService,
+    private seriesService: SeriesService,
     private router: Router,
     private showSeriesDetalService: ShowSeriesDetalService,
   ) {}
@@ -87,7 +87,7 @@ export class SeriesSearchComponent implements OnInit {
     this.startSearch = true;
     if(this.searchSeriesTitle.length > 3) {
       for(let i = 1; i <= searchData.total_pages; i++) {
-        this.getSeriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
+        this.seriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
           this.dataToTable(dataSeries.results.filter(data => data.popularity > environment.popularity));
           if(i === searchData.total_pages) {
             this.dataSourceTable.length > 0 ? this.seriesId = this.dataSourceTable[0].id : this.seriesId = 0;
@@ -110,7 +110,7 @@ export class SeriesSearchComponent implements OnInit {
 
   onSubmit(): void {
     this.resetValues();
-    this.getSeriesService.searchSeries(this.searchSeriesTitle, 1).subscribe(dataSeries => {
+    this.seriesService.searchSeries(this.searchSeriesTitle, 1).subscribe(dataSeries => {
       this.searchSeries(dataSeries)
     },
     error => console.log(error)    
@@ -120,3 +120,4 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 }
+ 

@@ -12,7 +12,7 @@ import { SeasonEpiosodes } from '@models/seasonEpiosed.model';
 @Injectable({
   providedIn: 'root'
 })
-export class GetSeriesService {
+export class SeriesService {
   
   language: string;
   

@@ -3,12 +3,12 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ChangeLanguageService } from './change-language.service';
-import { SerieDetail } from '@models/serieDetail.model';
+import { SearchData } from '@models/searchData.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GetLatestSerieService {
+export class PremiereService {
 
   language: string;
 
@@ -16,7 +16,8 @@ export class GetLatestSerieService {
     this.language = this.changeLanguageService.getInfoLanguage();
   }
 
-  getLatestSerie(): Observable<SerieDetail> {
-    return this.http.get<SerieDetail>(`${environment.apiUrl}tv/latest?api_key=${environment.apiKey}&language=${this.language}-US`);
+  getPremieres(date: string, page: number): Observable<SearchData> {
+    return this.http.get<SearchData>(`${environment.apiUrl}discover/tv?api_key=${environment.apiKey}&language=${this.language}-US&sort_by=vote_average.asc&first_air_date.gte=${date}&first_air_date.lte=${date}&page=${page}&timezone=America%2FNew_York&include_null_first_air_dates=false`);
   }
+
 }

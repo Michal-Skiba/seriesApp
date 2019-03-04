@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '@environments/environment';
-import { GetSeriesService } from '@services/get-series.service';
+import { SeriesService } from '@services/series.service';
 import { SerieDetail } from '@models/serieDetail.model';
 import { Observable } from 'rxjs';
 import { SearchData } from '@models/searchData.model';
@@ -19,10 +19,10 @@ export class SerieInformationsComponent implements OnInit {
   similarSeries$: Observable<SearchData>;
   serieInformations$: Observable<SerieDetail>
 
-  constructor(private getSeriesService: GetSeriesService) { }
+  constructor(private seriesService: SeriesService) { }
   
   ngOnInit() {
-    this.similarSeries$ = this.getSeriesService.getSimilarSeries(this.id);
-    this.serieInformations$ = this.getSeriesService.getSeriesDetail(this.id);
+    this.similarSeries$ = this.seriesService.getSimilarSeries(this.id);
+    this.serieInformations$ = this.seriesService.getSeriesDetail(this.id);
   }
 }

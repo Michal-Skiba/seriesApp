@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GetTopRatedSeriesService } from '@services/get-top-rated-series.service';
+import { TopRatedSeriesService } from '@services/top-rated-series.service';
 import { TabelRowBestRated } from '@models/tabelRow.model';
 import { MatDialog } from '@angular/material';
 import { BestRatedHighchartComponent } from '../best-rated-highchart/best-rated-highchart.component'
@@ -22,7 +22,7 @@ export class BestRatedTableComponent implements OnInit {
   language: string;
 
   constructor(
-    private getTopRatedService: GetTopRatedSeriesService,
+    private getTopRatedService: TopRatedSeriesService,
     public dialog: MatDialog,
     private changeLanguageService: ChangeLanguageService,
   ) {}

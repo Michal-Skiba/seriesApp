@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetPremiereService } from '@services/get-premiere.service'
+import { PremiereService } from '@services/premiere.service'
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { slideInLeft, slideInRight, bounce  } from 'ng-animate';
 import { SearchedSerie } from '@models/searchedSerie.model';
@@ -24,7 +24,7 @@ import { environment } from '@environments/environment';
 })
 export class PremiereComponent implements OnInit {
 
-  constructor( private getPremiereService: GetPremiereService ) { }
+  constructor( private premiereService: PremiereService ) { }
   
   ngOnInit() { 
     this.getPremieres() 
@@ -62,7 +62,7 @@ export class PremiereComponent implements OnInit {
     this.series = [];
     this.loading = true;
     let numberOfPages: number;
-    this.getPremiereService.getPremieres(this.date, 1).subscribe((data: SearchData) => {
+    this.premiereService.getPremieres(this.date, 1).subscribe((data: SearchData) => {
       numberOfPages = data.total_pages; 
       for(let i = 0; data.results.length -1 >= i; i++) {
         this.series.push(data.results[i]) 
@@ -71,7 +71,7 @@ export class PremiereComponent implements OnInit {
     () => {
       if (numberOfPages > 1) {
         for(let i = 2; numberOfPages <= 1; i++) {
-          this.getPremiereService.getPremieres(this.date, i).subscribe((data: SearchData) => {
+          this.premiereService.getPremieres(this.date, i).subscribe((data: SearchData) => {
             for(let i = 0; data.results.length -1 >= i; i++) {
               this.series.push(data.results[i]) 
             }    

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { GetSeriesService } from '@services/get-series.service';
+import { SeriesService } from '@services/series.service';
 import * as Highcharts from 'highcharts/highstock';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -16,7 +16,7 @@ export class BestRatedHighchartComponent {
   Highcharts = Highcharts;
 
   constructor(
-    private getSeriesService: GetSeriesService,
+    private getSeriesService: SeriesService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: number,
     ) {

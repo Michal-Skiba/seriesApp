@@ -9,7 +9,7 @@ describe('BestRatedHighchartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule ],
+      imports: [ HttpClientModule ],
       declarations: [ BestRatedHighchartComponent ],
       schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
       providers: [

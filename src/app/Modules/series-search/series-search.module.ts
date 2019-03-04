@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SeriesSearchComponent } from './series-search/series-search.component';
-import { GetSeriesService } from '../../Services/get-series.service'
+import { SeriesService } from '../../Services/series.service'
 import { routing } from './serie-search.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -58,7 +58,7 @@ import { CountdownDirective } from '../../directives/countdown.directive';
     MatSlideToggleModule,
   ],
   providers: [
-    GetSeriesService,
+    SeriesService,
   ],
 })
 export class SeriesSearchModule { }
