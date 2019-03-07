@@ -1,4 +1,11 @@
-.tableWrapper {
+.loader {
+    margin-top: 20px;
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+}
+
+.table {
     width: 100%;
     .mat-table {       
         width: 100%;
@@ -10,48 +17,4 @@
         }
         margin: 5px auto 0 auto;
     }
-    .searchCol {
-        width: 40px;
-    }
-    .mat-icon {
-        cursor: pointer;
-    }
-    table {
-        width: 100%;
-        tr {
-            td {
-                font-size: 9px;
-            }
-        }
-    }
-    @media only screen and (min-width: 500px) {
-        table {
-            tr {
-                td {
-                    font-size: 12px;
-                }
-            }
-        }
-    }
-    @media only screen and (min-width: 768px) {
-        .mat-card {
-            width: 610px; 
-        }
-    }
-    @media only screen and (min-width: 1200px) {
-        display: flex;
-        flex-direction: row-reverse;
-        .appMovieTillWrapper {
-            margin-top: 0;
-            margin-left: 2%;
-            width: 48%;
-        }
-    }
-}
-
-.loader {
-    margin-top: 20px;
-    width: 100%;
-    display: flex; 
-    justify-content: center;
 }

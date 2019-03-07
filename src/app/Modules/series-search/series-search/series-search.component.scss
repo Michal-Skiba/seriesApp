@@ -74,11 +74,9 @@
 }
 
 .slideToggle {
-    margin-top: 10px;
+    justify-content: center;
     display: flex;
-    position: absolute;
-    right: 20px;
-    mat-icon {
-        margin: 0 5px;
+    .mat-icon {
+        margin: 0 10px;
     }
 }

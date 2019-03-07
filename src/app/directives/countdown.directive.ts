@@ -1,19 +1,24 @@
-import { Directive, ElementRef, Renderer2, OnInit, Input } from '@angular/core';
+import { Directive, ElementRef, Renderer2, OnInit, Input, OnDestroy } from '@angular/core';
 import { NextEpisode } from '@models/nextEpisode.model';
+import { interval, Subject } from 'rxjs';
+import 'rxjs/add/operator/takeUntil'
 
 @Directive({
   selector: '[appCountdown]'
 })
-export class CountdownDirective implements OnInit {
+export class CountdownDirective implements OnInit, OnDestroy {
 
   constructor(private el: ElementRef, private renderer: Renderer2) { console.log('działa')}
-  
-  @Input() serieTime: NextEpisode;
 
+  onDestroy = true;
+
+  @Input() serieTime: NextEpisode;
+  source = interval(1000);
+  
   ngOnInit() {
     let time: string;
     const countDownDate = new Date(this.serieTime.air_date + " " + " 10:00:00").getTime();
-    setInterval(() => {
+    this.source.subscribe(() => {
       const now = new Date().getTime();
       const distance = countDownDate - now;
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -23,6 +28,11 @@ export class CountdownDirective implements OnInit {
       time = days + "d " + hours + "h "
       + minutes + "m " + seconds + "s "
       this.renderer.setProperty(this.el.nativeElement, 'innerHTML', ` ${time}`)
-    }, 1000)
+    })
   }
+
+  ngOnDestroy() {
+    this.source.unsubscribe();
+  }
+
 }

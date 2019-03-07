@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SeriesSearchComponent } from './series-search/series-search.component';
 import { SeriesService } from '../../Services/series.service'
@@ -14,32 +14,23 @@ import {
   MatTableModule,
   MatTooltipModule,
   MatExpansionModule,
-  MatSlideToggleModule,
 } from '@angular/material';
-import { MovieTillComponent } from './movie-till/movie-till.component';
-import { TableComponent } from '../../Modules/series-search/table/table.component';
-import { TillVievComponent } from '../../Modules/series-search/till-viev/till-viev.component';
+
 import { TranslateGenrePipe } from '@pipes/translate-genre.pipe';
 import { StatusTranslatePipe } from '@pipes/status-translate.pipe';
 import { PopulatiryToStringPipe } from '@pipes/populatiry-to-string.pipe';
-import { SerieDetailComponent } from './serie-detail/serie-detail.component';
 import { PremiereComponent } from './premiere/premiere.component';
-import { SerieInformationsComponent } from './serie-informations/serie-informations.component';
-import { CountdownDirective } from '../../directives/countdown.directive';
+import { ComponentsModule } from 'src/app/Components/components.module';
+
 
 @NgModule({
   declarations: [
     SeriesSearchComponent,
-    MovieTillComponent,
-    TableComponent,
-    TillVievComponent,
     TranslateGenrePipe,
     StatusTranslatePipe,
     PopulatiryToStringPipe,
-    SerieDetailComponent,
     PremiereComponent,
-    SerieInformationsComponent,
-    CountdownDirective,
+
   ],
   imports: [
     CommonModule,
@@ -55,10 +46,11 @@ import { CountdownDirective } from '../../directives/countdown.directive';
     MatTableModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatSlideToggleModule,
+    ComponentsModule,
   ],
   providers: [
     SeriesService,
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class SeriesSearchModule { }

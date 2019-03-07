@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BestRatedSeriesComponent } from './best-rated-series/best-rated-series.component';
 import { routing } from './best-reated-series.routing';
-import { BestRatedHighchartComponent } from './best-rated-highchart/best-rated-highchart.component';
 import {
   MatTabsModule,
   MatTableModule,
@@ -13,11 +12,11 @@ import {
 } from '@angular/material';
 import { BestRatedTableComponent } from './best-rated-table/best-rated-table.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { ComponentsModule } from 'src/app/Components/components.module';
 
 @NgModule({
   declarations: [
     BestRatedSeriesComponent,
-    BestRatedHighchartComponent,
     BestRatedTableComponent,
   ],
   imports: [
@@ -30,10 +29,11 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatTooltipModule,
     HighchartsChartModule,
     MatDialogModule,
+    ComponentsModule,
   ],
   exports: [
     BestRatedSeriesComponent,
   ],
-  entryComponents: [BestRatedHighchartComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class BestRatedSeriesModule { }

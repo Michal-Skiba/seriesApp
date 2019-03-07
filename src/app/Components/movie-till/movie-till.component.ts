@@ -5,6 +5,7 @@ import { SearchedSerie } from '@models/searchedSerie.model';
 import { Season } from '@models/season.model';
 import { Actors } from '@models/actors.model';
 import { Episode } from '@models/episode.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-till',
@@ -13,7 +14,7 @@ import { Episode } from '@models/episode.model';
 })
 export class MovieTillComponent implements OnInit, OnChanges {
  
-  constructor(private getSeriesService: SeriesService) { }
+  constructor(private getSeriesService: SeriesService, private router: Router) { }
 
   @Input() id: number
   @Input() tillViev: boolean
@@ -59,9 +60,13 @@ export class MovieTillComponent implements OnInit, OnChanges {
     )}
   }
 
-  showDetails(): void {
-    this.showDetailsFlag.emit(true)
+  showDetails(id: string): void {
+    console.log(id, 'aaaaaaaa')
+    // this.showDetailsFlag.emit(true)
+    this.router.navigate([`./search/${id}`])
+    window.location.reload();
   }
+
 
   getSeriesInfo(id: number): void {
     this.getSeriesService.getSeriesDetail(id).subscribe(dataSeries => {

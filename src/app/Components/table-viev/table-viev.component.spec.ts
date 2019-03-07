@@ -1,24 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MockGetShowInfoComponent } from './mock-get-show-info.component';
+import { TableVievComponent } from './table-viev.component';
 
-describe('MockGetShowInfoComponent', () => {
-  let component: MockGetShowInfoComponent;
-  let fixture: ComponentFixture<MockGetShowInfoComponent>;
+describe('TielVievComponent', () => {
+  let component: TableVievComponent;
+  let fixture: ComponentFixture<TableVievComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MockGetShowInfoComponent ]
+      declarations: [ TableVievComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MockGetShowInfoComponent);
+    fixture = TestBed.createComponent(TableVievComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  
   it('should create', () => {
     expect(component).toBeTruthy();
   });

@@ -1,0 +1,11 @@
+table {
+    width: 90%;
+    margin: 20px 5% 0 5%;
+    @media only screen and (min-width: 768px) {
+        width: 60%;
+        margin: 20px 20% 0 20%;
+    }
+    .icon {
+        cursor: pointer;   
+    }
+}

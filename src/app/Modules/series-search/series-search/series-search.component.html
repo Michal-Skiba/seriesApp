@@ -5,23 +5,14 @@
         <input matInput (keyup)="inputListener($event)" placeholder="Tytuł serialu" formControlName="seriesTitle">
       </mat-form-field>
       <div>
-        <button type="submit" color="primary" routerLink="/search" mat-raised-button [disabled]="!searchForm.valid">
+        <button type="submit" color="primary" mat-raised-button [disabled]="!searchForm.valid">
           <mat-icon>search</mat-icon>Wyszukaj
         </button>
       </div>
     </form>
   </div>
-  <div class="slideToggle" *ngIf="startSearch">
-    <mat-icon>table_chart</mat-icon>
-    <mat-slide-toggle color="primary" [(ngModel)]="tillViev"></mat-slide-toggle>
-    <mat-icon>apps</mat-icon>
-  </div>
 </div>
-<div *ngIf="!loadingSeries &&
-            !showPremiere &&
-            startSearch &&
-            dataSourceTable.length <= 0 &&
-            (searchSeriesTitle.length <= 3  || !searchSeriesTitle)" class="searchError">
+<div *ngIf="errorCondition" class="searchError">
   <mat-card>
     <mat-icon>error</mat-icon>Wpisz bardziej szczegółową nazwę !!!
   </mat-card>
@@ -29,28 +20,16 @@
 <div *ngIf="loadingSeries" class="loader">
   <mat-spinner></mat-spinner>
 </div>
-<div *ngIf="!loadingSeries &&
-            !showPremiere &&
-            dataSourceTable.length <= 0 && dataSourceTable.length <= 39 &&
-            searchSeriesTitle.length > 3 &&
-            startSearch" 
-            class="noFiles">
+<div *ngIf="warningCondition" class="noFiles">
   <mat-card>
     <mat-icon>warning</mat-icon>Brak znalezionych filmów
   </mat-card>
 </div>
-<div *ngIf="!this.loadingSeries &&
-            dataSourceTable.length > 0 && dataSourceTable.length <= 39 &&     
-            this.showSearchedItems &&
-            !showPremiere">
-  <div *ngIf='!this.tillViev'>
-    <app-table [dataSourceTable]=dataSourceTable [id]=seriesId (showDetails)="showDetails($event)">
-    </app-table>
-  </div>
-  <div *ngIf='this.tillViev'>
-    <app-till-viev [dataSource]=dataSourceTable (showDetails)="showDetails($event)">
-    </app-till-viev>
-  </div>
+<div *ngIf="vievCondition">
+    <app-viev-wrapper
+      [dataSourceTable]='dataSourceTable'
+    >
+    </app-viev-wrapper>
 </div>
 <div *ngIf='showPremiere'>
   <app-premiere>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LastTrendsService } from '@services/last-trends.service'
-import { TabelRowLastTrends } from '@models/tabelRow.model';
+import { SearchedSerie } from '@models/searchedSerie.model';
 
 @Component({
   selector: 'app-last-trends',
@@ -11,23 +11,12 @@ export class LastTrendsComponent implements OnInit {
 
   constructor(private lastTrendsService: LastTrendsService) { }
 
-  tableIndex: number = 1;
-  dataSourceTable: Array<TabelRowLastTrends> = [];
-  displayedColumns: string[] = ['position', 'title', 'premiereDate', 'popularity'];
+  dataSourceTable: Array<SearchedSerie>
   loading: boolean = true;
 
   ngOnInit() {
     this.lastTrendsService.getLastTrends(1).subscribe((data) => {
-      data.results.forEach(element => {
-        let data = {
-          'position': this.tableIndex,
-          'title': element.name,
-          'premiereDate': element.first_air_date,
-          'popularity': element.popularity,
-        }
-        this.dataSourceTable.push(data);
-        this.tableIndex++
-      })
+      this.dataSourceTable = data.results
     }, error => console.log(error),
     () => {
       this.loading = false;

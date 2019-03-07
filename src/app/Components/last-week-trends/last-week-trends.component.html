@@ -3,7 +3,6 @@
   <p class="title">Trendy ostatniego tygodnia</p>
   <div class="lastWeekTrendsWrapper">
     <div *ngFor="let serie of dataSeries.results | slice:0:10 ; let i = index" class="seriesRow" (click)="showInfo(serie.id)">
-      <p class="index">{{i +1}}.</p>
       <img src="{{ posterUrl + serie.poster_path}}" alt="poster">
       <p class="name">{{serie.name}}</p>
       <p class="premiere">Premiera: {{serie.first_air_date}}</p>

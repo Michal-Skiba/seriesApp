@@ -6,7 +6,7 @@ import { ShowSeriesDetalService } from '@services/show-series-detail.service';
 import { environment } from '@environments/environment.ts';
 import { SearchedSerie } from '@models/searchedSerie.model';
 import { SearchData } from '@models/searchData.model';
-import { SerieData } from '@models/serieData.model'
+
 
 @Component({
   selector: 'app-series-search',
@@ -21,18 +21,27 @@ export class SeriesSearchComponent implements OnInit {
     private showSeriesDetalService: ShowSeriesDetalService,
   ) {}
 
-  startSearch: boolean = false;
+  inputValue: string;
   loadingSeries: boolean = false;
-  tillViev: boolean = false;
   showPremiere: boolean = true;
   showSearchedItems: boolean = true;
   searchForm: FormGroup;
   searchSeriesTitle: string = '';
-  dataSourceTable: Array<SerieData> = [];
-  seriesId: number = 0;
+  dataSourceTable: Array<SearchedSerie> = [];
   value: string;
   isSerieDetailThere: boolean;
-  tableIndex: number = 1;
+
+  get warningCondition() {
+    return !this.showPremiere && this.dataSourceTable.length <= 0 && this.searchSeriesTitle.length > 3 && !this.loadingSeries;
+  }
+  
+  get errorCondition() {
+    return !this.isSerieDetailThere && !this.showPremiere && !this.loadingSeries  && this.dataSourceTable.length <= 0 && (this.searchSeriesTitle.length <= 3  || !this.searchSeriesTitle)
+  }
+
+  get vievCondition() { 
+    return !this.loadingSeries && this.dataSourceTable.length > 0 && this.dataSourceTable.length <= 39 && this.showSearchedItems && !this.showPremiere
+  }
 
   ngOnInit() {
     this.showSeriesDetalService.getShowInfo().subscribe((data: boolean) => { 
@@ -49,13 +58,11 @@ export class SeriesSearchComponent implements OnInit {
   }
 
   inputListener(event: any): void {
-    this.searchSeriesTitle = event.target.value;
-    this.startSearch = false;
+    this.inputValue = event.target.value;
     if(!event.target.value) {
       this.isSerieDetailThere = false;
       this.changeRoute('search');
       this.showPremiere = true;
-      this.startSearch = false;
     }
   }
 
@@ -69,52 +76,37 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-  dataToTable(series: Array<SearchedSerie>): void {
-    series.forEach(element => {
-      let data = {
-        'position': this.tableIndex,
-        'title': element.name,
-        'premiereDate': element.first_air_date,
-        'rating': element.vote_average,
-        'id': element.id,
-      }
-      this.tableIndex += 1;
-      this.dataSourceTable.push(data);
-    })
-  }
-
   searchSeries(searchData: SearchData): void {
-    this.startSearch = true;
     if(this.searchSeriesTitle.length > 3) {
       for(let i = 1; i <= searchData.total_pages; i++) {
         this.seriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
-          this.dataToTable(dataSeries.results.filter(data => data.popularity > environment.popularity));
-          if(i === searchData.total_pages) {
-            this.dataSourceTable.length > 0 ? this.seriesId = this.dataSourceTable[0].id : this.seriesId = 0;
-            this.loadingSeries = false;
-          } 
+          this.dataSourceTable = [...this.dataSourceTable, ...dataSeries.results.filter(data => data.popularity > environment.popularity)]
+          console.log(this.dataSourceTable, 'source table')
         },
         error => console.log(error, 'searchSeriessError')
         )
       }  
     }
+    this.loadingSeries = false;
   }
 
   resetValues(): void {
-    this.startSearch = false;
     this.dataSourceTable = [];
     this.showPremiere = false;
     this.showSearchedItems = true;
-    this.tableIndex = 1;
   }
 
   onSubmit(): void {
+    this.loadingSeries = true;
     this.resetValues();
+    this.searchSeriesTitle = this.inputValue;
+    console.log(this.showPremiere, 'aaaaaaaaaaa')
     this.seriesService.searchSeries(this.searchSeriesTitle, 1).subscribe(dataSeries => {
       this.searchSeries(dataSeries)
     },
-    error => console.log(error)    
+    error => console.log(error)
     )
+    console.log(this.vievCondition, 'aaaaaaaaaaaaaa')
     if(!this.searchSeriesTitle) {
       this.loadingSeries = false;
     }

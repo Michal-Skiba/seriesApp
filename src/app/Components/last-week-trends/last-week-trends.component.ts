@@ -16,10 +16,11 @@ export class LastWeekTrendsComponent {
   posterUrl = environment.posterUrl;
 
   showInfo(id: number) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => {
-      return false;
-    };
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => {
+    //   return false;
+    // };
     this.router.navigate([`./search/${id}`])
+    //window.location.reload();
   }
 
 }

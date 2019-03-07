@@ -1,0 +1,13 @@
+<div class="slideToggle">  
+  <mat-icon>apps</mat-icon>
+  <mat-slide-toggle color="primary" [(ngModel)]="tableViev"></mat-slide-toggle>
+  <mat-icon>table_chart</mat-icon>
+</div>
+<div *ngIf='tableViev'>
+  <app-table-viev [dataSourceTable]=dataSourceTable (showDetails)="showDetails($event)">
+  </app-table-viev>
+</div>
+<div *ngIf='!tableViev'>
+  <app-till-viev [dataSource]=dataSourceTable (showDetails)="showDetails($event)">
+  </app-till-viev>
+</div>

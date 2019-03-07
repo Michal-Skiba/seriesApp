@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SerieData } from '@models/serieData.model'
+import { SearchedSerie } from '@models/searchedSerie.model';
 
 @Component({
   selector: 'app-till-viev',
@@ -10,7 +10,7 @@ export class TillVievComponent {
 
   constructor() {}
   
-  @Input() dataSource: Array<SerieData>;
+  @Input() dataSource: Array<SearchedSerie>;
   @Output() showDetails = new EventEmitter<boolean>();
   
   showDetailsFlag($event: boolean) {
