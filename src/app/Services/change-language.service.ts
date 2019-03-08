@@ -17,7 +17,6 @@ export class ChangeLanguageService {
   }
 
   changeLanguage(choosenLanguage: string): void {
-    console.log('choooose')
     this.language = choosenLanguage;
     this.choosenLanguage.next(this.language);
     localStorage.setItem('language', choosenLanguage);

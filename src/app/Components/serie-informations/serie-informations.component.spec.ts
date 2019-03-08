@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SerieInformationsComponent } from './serie-informations.component';
-import { CountdownDirective } from '../../../directives/countdown.directive';
+import { CountdownDirective } from '../../directives/countdown.directive';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('SerieInformationsComponent', () => {

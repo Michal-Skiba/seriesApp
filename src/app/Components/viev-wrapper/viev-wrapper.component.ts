@@ -6,10 +6,10 @@ import { SearchedSerie } from '@models/searchedSerie.model';
   templateUrl: './viev-wrapper.component.html',
   styleUrls: ['./viev-wrapper.component.scss']
 })
-export class VievWrapperComponent  {
+export class VievWrapperComponent {
 
   constructor() { }
- 
+  tableViev: boolean; 
+
   @Input() dataSourceTable: Array<SearchedSerie>; 
-  
 }

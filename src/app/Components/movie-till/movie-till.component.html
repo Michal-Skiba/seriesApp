@@ -1,94 +1,23 @@
-<div  
-  *ngIf="!loading"
-  [className]="tillViev ? 'tillVievWrapper' : 'cardWrapper'"
->
+<div *ngIf="!loading" class="cardWrapper">
   <mat-card>
     <mat-card-title>
-      <div 
-        (click)='showDetails(id)'
-        class="movieTitle"
-      >
+      <div (click)='showDetails(id)' class="movieTitle">
         {{ title }}
       </div>
     </mat-card-title>
     <img mat-card-image src="{{fullUrl}}" alt={{title}}>
     <mat-card-content>
-      <div class="collapse">
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <p>Informacje o serialu</p>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-serie-informations
-              [id] = id
-            >
-            </app-serie-informations>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </div>
-      <div class="collapse">
-        <mat-accordion>
-          <mat-expansion-panel >
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <p>Występujący aktorzy</p>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="underCollapseContainer">
-              <div *ngIf="actorsError">
-                  Brak danych
-              </div>
-              <div  *ngIf="!actorsError">
-                <div *ngFor="let actor of actors" class="rowDisplay actors">                     
-                  <mat-panel-title>
-                    {{actor.name}}
-                  </mat-panel-title>
-                  <mat-panel-description>
-                    {{actor.character}}
-                  </mat-panel-description>  
-                </div>
-              </div>
-            </div>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </div>
-      <div class="collapse">
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <p>Informacje o sezonach</p>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-          <mat-expansion-panel  *ngFor="let season of seasons; let i = index" class="seasonsCollapse">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{i+1}}. {{season.name || 'brak danych'}}
-              </mat-panel-title>
-              <mat-panel-description>
-                premiera: {{season.air_date || 'brak danych'}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-              <div *ngFor="let episode of seasonsEpisodes[i+1]; let j = index" class="rowDisplay">
-                  <mat-panel-title
-                    matTooltip={{episode.overview}}
-                    aria-label=""
-                  >
-                      {{j + 1}}. {{episode.name || 'brak danych'}}
-                  </mat-panel-title>
-                  <mat-panel-description>
-                      {{episode.air_date || 'brak danych'}}
-                  </mat-panel-description>
-              </div>
-          </mat-expansion-panel>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </div>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Opis
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{overview}}</p>
+      </mat-expansion-panel>
     </mat-card-content>
   </mat-card>
 </div>
 <div *ngIf="loading" class="loader">
-    <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>

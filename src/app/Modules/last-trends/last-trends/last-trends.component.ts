@@ -17,7 +17,7 @@ export class LastTrendsComponent implements OnInit {
   ngOnInit() {
     this.lastTrendsService.getLastTrends(1).subscribe((data) => {
       this.dataSourceTable = data.results
-    }, error => console.log(error),
+    }, () => null,
     () => {
       this.loading = false;
     })

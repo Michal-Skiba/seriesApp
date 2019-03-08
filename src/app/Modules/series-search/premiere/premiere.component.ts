@@ -67,7 +67,7 @@ export class PremiereComponent implements OnInit {
       for(let i = 0; data.results.length -1 >= i; i++) {
         this.series.push(data.results[i]) 
       }
-    }, error => console.log(error),
+    }, () => null,
     () => {
       if (numberOfPages > 1) {
         for(let i = 2; numberOfPages <= 1; i++) {
@@ -75,7 +75,7 @@ export class PremiereComponent implements OnInit {
             for(let i = 0; data.results.length -1 >= i; i++) {
               this.series.push(data.results[i]) 
             }    
-          }), error => console.log(error),
+          }), () => null,
           () => {
             this.loading = false
           }

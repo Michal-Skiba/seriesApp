@@ -69,3 +69,26 @@
     width: fit-content;
 }
 
+.collapse {
+    .mat-expansion-panel {
+        margin: 10px 0;
+    }
+    .rowDisplay {
+        display: flex;
+        justify-content: space-between;
+    }
+    .mat-expansion-panel-header-description {
+        font-size: 12px;
+        flex-grow: 0;
+    }
+    .seasonsCollapse {
+        .rowDisplay { 
+            font-size: 12px;
+        }
+        .mat-expansion-panel-header-description {
+            font-size: 12px;
+            flex-grow: 0;
+        }
+    }
+
+}

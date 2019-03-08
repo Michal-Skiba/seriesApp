@@ -81,13 +81,16 @@ export class SeriesSearchComponent implements OnInit {
       for(let i = 1; i <= searchData.total_pages; i++) {
         this.seriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
           this.dataSourceTable = [...this.dataSourceTable, ...dataSeries.results.filter(data => data.popularity > environment.popularity)]
-          console.log(this.dataSourceTable, 'source table')
         },
-        error => console.log(error, 'searchSeriessError')
+        () => null,
+        () => {
+          this.loadingSeries = false;
+        }
         )
       }  
+    } else {
+      this.loadingSeries = false;
     }
-    this.loadingSeries = false;
   }
 
   resetValues(): void {
@@ -96,17 +99,21 @@ export class SeriesSearchComponent implements OnInit {
     this.showSearchedItems = true;
   }
 
-  onSubmit(): void {
+  onSubmit(): void {  
+    if(this.router.url != '/search') {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => {
+        return true;
+      };
+      this.router.navigate([`/search`])
+    }
     this.loadingSeries = true;
     this.resetValues();
     this.searchSeriesTitle = this.inputValue;
-    console.log(this.showPremiere, 'aaaaaaaaaaa')
     this.seriesService.searchSeries(this.searchSeriesTitle, 1).subscribe(dataSeries => {
       this.searchSeries(dataSeries)
     },
-    error => console.log(error)
+    () => null,
     )
-    console.log(this.vievCondition, 'aaaaaaaaaaaaaa')
     if(!this.searchSeriesTitle) {
       this.loadingSeries = false;
     }

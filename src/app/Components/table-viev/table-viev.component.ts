@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SearchedSerie } from '@models/searchedSerie.model';
 import { Router } from '@angular/router'
 
@@ -7,22 +7,18 @@ import { Router } from '@angular/router'
   templateUrl: './table-viev.component.html',
   styleUrls: ['./table-viev.component.scss']
 })
-export class TableVievComponent implements OnInit {
+export class TableVievComponent {
   constructor(private router: Router) { }
 
   @Input() dataSourceTable: Array<SearchedSerie>;
-  @Input() searchViev: boolean;
-  displayedColumns: string[] = [ 'title', 'premiereDate', 'rating', 'id'];
+
+  displayedColumns: string[] = ['title', 'premiereDate', 'rating', 'id'];
 
   showInfo(id: number) {
-     this.router.routeReuseStrategy.shouldReuseRoute = () => {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
     this.router.navigate([`./search/${id}`])
-  }
-  
-  ngOnInit() {
-    console.log(this.dataSourceTable, 'w komponencie ')
   }
 }
 

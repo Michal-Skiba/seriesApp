@@ -4,9 +4,7 @@
         <div class="content">
             <img src={{imageFullUrl}} onError="this.src='../../../assets/noimage.png'" alt="movie image">
             <div class="info">
-                <app-serie-informations
-                    [id] = id
-                >
+                <app-serie-informations [id]=id>
                 </app-serie-informations>
             </div>
         </div>
@@ -15,11 +13,12 @@
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                        <p>Lista podobnych seriali</p>
+                            <p>Lista podobnych seriali</p>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div *ngFor="let serie of similarSeries; let i = index" class="similarSeriesRow">
-                        <p class="similarSerieName"  routerLink="/search/{{serie.id}}" (click)="reload()" >{{i+1}}. {{serie.name}}</p>
+                        <p class="similarSerieName" routerLink="/search/{{serie.id}}" (click)="reload()">{{i+1}}.
+                            {{serie.name}}</p>
                         <p>{{serie.first_air_date}}</p>
                     </div>
                     <div *ngIf="similarSeriesLoader" class="seriesLoader">
@@ -27,6 +26,57 @@
                     </div>
                     <div *ngIf="similarSeriesPageNumber < similarSeriesLastPage">
                         <p class="moreSeries" (click)="loadMore()">Więcej</p>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <p>Informacje o sezonach</p>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-expansion-panel *ngFor="let season of seasons; let i = index" class="seasonsCollapse">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{i+1}}. {{season.name || 'brak danych'}}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                premiera: {{season.air_date || 'brak danych'}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let episode of seasonsEpisodes[i]; let j = index" class="rowDisplay">
+                            <mat-panel-title matTooltip={{episode.overview}} aria-label="">
+                                {{j + 1}}. {{episode.name || 'brak danych'}}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{episode.air_date || 'brak danych'}}
+                            </mat-panel-description>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <mat-accordion>
+                <mat-expansion-panel class="actorCollapse">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <p>Występujący aktorzy</p>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div>
+                        <div *ngIf="actorsError">
+                            Brak danych
+                        </div>
+                        <div *ngIf="!actorsError">
+                            <div *ngFor="let actor of actors" class="rowDisplay">
+                                <mat-panel-title>
+                                    {{actor.name}}
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    {{actor.character}}
+                                </mat-panel-description>
+                            </div>
+                        </div>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>

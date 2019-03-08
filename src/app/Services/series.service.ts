@@ -34,8 +34,8 @@ export class SeriesService {
     )
   }
 
-  getCredits(seriesId: number): Observable<Credits> {
-    return this.http.get<Credits>(`${environment.apiUrl}tv/${seriesId}/season/{season_number}/credits?api_key=${environment.apiKey}&language=${this.language}-US`)
+  getCredits(seriesId: number): Observable<Credits> { 
+    return this.http.get<Credits>(`${environment.apiUrl}tv/${seriesId}/credits?api_key=${environment.apiKey}&language=${this.language}-US`)
     .pipe(
       retry(20),
     )
@@ -46,7 +46,6 @@ export class SeriesService {
     .pipe(
       retry(20),
     )
-    
   }
 
   getSimilarSeries(seriesId: number, page: number = 1): Observable<SearchData> {

@@ -1,45 +1,35 @@
 <table mat-table [dataSource]="dataSourceTable" class="mat-elevation-z8">
-    <ng-container matColumnDef="title" >
+    <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef> Tytuł </th>
-        <td mat-cell *matCellDef="let element" class="title"> {{element.name || 'brak danych'}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.name || 'brak danych'}}</td>
     </ng-container>
-    <ng-container matColumnDef="premiereDate" >
+    <ng-container matColumnDef="premiereDate">
         <th mat-header-cell *matHeaderCellDef> Data premiery </th>
-        <td mat-cell *matCellDef="let element" class="premiereDate"> {{element.first_air_date || 'brak danych'}}</td>
+        <td mat-cell *matCellDef="let element" > {{element.first_air_date || 'brak danych'}}</td>
     </ng-container>
     <div>
     </div>
-    <ng-container matColumnDef="rating" >
+    <ng-container matColumnDef="rating">
         <th mat-header-cell *matHeaderCellDef> Ocena </th>
-        <td mat-cell *matCellDef="let element" class="rating"> {{element.vote_average || 'brak danych'}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.vote_average || 'brak danych'}}</td>
     </ng-container>
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element" class="searchCol">
-        <ng-container *ngIf="searchViev">
-            <mat-icon 
-                (click)="changeDisplaySeries(element.id)"
-                matTooltip="Wyświetl informacje szczegółowę o filmie"  
-                aria-label=""
-                class="icon"
-            >
-                search
-            </mat-icon>
-        </ng-container>
-        <ng-container *ngIf="!searchViev">
-            <mat-icon 
-                (click)="showInfo(element.id)"
-                matTooltip="Wyświetl informacje szczegółowę o filmie"  
-                aria-label=""
-                class="icon"
-            >
-                search
-            </mat-icon>
-        </ng-container>
-        
+            <ng-container *ngIf="searchViev">
+                <mat-icon (click)="changeDisplaySeries(element.id)"
+                    matTooltip="Wyświetl informacje szczegółowę o filmie" aria-label="" class="icon">
+                    search
+                </mat-icon>
+            </ng-container>
+            <ng-container *ngIf="!searchViev">
+                <mat-icon (click)="showInfo(element.id)" matTooltip="Wyświetl informacje szczegółowę o filmie"
+                    aria-label="" class="icon">
+                    search
+                </mat-icon>
+            </ng-container>
         </td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

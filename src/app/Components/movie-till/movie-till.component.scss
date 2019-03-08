@@ -91,53 +91,8 @@
     }        
 }
 
-.tillVievWrapper {
-    &:hover {
-        .mat-card {
-            background: rgb(237, 237, 237);
-        }
-    }
-    .mat-card {
-        .actors {
-            .mat-expansion-panel-header-description {
-                display: flex;
-                justify-content: center;
-                margin-right: 10px;
-            }
-        }
-        .mat-expansion-panel-header-description {
-            display: flex;
-            justify-content: flex-end;
-            margin-right: 10px;
-        }
-    }
-    .seasonsCollapse {
-        .mat-expansion-panel-header-title {
-            font-size: 10px;
-        }
-        .rowDisplay { 
-            font-size: 10px;
-        }
-        .mat-expansion-panel-header-description {
-            font-size: 10px;
-        }
-    }
-}
 
 
 .rowDisplay {
     display: flex;
-}
-
-.collapse {
-    margin: 10px 0;
-    .underCollapseContainer {
-        margin-top: 10px;
-    }
-    .mat-expansion-panel-header {
-        border: 1px solid gray;
-    }
-    .seasonsCollapse {
-        margin: 5px 0;
-    }
 }

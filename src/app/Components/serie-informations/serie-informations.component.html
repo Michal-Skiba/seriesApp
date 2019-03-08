@@ -36,15 +36,6 @@
         </span>       
       </p>
       <p>
-        <b>Podobne seriale: </b>
-        <span *ngFor="let serie of similarSeriesData.results; let i = index">
-          {{ serie.name }}<span *ngIf="i+1 < similarSeriesData.results.length">,</span>
-        </span>
-        <span *ngIf="0 >=  similarSeriesData.results.length">
-          Brak danych
-        </span>       
-      </p>
-      <p>
         <b>Linki do podobnych witryn: </b>
         <a target="_blank" href="{{filmwebLink + dataSeries.name}}">Filmweb</a>&nbsp;
         <a target="_blank" href="{{imdbLink + dataSeries.name}}">Imdb</a>

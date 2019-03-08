@@ -19,7 +19,7 @@ export class BestRatedTableComponent implements OnInit {
   ngOnInit() {
     this.getTopRatedService.getTopratedSeries(this.tab).subscribe(dataSeries => {
       this.dataSourceTable = dataSeries.results
-    }, error => console.log(error),
+    }, () => null,
     () => {
       this.loading = false;
     }) 

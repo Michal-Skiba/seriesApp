@@ -1,4 +1,3 @@
-
 export class Actors {
     character: string;
     credit_id: string;
