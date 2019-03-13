@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSourceTable" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSourceTable" class="mat-elevation-z8" id='tableViev'>
     <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef> Tytuł </th>
         <td mat-cell *matCellDef="let element"> {{element.name || 'brak danych'}}</td>

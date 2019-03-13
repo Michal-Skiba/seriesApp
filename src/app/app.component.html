@@ -4,13 +4,13 @@
       <div class="menu">
         <ul>
           <li routerLink="/search" [routerLinkActive]="['active']">
-            <mat-icon>search</mat-icon>Wyszukaj serial
+            <mat-icon>search</mat-icon><span>Wyszukaj serial</span>
           </li>
-          <li  routerLink="/best-rated" [routerLinkActive]="['active']">
-            <mat-icon>bar_chart</mat-icon>Najlepiej oceniane seriale
+          <li routerLink="/best-rated" [routerLinkActive]="['active']">
+            <mat-icon>bar_chart</mat-icon><span>Najlepiej oceniane seriale</span>
           </li>
           <li routerLink="/trends" [routerLinkActive]="['active']">
-            <mat-icon>show_chart</mat-icon>Ostatnie trendy
+            <mat-icon>show_chart</mat-icon><span>Ostatnie trendy</span>
           </li>
         </ul>
       </div>
@@ -18,32 +18,28 @@
         <button mat-button [matMenuTriggerFor]="menu">
           <mat-icon>menu</mat-icon>
         </button>
-        <mat-menu #menu="matMenu" class="metMenu" >
+        <mat-menu #menu="matMenu" class="metMenu">
           <button mat-menu-item routerLink="/search" [routerLinkActive]="['isActiveMobile']">
-            Wyszukaj serial
+            <span>Wyszukaj serial</span>
           </button>
+          <div>
           <button mat-menu-item routerLink="/best-rated" [routerLinkActive]="['isActiveMobile']">
-            Najlepiej oceniane seriale
+            <span>Najlepiej oceniane seriale</span>
           </button>
-          <button mat-menu-item routerLink="/trends" [routerLinkActive]="['isActiveMobile']">
-            Ostatnie trendy
-          </button>
-          <div class="secondaryMobileMenu">
-            <button mat-menu-item routerLink="/best-rated"[routerLink]='[{ outlets: { bottomInfo: ["latest-serie"] } }]' [routerLinkActive]="['isActiveMobile']">
-              Najlepiej oceniane seriale
-            </button>
-            <button mat-menu-item [routerLink]='[{ outlets: { bottomInfo: ["top-rated-serie"] } }]' [routerLinkActive]="['isActiveMobile']">
-              Ostatnie trendy
-            </button>
           </div>
+          <button mat-menu-item routerLink="/trends" [routerLinkActive]="['isActiveMobile']">
+            <span>Ostatnie trendy</span>
+          </button>
         </mat-menu>
       </div>
     </mat-toolbar>
     <div class="langaugeSwitch">
-      <img src="../assets/pl.png" alt="pl" [className]="(getLanguage()=== 'pl') && 'flagBorder'" (click)='changeLanguage("pl")'>
-      <img src="../assets/en.png" alt="en" [className]="(getLanguage() === 'en') && 'flagBorder'" (click)='changeLanguage("en")'>
+      <img src="../assets/pl.png" alt="pl" [className]="(getLanguage()=== 'pl') && 'flagBorder'"
+        (click)='changeLanguage("pl")'>
+      <img src="../assets/en.png" alt="en" [className]="(getLanguage() === 'en') && 'flagBorder'"
+        (click)='changeLanguage("en")'>
     </div>
-    <router-outlet class="test"></router-outlet>
+    <router-outlet></router-outlet>
   </div>
   <div class="footer">
     <app-footer></app-footer>

@@ -11,7 +11,7 @@ import { SearchData } from '@models/searchData.model'
 export class LastTrendsService {
   
   language: string;
-
+  
   constructor(private http: HttpClient, private changeLanguageService: ChangeLanguageService) { 
     this.language = this.changeLanguageService.getInfoLanguage();
   }

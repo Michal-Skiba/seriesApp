@@ -1,8 +1,6 @@
 import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { SeriesService } from '@services/series.service';
 import { environment } from '@environments/environment';
-import { SearchedSerie } from '@models/searchedSerie.model';
-import { Season } from '@models/season.model';
 import { Router } from '@angular/router';
 
 @Component({

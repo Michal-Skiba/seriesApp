@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BestRatedSeriesComponent } from './best-rated-series/best-rated-series.component';
-import { routing } from './best-reated-series.routing';
+import { BestRatedSeriesRouting } from './best-reated-series.routing';
 import {
   MatTabsModule,
   MatTableModule,
@@ -21,7 +21,7 @@ import { ComponentsModule } from 'src/app/Components/components.module';
   ],
   imports: [
     CommonModule,
-    routing,
+    BestRatedSeriesRouting,
     MatTabsModule,
     MatTableModule,
     MatProgressSpinnerModule,
