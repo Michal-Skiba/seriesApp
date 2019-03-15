@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '@environments/environment';
 import { SeriesService } from '@services/series.service';
-import { SerieDetail } from '@models/serieDetail.model';
+import { SerieDetailResponse } from '@models/serieDetail.model';
 import { Observable } from 'rxjs';
-import { SearchData } from '@models/searchData.model';
+import { SearchDataRepsonse } from '@models/searchData.model';
 
 @Component({
   selector: 'app-serie-informations',
@@ -16,8 +16,8 @@ export class SerieInformationsComponent implements OnInit {
 
   filmwebLink: string = environment.filmwebLink;
   imdbLink: string = environment.imdbLink;
-  similarSeries$: Observable<SearchData>;
-  serieInformations$: Observable<SerieDetail>
+  similarSeries$: Observable<SearchDataRepsonse>;
+  serieInformations$: Observable<SerieDetailResponse>
 
   constructor(private seriesService: SeriesService) { }
   

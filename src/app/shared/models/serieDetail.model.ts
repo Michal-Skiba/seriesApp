@@ -3,6 +3,16 @@ import { Genre } from './genre.model';
 import { NextEpisode } from './nextEpisode.model';
 import { Producers } from './producers.model';
 
+export class SerieDetailResponse {
+  body: SerieDetail;
+  headers: any;
+  ok: boolean;
+  status: number;
+  statusText: string;
+  type: number;
+  url: string;
+}
+
 export class SerieDetail {
     backdrop_path: string;
     created_by: Array<CreatedBy>

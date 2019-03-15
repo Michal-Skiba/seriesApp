@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TopRatedSeriesService } from '@services/top-rated-series.service';
 import { SearchedSerie } from '@models/searchedSerie.model';
+import { SeriesService } from '@services/series.service';
 
 @Component({
   selector: 'app-best-rated-table',
@@ -14,11 +14,11 @@ export class BestRatedTableComponent implements OnInit {
   dataSourceTable: Array<SearchedSerie>
   loading: boolean = true;
 
-  constructor(private getTopRatedService: TopRatedSeriesService) {}
+  constructor(private seriesService: SeriesService) {}
 
   ngOnInit() {
-    this.getTopRatedService.getTopratedSeries(this.tab).subscribe(dataSeries => {
-      this.dataSourceTable = dataSeries.results
+    this.seriesService.getTopratedSeries(this.tab).subscribe(dataSeries => {
+      this.dataSourceTable = dataSeries.body.results
     }, () => null,
     () => {
       this.loading = false;

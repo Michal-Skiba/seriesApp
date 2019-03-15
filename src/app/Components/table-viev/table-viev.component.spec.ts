@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableVievComponent } from './table-viev.component';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MatTableModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TielVievComponent', () => {
   let component: TableVievComponent;
@@ -8,7 +11,12 @@ describe('TielVievComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableVievComponent ]
+      declarations: [ TableVievComponent ],
+      schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
+      imports: [
+        MatTableModule,
+        RouterTestingModule,
+      ]
     })
     .compileComponents();
   }));

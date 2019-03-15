@@ -8,19 +8,21 @@ import { By } from '@angular/platform-browser';
 import { SeriesService } from '@services/series.service';
 import { FakeShowSeriesDetalService } from 'src/app/test-services/fakeShowSeriesDetalService.service';
 import { FakeSeriesService } from 'src/app/test-services/fakeSeriesService.service';
-
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SeriesSearchComponent', () => {
   let component: SeriesSearchComponent;
   let fixture: ComponentFixture<SeriesSearchComponent>;
   let mockRouter = {
+    routeReuseStrategy: Router,
     navigate: jasmine.createSpy('navigate')
   }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule,        
+        HttpClientModule, 
+        RouterTestingModule,    
       ],
       declarations: [ SeriesSearchComponent ],
       schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
@@ -99,7 +101,6 @@ describe('SeriesSearchComponent', () => {
     component.showDetails(true)
     expect(component.showSearchedItems).toBe(false); 
   })
-
 
   it('searchSerie function should work when inputValue is longer than 3', () => { 
     component.inputValue = "test"

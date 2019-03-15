@@ -5,6 +5,7 @@ import { BestRatedTableComponent } from '../best-rated-table/best-rated-table.co
 import { MatTabsModule, MatIconModule, MatTableModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 describe('BestRatedSeriesComponent', () => {
@@ -23,6 +24,7 @@ describe('BestRatedSeriesComponent', () => {
         BrowserAnimationsModule
       ],
       declarations: [ BestRatedSeriesComponent,  BestRatedTableComponent ],
+      schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
     })
     .compileComponents();
   }));

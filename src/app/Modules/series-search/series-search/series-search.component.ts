@@ -80,7 +80,7 @@ export class SeriesSearchComponent implements OnInit {
     if(this.searchSeriesTitle.length > 3) {
       for(let i = 1; i <= searchData.total_pages; i++) {
         this.seriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
-          this.dataSourceTable = [...this.dataSourceTable, ...dataSeries.results.filter(data => data.popularity > environment.popularity)]
+          this.dataSourceTable = [...this.dataSourceTable, ...dataSeries.body.results.filter(data => data.popularity > environment.popularity)]
         },
         () => null,
         () => {
@@ -110,7 +110,7 @@ export class SeriesSearchComponent implements OnInit {
     this.resetValues();
     this.searchSeriesTitle = this.inputValue;
     this.seriesService.searchSeries(this.searchSeriesTitle, 1).subscribe(dataSeries => {
-      this.searchSeries(dataSeries)
+      this.searchSeries(dataSeries.body)
     },
     () => null,
     )

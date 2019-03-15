@@ -12,4 +12,5 @@ export class VievWrapperComponent {
   tableViev: boolean; 
 
   @Input() dataSourceTable: Array<SearchedSerie>; 
+
 }

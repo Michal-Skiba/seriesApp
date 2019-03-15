@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MovieTillComponent', () => {
   let component: MovieTillComponent;
@@ -16,6 +17,7 @@ describe('MovieTillComponent', () => {
         HttpClientModule,
         RouterModule,
         MatCardModule,
+        RouterTestingModule,
       ],
       schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ] 
     })
