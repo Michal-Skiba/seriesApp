@@ -51,7 +51,6 @@ export class SeriesService {
 
   queuing(request: Observable<any>): Observable<any> {
     this.arrayTimes.push(moment())
-    console.log(this.currentRequestCounter, 'aaaaaaaaaaa')
     let timeToCalcReq = this.arrayTimes[0] 
     const now = moment();
     const timeDif = 10 - now.diff(timeToCalcReq , "seconds")
@@ -62,10 +61,6 @@ export class SeriesService {
         sum += this.timesToSendRequest[i];
       }
        return sum;
-    }
-
-    if(sumOfTimesToSendRequest() === 0) {
-      
     }
     if(this.currentRequestCounter > this.limitReq && this.currentRequestCounter < this.limitReq*2 && now.diff(timeToCalcReq , "seconds") < 10) {
       timeToSendRequest = timeDif * 1000
@@ -79,11 +74,9 @@ export class SeriesService {
         }, 1000);
       }
     } else if(this.currentRequestCounter > this.limitReq *2 && now.diff(this.arrayTimes[this.arrayTimes.length - 40], "seconds") < 10 ) {
-      console.log('wchodzi', this.currentRequestCounter, 'coo')
       let takeTime = this.arrayTimes[this.arrayTimes.length - this.limitReq - 1] 
       let limitOverrun = Math.floor(this.currentRequestCounter / this.limitReq);
-      timeToSendRequest = sumOfTimesToSendRequest() * 1000
-
+      timeToSendRequest = sumOfTimesToSendRequest() * 1000;
       if(this.currentRequestCounter === (limitOverrun * this.limitReq) + 1) {
         this.timesToSendRequest = [...this.timesToSendRequest ,(10 - now.diff(takeTime , "seconds"))]
         let interval = setInterval(() => { 
@@ -98,15 +91,13 @@ export class SeriesService {
         this.currentRequestCounter = 0;
         this.arrayTimes = [];
         this.timesToSendRequest = []
-      }
-      
-    } 
-    console.log(this.arrayTimes, 'aaaaaaaaaaaasdjkghsdghfjdkhgkdfhgjkshdfgjkhdkfh', now.diff(this.arrayTimes[this.arrayTimes.length - 40], "seconds") > 10 )
-
+      }     
+    }
+     
     this.currentRequestCounter++
+
     return Observable.of(request).pipe(
       switchMap(() => timer(timeToSendRequest)),
-      tap(() => console.log(timeToSendRequest, 'aaaaaaaaaa')),
       switchMap(() => request),
     );
   }
