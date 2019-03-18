@@ -1,33 +1,41 @@
-import { TestBed, getTestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { SeriesService } from './series.service';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
-import { doesNotThrow } from 'assert';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('SeriesService', () => {
   let service: SeriesService;
+  let originalTimeout;
 
   beforeEach( async () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule,  
-        HttpClientTestingModule,
       ],
       providers: [
         SeriesService,
       ]
     })
-    service = getTestBed().get(SeriesService);
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    service = TestBed.get(SeriesService);
     }
   );
-  // it('should be created', () => {
-  //   const service: SeriesService = TestBed.get(SeriesService);
-  //   expect(service).toBeTruthy();
-  // });
+
+  afterEach(function() {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+  });
+
+  it('should be created', () => {
+    console.log('dzialammmmmm')
+    expect(service).toBeTruthy();
+  });
 
   it('test', () => {
+    console.log('ssssssssssss')
+    // service.getLastWeekTrends().subscribe((s) => {return console.log()})
     service.getLastWeekTrends().subscribe((s) => {
-      console.log(s, 'aaaaaaaaaaa')
+  
+      console.log('w srodku')
     })
   })
 
