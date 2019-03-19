@@ -11,12 +11,12 @@ export class LastTrendsComponent implements OnInit {
 
   constructor(private seriesService: SeriesService) { }
 
-  dataSourceTable: Array<SearchedSerie>
+  dataSourceTable: Array<SearchedSerie>;
   loading: boolean = true;
 
   ngOnInit() {
     this.seriesService.getLastTrends(1).subscribe((data) => {
-      this.dataSourceTable = data.body.results
+      this.dataSourceTable = data.results;
     }, () => null,
     () => {
       this.loading = false;

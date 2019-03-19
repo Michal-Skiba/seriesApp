@@ -33,9 +33,9 @@ export class MovieTillComponent implements OnChanges {
 
   getSeriesInfo(id: number): void {
     this.getSeriesService.getSeriesDetail(id).subscribe(dataSeries => {
-      this.fullUrl = environment.posterUrl + dataSeries.body.backdrop_path;
-      this.title = dataSeries.body.name;
-      this.overview = dataSeries.body.overview;
+      this.fullUrl = environment.posterUrl + dataSeries.backdrop_path;
+      this.title = dataSeries.name;
+      this.overview = dataSeries.overview;
     }, () => null,
     () => {
       this.loading = false;

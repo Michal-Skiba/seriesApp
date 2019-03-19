@@ -40,20 +40,20 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
       this.id = param.get('id')
     })
     this.SeriesService.getSeriesDetail(this.id).subscribe(dataSerie => {
-      this.title = dataSerie.body.name;
-      this.imageFullUrl = environment.posterUrl + dataSerie.body.backdrop_path;
-      this.seasons = dataSerie.body.seasons;
+      this.title = dataSerie.name;
+      this.imageFullUrl = environment.posterUrl + dataSerie.backdrop_path;
+      this.seasons = dataSerie.seasons;
     }, () => null,
     () => {
       this.getEpisodesInfo();
       this.loading = false;
     })
     this.SeriesService.getSimilarSeries(this.id).subscribe(data => {
-      this.similarSeries = data.body.results;
-      this.similarSeriesLastPage = data.body.total_pages;
+      this.similarSeries = data.results;
+      this.similarSeriesLastPage = data.total_pages;
     })
     this.SeriesService.getCredits(this.id).subscribe(dataCredits => {
-      this.actors = dataCredits.body.cast;
+      this.actors = dataCredits.cast;
     }, () => {
       this.actorsError = true;
     })
@@ -62,7 +62,7 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
   getEpisodesInfo(): void {
     for(let i = 0; i < this.seasons.length ; i++) {
       this.SeriesService.getSeasonEpisode(this.id, i).subscribe(seasonsInfo => {
-        this.seasonsEpisodes[i] = seasonsInfo.body.episodes;
+        this.seasonsEpisodes[i] = seasonsInfo.episodes;
       }
     )}
   }
@@ -71,7 +71,7 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
   loadMore(): void {
     this.similarSeriesLoader = true;
     this.SeriesService.getSimilarSeries(this.id, this.similarSeriesPageNumber).subscribe(data => {
-      this.similarSeries.push(...data.body.results);
+      this.similarSeries.push(...data.results);
     }, () => null,
     () => {
       this.similarSeriesLoader = false;

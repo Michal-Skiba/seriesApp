@@ -3,7 +3,7 @@ import { trigger, transition, useAnimation } from '@angular/animations';
 import { slideInLeft, slideInRight } from 'ng-animate';
 import { SearchedSerie } from '@models/searchedSerie.model';
 import * as moment from 'moment';
-import { SearchDataRepsonse } from '@models/searchData.model';
+import { SearchData } from '@models/searchData.model';
 import { environment } from '@environments/environment';
 import { SeriesService } from '@services/series.service'
 
@@ -62,18 +62,18 @@ export class PremiereComponent implements OnInit {
     this.series = [];
     this.loading = true;
     let numberOfPages: number;
-    this.seriesService.getPremieres(this.date, 1).subscribe((data: SearchDataRepsonse) => {
-      numberOfPages = data.body.total_pages; 
-      for(let i = 0; data.body.results.length -1 >= i; i++) {
-        this.series.push(data.body.results[i]) 
+    this.seriesService.getPremieres(this.date, 1).subscribe((data: SearchData) => {
+      numberOfPages = data.total_pages; 
+      for(let i = 0; data.results.length -1 >= i; i++) {
+        this.series.push(data.results[i]) 
       }
     }, () => null,
     () => {
       if (numberOfPages > 1) {
         for(let i = 2; numberOfPages <= 1; i++) {
-          this.seriesService.getPremieres(this.date, i).subscribe((data: SearchDataRepsonse) => {
-            for(let i = 0; data.body.results.length -1 >= i; i++) {
-              this.series.push(data.body.results[i]) 
+          this.seriesService.getPremieres(this.date, i).subscribe((data: SearchData) => {
+            for(let i = 0; data.results.length -1 >= i; i++) {
+              this.series.push(data.results[i]) 
             }    
           }), () => null,
           () => {

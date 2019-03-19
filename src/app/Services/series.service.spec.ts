@@ -26,17 +26,16 @@ describe('SeriesService', () => {
   });
 
   it('should be created', () => {
-    console.log('dzialammmmmm')
     expect(service).toBeTruthy();
   });
 
   it('test', () => {
-    console.log('ssssssssssss')
-    // service.getLastWeekTrends().subscribe((s) => {return console.log()})
-    service.getLastWeekTrends().subscribe((s) => {
   
-      console.log('w srodku')
-    })
+    service.getLastWeekTrends().subscribe((data) =>  {
+      console.log(`in success:`, data);
+  }, (error) => {
+      expect(error.status).not.toEqual(429)
+  });
   })
 
 });
