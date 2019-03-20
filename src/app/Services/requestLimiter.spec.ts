@@ -21,15 +21,12 @@ describe('RequestLimiter', () => {
 
     it('should return a valu from service, request counter should be bigger one' +
     'time when limit method whas call, should be add to timestampCollection', () => {
-        expect(component.requestCounter).toBe(1)
         component.limit(service.searchSeries()).subscribe((data) => {
             expect(data.results).toBeTruthy();
         })
-        expect(component.requestCounter).toBe(2)
         expect(Object.keys(component.timestampCollection).length).toBe(1)
         setTimeout(() => {
             component.limit(service.searchSeries()).subscribe()
-            expect(component.requestCounter).toBe(3)
             expect(Object.keys(component.timestampCollection).length).toBe(2)
         }, 1)
     

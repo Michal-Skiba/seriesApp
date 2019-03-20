@@ -16,11 +16,15 @@ export class RequestLimiter {
             let waitSeconds = 0;
             const timeDifference = (this.windowTime - (currentTime -
                 +this.getTimeFromTimestampCol(sumOfRequests - this.maxRequests)) * 1000);
+            console.log(sumOfRequests, 'sumaaaaaaaaaa')
             if (timeDifference < 0) {
                 this.timestampCollection = {};
                 waitSeconds = 0;
-            } else if (sumOfRequests > this.maxRequests && timeDifference) {
+            } else if (sumOfRequests > this.maxRequests && sumOfRequests < this.maxRequests*2 && timeDifference) {
                 waitSeconds = timeDifference;
+            } else if (sumOfRequests >= this.maxRequests*2) {
+                let additionalTime = Math.floor(sumOfRequests/this.maxRequests) -1
+                waitSeconds = timeDifference + additionalTime * this.windowTime;
             }         
             return of(null).pipe(
                 delay(waitSeconds),
