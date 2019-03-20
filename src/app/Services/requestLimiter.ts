@@ -2,8 +2,7 @@ import { Observable, of } from 'rxjs';
 import { delay, switchMapTo, concatMap } from 'rxjs/operators';
 
 export class RequestLimiter {
-    readonly timestampCollection: { [t: number]: number; } = {};
-    requestCounter = 1;
+    timestampCollection: { [t: number]: number; } = {};
     constructor(private windowTime: number, private maxRequests: number) {}
 
     public limit(stream: Observable<any>) {
@@ -11,14 +10,14 @@ export class RequestLimiter {
             const now = new Date();
             const beginTime = new Date(new Date().setSeconds(new Date(now).getSeconds() - this.windowTime)).getTime() / 1000;
             const currentTime = now.getTime() / 1000;
-            this.timestampCollection[currentTime] = this.requestCounter;
-            this.requestCounter++;
+            
             const sumOfRequests = this.calc(beginTime, currentTime);
+            this.timestampCollection[currentTime] = sumOfRequests;
             let waitSeconds = 0;
             const timeDifference = (this.windowTime - (currentTime -
-                +this.getTimeFromTimestampCol(this.requestCounter - this.maxRequests)) * 1000);
-            if (timeDifference < 0 && sumOfRequests > this.maxRequests) {
-                this.requestCounter = 0
+                +this.getTimeFromTimestampCol(sumOfRequests - this.maxRequests)) * 1000);
+            if (timeDifference < 0) {
+                this.timestampCollection = {};
                 waitSeconds = 0;
             } else if (sumOfRequests > this.maxRequests && timeDifference) {
                 waitSeconds = timeDifference;
