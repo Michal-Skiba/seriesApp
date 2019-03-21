@@ -3,29 +3,39 @@ import { delay, switchMapTo, concatMap } from 'rxjs/operators';
 
 export class RequestLimiter {
     timestampCollection: { [t: number]: number; } = {};
+    additionalTimeAfterRefresh: number = 0;
+    currentUrl: string = ''
+    requestCounter = 1;
     constructor(private windowTime: number, private maxRequests: number) {}
 
-    public limit(stream: Observable<any>) {
-        return of(null).pipe(concatMap(() => {
-            const now = new Date();
-            const beginTime = new Date(new Date().setSeconds(new Date(now).getSeconds() - this.windowTime)).getTime() / 1000;
-            const currentTime = now.getTime() / 1000;
-            
-            const sumOfRequests = this.calc(beginTime, currentTime);
-            this.timestampCollection[currentTime] = sumOfRequests;
-            let waitSeconds = 0;
+    public limit(stream: Observable<any>, url: string) {
+        return of(null).pipe(concatMap(() => {       
+            const currentTime = new Date().getTime() / 1000;
+            const lastReqTime = localStorage.getItem('timeOflastReq');
+            this.timestampCollection[this.requestCounter] = currentTime;
+            const lastRequestDelay = (this.windowTime - (currentTime -
+                +lastReqTime) * 1000);
+            if (this.requestCounter > 10 ) {
+                localStorage.setItem('timeOflastReq', JSON.stringify(currentTime))   
+            }            
+            if (lastRequestDelay > 0 && this.requestCounter === 1) {
+                this.additionalTimeAfterRefresh = lastRequestDelay;
+            }
+            let waitSeconds = 0 + this.additionalTimeAfterRefresh;
             const timeDifference = (this.windowTime - (currentTime -
-                +this.getTimeFromTimestampCol(sumOfRequests - this.maxRequests)) * 1000);
-            console.log(sumOfRequests, 'sumaaaaaaaaaa')
-            if (timeDifference < 0) {
+                +this.timestampCollection[this.requestCounter - this.maxRequests+1]) * 1000);
+            if(url != this.currentUrl) {
                 this.timestampCollection = {};
-                waitSeconds = 0;
-            } else if (sumOfRequests > this.maxRequests && sumOfRequests < this.maxRequests*2 && timeDifference) {
-                waitSeconds = timeDifference;
-            } else if (sumOfRequests >= this.maxRequests*2) {
-                let additionalTime = Math.floor(sumOfRequests/this.maxRequests) -1
-                waitSeconds = timeDifference + additionalTime * this.windowTime;
-            }         
+                this.requestCounter  = 1;
+                this.currentUrl = url;
+            }
+            if (this.requestCounter > this.maxRequests && this.requestCounter < this.maxRequests*2) {
+                waitSeconds = timeDifference + this.additionalTimeAfterRefresh;
+            } else if (this.requestCounter >= this.maxRequests*2) {
+                let additionalTime = Math.floor(this.requestCounter/this.maxRequests) - 1;
+                waitSeconds = this.windowTime + additionalTime * this.windowTime + this.additionalTimeAfterRefresh;
+            } 
+            this.requestCounter++
             return of(null).pipe(
                 delay(waitSeconds),
                 switchMapTo(stream),
@@ -33,18 +43,4 @@ export class RequestLimiter {
       
         }));
     }
-    private calc(beginTime: number, endTime: number): number {
-        let requestCalc = 0;
-        Object.keys(this.timestampCollection).forEach(key => {
-            if (+key >= beginTime && endTime >= +key) {
-                requestCalc++;
-            }
-        });
-        return requestCalc;
-    }
-
-    private getTimeFromTimestampCol(numberOfRequest: number) {
-        return Object.keys(this.timestampCollection).find(key =>  this.timestampCollection[key] === numberOfRequest);
-    }
-
 }

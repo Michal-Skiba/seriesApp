@@ -86,6 +86,9 @@ export const fakeSearchSeriesData = {
 };
 
 export class FakeSeriesService {
+    static searchSeries(): Observable<any> {
+        throw new Error("Method not implemented.");
+    }
 
     constructor() { }
 

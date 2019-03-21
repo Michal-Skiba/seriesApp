@@ -19,7 +19,7 @@ export class SeriesSearchComponent implements OnInit {
     private seriesService: SeriesService,
     private router: Router,
     private showSeriesDetalService: ShowSeriesDetalService,
-  ) {}
+  ) { }
 
   inputValue: string;
   loadingSeries: boolean = false;
@@ -34,60 +34,60 @@ export class SeriesSearchComponent implements OnInit {
   get warningCondition() {
     return !this.showPremiere && this.dataSourceTable.length <= 0 && this.searchSeriesTitle.length > 3 && !this.loadingSeries;
   }
-  
+
   get errorCondition() {
-    return !this.isSerieDetailThere && !this.showPremiere && !this.loadingSeries  && this.dataSourceTable.length <= 0 && (this.searchSeriesTitle.length <= 3  || !this.searchSeriesTitle)
+    return !this.isSerieDetailThere && !this.showPremiere && !this.loadingSeries && this.dataSourceTable.length <= 0 && (this.searchSeriesTitle.length <= 3 || !this.searchSeriesTitle)
   }
 
-  get vievCondition() { 
+  get vievCondition() {
     return !this.loadingSeries && this.dataSourceTable.length > 0 && this.dataSourceTable.length <= 39 && this.showSearchedItems && !this.showPremiere
   }
 
   ngOnInit() {
-    this.showSeriesDetalService.getShowInfo().subscribe((data: boolean) => { 
+    this.showSeriesDetalService.getShowInfo().subscribe((data: boolean) => {
       this.isSerieDetailThere = data;
-      setTimeout(()=> {
-        if(data) {
+      setTimeout(() => {
+        if (data) {
           this.showPremiere = false;
         }
       }, 0);
     })
-    this.searchForm = new FormGroup ({
+    this.searchForm = new FormGroup({
       seriesTitle: new FormControl()
     })
   }
 
   inputListener(event: any): void {
     this.inputValue = event.target.value;
-    if(!event.target.value) {
+    if (!event.target.value) {
       this.isSerieDetailThere = false;
       this.changeRoute('search');
       this.showPremiere = true;
     }
   }
 
-  changeRoute(data:string): void {
+  changeRoute(data: string): void {
     this.router.navigate([data])
   }
 
   showDetails($event: boolean): void {
-    if($event === true) {
+    if ($event === true) {
       this.showSearchedItems = false;
     }
   }
 
   searchSeries(searchData: SearchData): void {
-    if(this.searchSeriesTitle.length > 3) {
-      for(let i = 1; i <= searchData.total_pages; i++) {
+    if (this.searchSeriesTitle.length > 3) {
+      for (let i = 1; i <= searchData.total_pages; i++) {
         this.seriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
           this.dataSourceTable = [...this.dataSourceTable, ...dataSeries.results.filter(data => data.popularity > environment.popularity)]
         },
-        () => null,
-        () => {
-          this.loadingSeries = false;
-        }
+          () => null,
+          () => {
+            this.loadingSeries = false;
+          }
         )
-      }  
+      }
     } else {
       this.loadingSeries = false;
     }
@@ -99,8 +99,8 @@ export class SeriesSearchComponent implements OnInit {
     this.showSearchedItems = true;
   }
 
-  onSubmit(): void {  
-    if(this.router.url != '/search') {
+  onSubmit(): void {
+    if (this.router.url != '/search') {
       this.router.routeReuseStrategy.shouldReuseRoute = () => {
         return true;
       };
@@ -112,11 +112,10 @@ export class SeriesSearchComponent implements OnInit {
     this.seriesService.searchSeries(this.searchSeriesTitle, 1).subscribe(dataSeries => {
       this.searchSeries(dataSeries)
     },
-    () => null,
+      () => null,
     )
-    if(!this.searchSeriesTitle) {
+    if (!this.searchSeriesTitle) {
       this.loadingSeries = false;
     }
   }
 }
- 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { SearchedSerie } from '@models/searchedSerie.model';
 import { SeriesService } from '@services/series.service';
 
@@ -14,7 +14,7 @@ export class BestRatedTableComponent implements OnInit {
   dataSourceTable: Array<SearchedSerie>
   loading: boolean = true;
 
-  constructor(private seriesService: SeriesService) {}
+  constructor(private seriesService: SeriesService, private elementRef: ElementRef) {}
 
   ngOnInit() {
     this.seriesService.getTopratedSeries(this.tab).subscribe(dataSeries => {
