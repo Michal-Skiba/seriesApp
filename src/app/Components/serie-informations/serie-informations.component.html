@@ -14,7 +14,7 @@
         </span>
         <span *ngIf="0 >= dataSeries.production_companies.length">
           Brak danych
-        </span>       
+        </span>
       </p>
       <p>
         <b>Kraj pochodzenia: </b>
@@ -24,7 +24,7 @@
         </span>
         <span *ngIf="0 >= dataSeries.origin_country.length">
           Brak danych
-        </span>       
+        </span>
       </p>
       <p>
         <b>Getunek: </b>
@@ -33,7 +33,7 @@
         </span>
         <span *ngIf="0 >= dataSeries.genres.length">
           Brak danych
-        </span>       
+        </span>
       </p>
       <p>
         <b>Linki do podobnych witryn: </b>
@@ -41,7 +41,8 @@
         <a target="_blank" href="{{imdbLink + dataSeries.name}}">Imdb</a>
       </p>
       <div *ngIf="dataSeries.next_episode_to_air" class="timer">
-          <b>Następny nowy odcinek za:  </b> <p appCountdown [serieTime]="dataSeries.next_episode_to_air"></p>
+        <b>Następny nowy odcinek za: </b>
+        <p appCountdown [serieTime]="dataSeries.next_episode_to_air"></p>
       </div>
     </div>
   </ng-container>

@@ -20,7 +20,7 @@ export class SerieInformationsComponent implements OnInit {
   serieInformations$: Observable<SerieDetail>
 
   constructor(private seriesService: SeriesService) { }
-  
+
   ngOnInit() {
     this.similarSeries$ = this.seriesService.getSimilarSeries(this.id);
     this.serieInformations$ = this.seriesService.getSeriesDetail(this.id);

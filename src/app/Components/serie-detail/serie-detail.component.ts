@@ -14,7 +14,7 @@ import { Actors } from '@models/actors.model';
   styleUrls: ['./serie-detail.component.scss']
 })
 export class SerieDetailComponent implements OnInit, OnDestroy {
-  
+
   title: string;
   id: number;
   loading: boolean = true;
@@ -44,10 +44,10 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
       this.imageFullUrl = environment.posterUrl + dataSerie.backdrop_path;
       this.seasons = dataSerie.seasons;
     }, () => null,
-    () => {
-      this.getEpisodesInfo();
-      this.loading = false;
-    })
+      () => {
+        this.getEpisodesInfo();
+        this.loading = false;
+      })
     this.SeriesService.getSimilarSeries(this.id).subscribe(data => {
       this.similarSeries = data.results;
       this.similarSeriesLastPage = data.total_pages;
@@ -60,22 +60,23 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
   }
 
   getEpisodesInfo(): void {
-    for(let i = 0; i < this.seasons.length ; i++) {
+    for (let i = 0; i < this.seasons.length; i++) {
       this.SeriesService.getSeasonEpisode(this.id, i).subscribe(seasonsInfo => {
         this.seasonsEpisodes[i] = seasonsInfo.episodes;
       }
-    )}
+      )
+    }
   }
-  
-  
+
+
   loadMore(): void {
     this.similarSeriesLoader = true;
     this.SeriesService.getSimilarSeries(this.id, this.similarSeriesPageNumber).subscribe(data => {
       this.similarSeries.push(...data.results);
     }, () => null,
-    () => {
-      this.similarSeriesLoader = false;
-    })
+      () => {
+        this.similarSeriesLoader = false;
+      })
     this.similarSeriesPageNumber += 1;
   }
 

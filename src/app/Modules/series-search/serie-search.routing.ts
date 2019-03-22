@@ -5,7 +5,7 @@ import { SerieDetailComponent } from 'src/app/Components/serie-detail/serie-deta
 
 
 const routes: Routes = [
-  { 
+  {
     path: '',
     component: SeriesSearchComponent,
     children: [
@@ -13,7 +13,7 @@ const routes: Routes = [
         path: ':id',
         component: SerieDetailComponent,
       }
-    ] 
+    ]
   },
 ];
 

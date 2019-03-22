@@ -11,16 +11,16 @@ describe('PremiereComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PremiereComponent ],
+      declarations: [PremiereComponent],
       imports: [
         BrowserAnimationsModule,
         HttpClientModule,
         MatIconModule,
-        RouterModule,
         MatProgressSpinnerModule,
+        RouterModule.forRoot([]),
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

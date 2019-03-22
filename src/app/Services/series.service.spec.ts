@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { SeriesService } from './series.service';
 import { HttpClientModule } from '@angular/common/http';
-import { browser } from 'protractor';
-import { SearchData } from '@models/searchData.model';
+import { RouterModule } from '@angular/router';
 
 describe('SeriesService', () => {
   let service: SeriesService;
@@ -12,13 +11,14 @@ describe('SeriesService', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
+        RouterModule.forRoot([]),
       ],
       providers: [
         SeriesService,
       ]
     })
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     service = TestBed.get(SeriesService);
   }
   );
@@ -36,8 +36,8 @@ describe('SeriesService', () => {
       expect(data.results).toBeTruthy();
       done();
     }, (error) => {
-      expect(error.status).not.toEqual(429)
-      expect(error.status).not.toEqual(404)
+      expect(error.status).not.toEqual(429);
+      expect(error.status).not.toEqual(404);
       done();
     });
   })
@@ -47,8 +47,8 @@ describe('SeriesService', () => {
       expect(data).toBeTruthy();
       done();
     }, (error) => {
-      expect(error.status).not.toEqual(429)
-      expect(error.status).not.toEqual(404)
+      expect(error.status).not.toEqual(429);
+      expect(error.status).not.toEqual(404);
       done();
     });
   })
@@ -58,8 +58,8 @@ describe('SeriesService', () => {
       expect(data).toBeTruthy();
       done();
     }, (error) => {
-      expect(error.status).not.toEqual(429)
-      expect(error.status).not.toEqual(404)
+      expect(error.status).not.toEqual(429);
+      expect(error.status).not.toEqual(404);
       done();
     });
   })
@@ -69,8 +69,8 @@ describe('SeriesService', () => {
       expect(data).toBeTruthy()
       done();
     }, (error) => {
-      expect(error.status).not.toEqual(429)
-      expect(error.status).not.toEqual(404)
+      expect(error.status).not.toEqual(429);
+      expect(error.status).not.toEqual(404);
       done();
     })
   })
@@ -80,8 +80,8 @@ describe('SeriesService', () => {
       expect(data).toBeTruthy()
       done();
     }, (error) => {
-      expect(error.status).not.toEqual(429)
-      expect(error.status).not.toEqual(404)
+      expect(error.status).not.toEqual(429);
+      expect(error.status).not.toEqual(404);
       done();
     })
   })
@@ -91,8 +91,8 @@ describe('SeriesService', () => {
       expect(data).toBeTruthy()
       done();
     }, (error) => {
-      expect(error.status).not.toEqual(429)
-      expect(error.status).not.toEqual(404)
+      expect(error.status).not.toEqual(429);
+      expect(error.status).not.toEqual(404);
       done();
     })
   })
@@ -102,8 +102,8 @@ describe('SeriesService', () => {
       expect(data).toBeTruthy()
       done();
     }, (error) => {
-      expect(error.status).not.toEqual(429)
-      expect(error.status).not.toEqual(404)
+      expect(error.status).not.toEqual(429);
+      expect(error.status).not.toEqual(404);
       done();
     })
   })
@@ -113,8 +113,8 @@ describe('SeriesService', () => {
       expect(data).toBeTruthy()
       done();
     }, (error) => {
-      expect(error.status).not.toEqual(429)
-      expect(error.status).not.toEqual(404)
+      expect(error.status).not.toEqual(429);
+      expect(error.status).not.toEqual(404);
       done();
     })
   })
@@ -124,20 +124,9 @@ describe('SeriesService', () => {
       expect(data).toBeTruthy()
       done();
     }, (error) => {
-      expect(error.status).not.toEqual(429)
-      expect(error.status).not.toEqual(404)
+      expect(error.status).not.toEqual(429);
+      expect(error.status).not.toEqual(404);
       done();
     })
   })
-
-
-  // it('test', () => {
-  //   for(let i = 0; i < 30; i++) {
-  //     console.log(i, 'aa')
-  //     setTimeout(() => {
-  //       service.getTopratedSeries(1).subscribe()
-  //   }, 10)
-  //   }
-  // })
-
 });

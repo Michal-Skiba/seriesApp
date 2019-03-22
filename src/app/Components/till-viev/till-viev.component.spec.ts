@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TillVievComponent } from './till-viev.component';
 import { MovieTillComponent } from '../movie-till/movie-till.component';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -15,10 +15,10 @@ describe('TillVievComponent', () => {
         RouterModule.forRoot([]),
         MatCardModule,
       ],
-      declarations: [ TillVievComponent, MovieTillComponent ],
-      schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
+      declarations: [TillVievComponent, MovieTillComponent],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

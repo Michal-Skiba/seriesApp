@@ -3,6 +3,7 @@ import { LastTrendsComponent } from './last-trends.component';
 import { MatTableModule, MatProgressSpinnerModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 describe('LastTrendsComponent', () => {
   let component: LastTrendsComponent;
@@ -14,6 +15,7 @@ describe('LastTrendsComponent', () => {
         MatTableModule,
         MatProgressSpinnerModule,
         HttpClientModule,
+        RouterModule.forRoot([]),
       ],
       declarations: [ LastTrendsComponent ],
       schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],

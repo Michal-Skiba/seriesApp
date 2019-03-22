@@ -8,13 +8,13 @@ import { SearchedSerie } from '@models/searchedSerie.model';
 })
 export class TillVievComponent {
 
-  constructor() {}
-  
+  constructor() { }
+
   @Input() dataSource: Array<SearchedSerie>;
   @Output() showDetails = new EventEmitter<boolean>();
-  
+
   showDetailsFlag($event: boolean) {
-    if($event === true) {
+    if ($event === true) {
       this.showDetails.emit(true)
     }
   }

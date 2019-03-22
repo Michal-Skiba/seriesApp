@@ -1,7 +1,5 @@
 <div *ngIf='!loading' class="table" id="lastTrends">
-  <app-viev-wrapper
-      [dataSourceTable]='dataSourceTable'
-    >
+  <app-viev-wrapper [dataSourceTable]='dataSourceTable'>
   </app-viev-wrapper>
 </div>
 <div *ngIf='loading' class='loader'>

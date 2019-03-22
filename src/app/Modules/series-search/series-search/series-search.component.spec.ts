@@ -21,18 +21,18 @@ describe('SeriesSearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule, 
-        RouterTestingModule,    
+        HttpClientModule,
+        RouterTestingModule,
       ],
-      declarations: [ SeriesSearchComponent ],
-      schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
-      providers: [ 
-        { provide: ShowSeriesDetalService, useClass:FakeShowSeriesDetalService },
+      declarations: [SeriesSearchComponent],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        { provide: ShowSeriesDetalService, useClass: FakeShowSeriesDetalService },
         { provide: SeriesService, useClass: FakeSeriesService },
-        { provide: Router, useValue: mockRouter},
+        { provide: Router, useValue: mockRouter },
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -83,26 +83,26 @@ describe('SeriesSearchComponent', () => {
     }]
     component.showPremiere = true;
     component.showSearchedItems = false;
-    component.resetValues();  
+    component.resetValues();
     expect(component.dataSourceTable).toEqual([]);
     expect(component.showPremiere).toBe(false);
     expect(component.showSearchedItems).toBe(true);
   })
 
-  it('test input field value',  () => {
+  it('test input field value', () => {
     const input = fixture.debugElement.query(By.css('input'));
     input.nativeElement.value = 'text';
     input.nativeElement.dispatchEvent(new Event('input'));
     expect(input.nativeElement.value).toContain('text');
   })
 
-  it('test showDetails function, if event is true, searched items should be false',  () => {
-    expect(component.showSearchedItems).toBe(true); 
+  it('test showDetails function, if event is true, searched items should be false', () => {
+    expect(component.showSearchedItems).toBe(true);
     component.showDetails(true)
-    expect(component.showSearchedItems).toBe(false); 
+    expect(component.showSearchedItems).toBe(false);
   })
 
-  it('searchSerie function should work when inputValue is longer than 3', () => { 
+  it('searchSerie function should work when inputValue is longer than 3', () => {
     component.inputValue = "test"
     component.onSubmit()
     expect(component.searchSeriesTitle).toBe("test")

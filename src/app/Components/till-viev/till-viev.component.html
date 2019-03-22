@@ -1,9 +1,6 @@
 <div class="tills" id='tillViev'>
   <div *ngFor="let data of dataSource">
-    <app-movie-till
-      [id] = data.id
-      (showDetailsFlag) = "showDetailsFlag($event)"
-    >
+    <app-movie-till [id]=data.id (showDetailsFlag)="showDetailsFlag($event)">
     </app-movie-till>
   </div>
 </div>

@@ -16,13 +16,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SeriesService {
+
   language: string;
-  delay: number = 0;
-  firstRequestTime: any = null;
-  currentRequestCounter: number = 0;
-  arrayTimes: Array<object> = []
-  queque: Array<Observable<any>>
-  timesToSendRequest: Array<number> = [];
   readonly limiter = new RequestLimiter(10600, 39);
 
   constructor(private http: HttpClient, private changeLanguageService: ChangeLanguageService, private router: Router) {
@@ -36,13 +31,13 @@ export class SeriesService {
 
   searchSeries(seriesTitle: string, page: number): Observable<SearchData> {
     return this.limiter.limit(this.http.get<SearchData>(`${environment.apiUrl}search/tv?` +
-    `api_key=${environment.apiKey}&language=${this.language}-US&query=${seriesTitle}&page=${page}`), this.router.url);
+      `api_key=${environment.apiKey}&language=${this.language}-US&query=${seriesTitle}&page=${page}`), this.router.url);
   }
 
   getCredits(seriesId: number): Observable<Credits> {
     return this.limiter.limit(this.http.get<Credits>(
       `${environment.apiUrl}tv/${seriesId}/credits?api_key=${environment.apiKey}&language=${this.language}-US`
-      ), this.router.url);
+    ), this.router.url);
   }
 
   getSeasonEpisode(seriesId: number, seasonNumber: number): Observable<SeasonEpiosodes> {
@@ -57,7 +52,7 @@ export class SeriesService {
       this.http.get<SearchData>(
         `${environment.apiUrl}tv/${seriesId}/similar?api_key=${environment.apiKey}` +
         `&language=${this.language}-US&page=${page}`
-        ), this.router.url);
+      ), this.router.url);
   }
 
   getLastWeekTrends(): Observable<SearchData> {
@@ -68,7 +63,7 @@ export class SeriesService {
   getLastTrends(page: number): Observable<SearchData> {
     return this.limiter.limit(this.http.get<SearchData>(`${environment.apiUrl}tv/popular` +
       `?api_key=${environment.apiKey}&language=${this.language}-US&page=${page}`
-      ), this.router.url);
+    ), this.router.url);
   }
 
   getPremieres(date: string, page: number): Observable<SearchData> {
@@ -76,14 +71,14 @@ export class SeriesService {
       `${environment.apiUrl}discover/tv?api_key=${environment.apiKey}&language=${this.language}-` +
       `US&sort_by=vote_average.asc&first_air_date.gte=${date}&first_air_date.lte=${date}&page=${page}` +
       `&timezone=America%2FNew_York&include_null_first_air_dates=false`
-      ), this.router.url);
+    ), this.router.url);
   }
 
-  getTopratedSeries(page: number): Observable<SearchData> {     
+  getTopratedSeries(page: number): Observable<SearchData> {
     return this.limiter.limit(this.http.get<SearchData>(
       `${environment.apiUrl}tv/top_rated?api_key=${environment.apiKey}` +
       `&language=${this.language}-US&page=${page}`
-      ), this.router.url);
+    ), this.router.url);
   }
 
 }

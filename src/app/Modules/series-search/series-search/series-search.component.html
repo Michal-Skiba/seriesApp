@@ -26,10 +26,8 @@
   </mat-card>
 </div>
 <div *ngIf="vievCondition" id='displayViev'>
-    <app-viev-wrapper
-      [dataSourceTable]='dataSourceTable'
-    >
-    </app-viev-wrapper>
+  <app-viev-wrapper [dataSourceTable]='dataSourceTable'>
+  </app-viev-wrapper>
 </div>
 <div *ngIf='showPremiere'>
   <app-premiere>

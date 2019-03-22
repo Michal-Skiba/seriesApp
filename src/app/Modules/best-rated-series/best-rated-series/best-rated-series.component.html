@@ -1,34 +1,23 @@
-<mat-tab-group  class="tabGroup"  id="bestRated">
+<mat-tab-group class="tabGroup" id="bestRated" (selectedTabChange)="tabClick($event)">
   <mat-tab label="1-20">
-    <app-best-rated-table
-      [tab] = 1
-    >
-    </app-best-rated-table>  
+    <app-best-rated-table [tab]=1 [actualTab]='actualTab'>
+    </app-best-rated-table>
   </mat-tab>
   <mat-tab label="21-40">
-    <app-best-rated-table
-      [tab] = 2
-    >
+    <app-best-rated-table [tab]=2 [actualTab]='actualTab'>
     </app-best-rated-table>
   </mat-tab>
   <mat-tab label="41-60">
-    <app-best-rated-table
-      [tab] = 3
-    >
+    <app-best-rated-table [tab]=3 [actualTab]='actualTab'>
     </app-best-rated-table>
   </mat-tab>
   <mat-tab label="61-80">
-    <app-best-rated-table
-      [tab] = 4
-    >
+    <app-best-rated-table [tab]=4 [actualTab]='actualTab'>
     </app-best-rated-table>
   </mat-tab>
   <mat-tab label="81-100">
-    <app-best-rated-table
-      [tab] = 5
-    >
+    <app-best-rated-table [tab]=5 [actualTab]='actualTab'>
     </app-best-rated-table>
   </mat-tab>
-  
-</mat-tab-group>
 
+</mat-tab-group>

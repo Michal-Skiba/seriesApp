@@ -24,6 +24,6 @@ import { ComponentsModule } from 'src/app/Components/components.module';
   exports: [
     LastTrendsComponent,
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LastTrendsModule { }

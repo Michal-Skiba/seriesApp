@@ -9,19 +9,19 @@ const routes: Routes = [
     redirectTo: 'search',
     pathMatch: 'full'
   },
-  { 
+  {
     path: 'search',
     loadChildren: './Modules/series-search/series-search.module#SeriesSearchModule',
   },
-  { 
+  {
     path: 'trends',
     loadChildren: './Modules/last-trends/last-trends.module#LastTrendsModule'
   },
-  { 
+  {
     path: 'best-rated',
     loadChildren: './Modules/best-rated-series/best-rated-series.module#BestRatedSeriesModule'
   },
-  { 
+  {
     path: '**',
     component: PageNotFoundComponent,
   },

@@ -1,63 +1,60 @@
 .loader {
-    margin: 100px auto;
-    width: fit-content;
+  margin: 100px auto;
+  width: fit-content;
 }
 .title {
-    margin: 0 auto;
-    font-size: 26px;
-    font-weight: bold;
-    width: fit-content;
+  margin: 0 auto;
+  font-size: 26px;
+  font-weight: bold;
+  width: fit-content;
 }
 .lastWeekTrendsWrapper {
-    .seriesRow {
-        cursor: pointer;
-        &:nth-child(odd) {
-            background: white;
-            &:hover {
-                background-color: rgb(206, 206, 206)
-            } 
-        }
-        &:nth-child(even) {
-            background-color:rgba(255, 255, 255, 0.5);
-            &:hover {
-                background-color: rgb(206, 206, 206)
-            } 
-        }
-        display: flex;
-        height: 50px;
-        margin: 10px 0;     
-        img {
-            height: 50px;
-            margin-left: 10px;
-        }
-        .name {
-            font-size: 14px;
-            margin-left: 10px;
-        }
-        .premiere {
-            font-size: 12px;
-            margin-top: 24px;
-            margin-left: auto;
-            margin-right: 10px;
-        }
-        @media only screen and (min-width: 700px) {
-            .name {
-                font-size: 16px;
-            }
-            .premiere {
-                font-size: 16px;
-            }        
-        }
-        @media only screen and (min-width: 1400px) {
-            .name {
-                font-size: 20px;
-            
-            }
-            .premiere {
-                font-size: 16px;
-        
-            }
-        }
+  .seriesRow {
+    cursor: pointer;
+    &:nth-child(odd) {
+      background: white;
+      &:hover {
+        background-color: rgb(206, 206, 206);
+      }
     }
-
+    &:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.5);
+      &:hover {
+        background-color: rgb(206, 206, 206);
+      }
+    }
+    display: flex;
+    height: 50px;
+    margin: 10px 0;
+    img {
+      height: 50px;
+      margin-left: 10px;
+    }
+    .name {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    .premiere {
+      font-size: 12px;
+      margin-top: 24px;
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    @media only screen and (min-width: 700px) {
+      .name {
+        font-size: 16px;
+      }
+      .premiere {
+        font-size: 16px;
+      }
+    }
+    @media only screen and (min-width: 1400px) {
+      .name {
+        font-size: 20px;
+      }
+      .premiere {
+        font-size: 16px;
+      }
+    }
+  }
 }

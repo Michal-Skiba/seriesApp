@@ -11,15 +11,15 @@ describe('VievComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VievWrapperComponent ],
+      declarations: [VievWrapperComponent],
       imports: [
         RouterTestingModule,
         MatIconModule,
         MatSlideToggleModule,
       ],
-      schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PopulatiryToStringPipe implements PipeTransform {
   transform(value: number): string {
-    if(value > 200) {
+    if (value > 200) {
       return 'bardzo popularne'
     } else if (value > 100) {
       return 'popularne'

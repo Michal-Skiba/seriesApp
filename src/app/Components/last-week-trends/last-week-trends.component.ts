@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
 })
 export class LastWeekTrendsComponent {
 
-  constructor(private  getSeriesService: SeriesService, private router: Router) { }
+  constructor(private getSeriesService: SeriesService, private router: Router) { }
 
   lastWeekTrends$ = this.getSeriesService.getLastWeekTrends();
   posterUrl = environment.posterUrl;

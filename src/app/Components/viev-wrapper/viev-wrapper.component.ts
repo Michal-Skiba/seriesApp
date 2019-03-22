@@ -9,8 +9,8 @@ import { SearchedSerie } from '@models/searchedSerie.model';
 export class VievWrapperComponent {
 
   constructor() { }
-  tableViev: boolean; 
+  tableViev: boolean;
 
-  @Input() dataSourceTable: Array<SearchedSerie>; 
+  @Input() dataSourceTable: Array<SearchedSerie>;
 
 }

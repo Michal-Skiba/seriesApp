@@ -19,25 +19,25 @@ export class TranslateGenrePipe implements PipeTransform {
       case 'Drama':
         return 'Dramat'
       case 'Family':
-        return 'Familijny' 
+        return 'Familijny'
       case 'Kids':
-        return 'Dla dzieci' 
+        return 'Dla dzieci'
       case 'Mystery':
-        return 'Zagadka' 
+        return 'Zagadka'
       case 'News':
-        return 'Nowości' 
+        return 'Nowości'
       case 'Reality':
-        return 'Reality' 
+        return 'Reality'
       case 'Sci-Fi & Fantasy':
-        return 'Sci-Fi & Fantasy' 
+        return 'Sci-Fi & Fantasy'
       case 'Soap':
-        return 'Mydło' 
+        return 'Mydło'
       case 'Talk':
-        return 'Rozmowa' 
+        return 'Rozmowa'
       case 'War & Politics':
-        return 'Wojna i polityka' 
+        return 'Wojna i polityka'
       case 'Western':
-        return 'Western' 
+        return 'Western'
       default:
         return 'brak danych'
     }

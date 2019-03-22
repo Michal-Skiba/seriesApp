@@ -24,23 +24,23 @@ describe('workspace-project App', () => {
     expect(page.getTextMobileBestRatedBtn()).toEqual(`Najlepiej oceniane seriale`);
   })
 
-  it('click on best-rated button(on high width) should redirect to best-rated component, Footer should still display' + 
-  'click on till title should redirect to serie detail', () => {
-    page.navigateToFullWidth();
-    page.getBestRatedBtn().click()
-    expect(element(by.id('bestRated')).isPresent()).toEqual(true)
-    expect(element(by.id('footer')).isPresent()).toEqual(true)
-    page.getTillFirstEl().click()
-    expect(element(by.id('serieDetail')).isPresent()).toEqual(true)
-  })
+  it('click on best-rated button(on high width) should redirect to best-rated component, Footer should still display' +
+    'click on till title should redirect to serie detail', () => {
+      page.navigateToFullWidth();
+      page.getBestRatedBtn().click()
+      expect(element(by.id('bestRated')).isPresent()).toEqual(true)
+      expect(element(by.id('footer')).isPresent()).toEqual(true)
+      page.getTillFirstEl().click()
+      expect(element(by.id('serieDetail')).isPresent()).toEqual(true)
+    })
 
   it('click on last-trends button(on high width) should redirect to last-trends component. Footer should still display' +
-  'click on till title should redirect to serie detail', () => {
-    page.navigateToFullWidth();
-    page.getTrendsBtn().click()
-    expect(element(by.id('lastTrends')).isPresent()).toEqual(true)
-    expect(element(by.id('footer')).isPresent()).toEqual(true)
-  })
+    'click on till title should redirect to serie detail', () => {
+      page.navigateToFullWidth();
+      page.getTrendsBtn().click()
+      expect(element(by.id('lastTrends')).isPresent()).toEqual(true)
+      expect(element(by.id('footer')).isPresent()).toEqual(true)
+    })
 
   it('click on search button(on high width) should redirect to search component. Footer should still display', () => {
     page.navigateToFullWidth();
@@ -80,7 +80,7 @@ describe('workspace-project App', () => {
     element(by.id('slideToggle')).click()
     expect(element(by.id('tableViev')).isPresent()).toEqual(true)
   })
-  
+
   it('test', () => {
     browser.sleep(7000)
     page.navigateToFullWidth();
@@ -103,7 +103,6 @@ describe('workspace-project App', () => {
         return element(by.id('displayViev')).isPresent()
       })
     })
-    
   })
 
 });

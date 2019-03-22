@@ -8,7 +8,7 @@ export class ChangeLanguageService {
   private language: string;
   private choosenLanguage = new Subject<string>();
   constructor() {
-    if(localStorage.getItem('language')) {
+    if (localStorage.getItem('language')) {
       this.language = localStorage.getItem('language')
       this.choosenLanguage.next(this.language);
     } else {

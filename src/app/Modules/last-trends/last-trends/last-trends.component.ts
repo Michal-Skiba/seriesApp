@@ -18,9 +18,8 @@ export class LastTrendsComponent implements OnInit {
     this.seriesService.getLastTrends(1).subscribe((data) => {
       this.dataSourceTable = data.results;
     }, () => null,
-    () => {
-      this.loading = false;
-    })
+      () => {
+        this.loading = false;
+      })
   }
-
 }

@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SerieInformationsComponent } from './serie-informations.component';
 import { CountdownDirective } from '../../directives/countdown.directive';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 describe('SerieInformationsComponent', () => {
   let component: SerieInformationsComponent;
@@ -11,12 +12,12 @@ describe('SerieInformationsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        RouterModule.forRoot([]),
         HttpClientModule,
       ],
-      declarations: [ SerieInformationsComponent, CountdownDirective ],
-      
+      declarations: [SerieInformationsComponent, CountdownDirective],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

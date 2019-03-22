@@ -1,94 +1,93 @@
 .wrapper {
-    .contentWrapper {
-        padding-bottom: 10px;
-        background-color:rgba(255, 255, 255, 0.8); 
-        .collapse {
-            margin: 20px auto 0 auto;
-            max-width: 600px;
-        }
+  .contentWrapper {
+    padding-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    .collapse {
+      margin: 20px auto 0 auto;
+      max-width: 600px;
     }
-    .title {
-        margin: 10px 0 20px 0;
-        width: 100%;
-        text-align: center;
-        background-color:rgba(255, 255, 255, 0.8); 
-        color: black;
-        height: 40px;
-        font-size: 30px;
-        padding-top: 5px;
-        font-weight: bold;
+  }
+  .title {
+    margin: 10px 0 20px 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    height: 40px;
+    font-size: 30px;
+    padding-top: 5px;
+    font-weight: bold;
+  }
+  width: 90%;
+  margin: 20px auto 0 auto;
+  .content {
+    img {
+      margin: auto 0;
+      width: 100%;
+      height: 100%;
     }
-    width: 90%;
-    margin: 20px auto 0 auto;
-    .content {        
-        img {
-            margin: auto 0;
-            width: 100%;
-            height: 100%;
-        }
-        .info {
-            color: black;
-            margin-left: 10px;
-        }
+    .info {
+      color: black;
+      margin-left: 10px;
     }
-    @media only screen and (min-width: 768px) {
-        max-width: 1000px;
-        .content {
-            display: flex;
-            img {
-                width: 65%
-            }
-        }
-    } 
+  }
+  @media only screen and (min-width: 768px) {
+    max-width: 1000px;
+    .content {
+      display: flex;
+      img {
+        width: 65%;
+      }
+    }
+  }
 }
 
 .loader {
-    .mat-spinner {
-        margin: 60px auto 20px auto;
-    }
+  .mat-spinner {
+    margin: 60px auto 20px auto;
+  }
 }
 
 .similarSeriesRow {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .similarSerieName {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .moreSeries {
-    float: right;
-    color: blue;
-    font-weight: bold;
-    cursor: pointer;
+  float: right;
+  color: blue;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .seriesLoader {
-    margin: 0 auto;
-    width: fit-content;
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .collapse {
-    .mat-expansion-panel {
-        margin: 10px 0;
-    }
+  .mat-expansion-panel {
+    margin: 10px 0;
+  }
+  .rowDisplay {
+    display: flex;
+    justify-content: space-between;
+  }
+  .mat-expansion-panel-header-description {
+    font-size: 12px;
+    flex-grow: 0;
+  }
+  .seasonsCollapse {
     .rowDisplay {
-        display: flex;
-        justify-content: space-between;
+      font-size: 12px;
     }
     .mat-expansion-panel-header-description {
-        font-size: 12px;
-        flex-grow: 0;
+      font-size: 12px;
+      flex-grow: 0;
     }
-    .seasonsCollapse {
-        .rowDisplay { 
-            font-size: 12px;
-        }
-        .mat-expansion-panel-header-description {
-            font-size: 12px;
-            flex-grow: 0;
-        }
-    }
-
+  }
 }

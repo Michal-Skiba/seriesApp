@@ -9,18 +9,18 @@ import { HttpClientModule } from '@angular/common/http';
 describe('SerieDetailComponent', () => {
   let component: SerieDetailComponent;
   let fixture: ComponentFixture<SerieDetailComponent>;
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SerieDetailComponent, SerieInformationsComponent ],
+      declarations: [SerieDetailComponent, SerieInformationsComponent],
       imports: [
         HttpClientModule,
         MatExpansionModule,
         RouterModule.forRoot([]),
       ],
-      schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ] 
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

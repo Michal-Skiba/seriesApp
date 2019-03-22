@@ -29,7 +29,7 @@ export class AppPage {
   getMobileMenuBtn() {
     return element(by.css('.mobileMenu > button'));
   }
-  
+
   getTextMobileTrendsBtn() {
     return element(by.css('.metMenu [routerLink="/trends"] span')).getText();
   }
@@ -80,13 +80,13 @@ export class AppPage {
   getTillFirstEl() {
     return element.all(by.css('.movieTitle')).first();
   }
-  
+
   addTextToSearchinput(text: string) {
     element(by.css('.formWrapper input')).clear();
-    element(by.css('.formWrapper input')).sendKeys(text) 
+    element(by.css('.formWrapper input')).sendKeys(text)
   }
 
-  getSubmitBtn(){ 
+  getSubmitBtn() {
     return element(by.css('[type="submit"]'));
   }
 

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./movie-till.component.scss']
 })
 export class MovieTillComponent implements OnChanges {
- 
+
   constructor(private getSeriesService: SeriesService, private router: Router) { }
 
   @Input() id: number
@@ -21,7 +21,7 @@ export class MovieTillComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.loading = true;
-    this.getSeriesInfo(this.id); 
+    this.getSeriesInfo(this.id);
   }
 
   showDetails(id: string): void {
@@ -37,8 +37,8 @@ export class MovieTillComponent implements OnChanges {
       this.title = dataSeries.name;
       this.overview = dataSeries.overview;
     }, () => null,
-    () => {
-      this.loading = false;
-    })
+      () => {
+        this.loading = false;
+      })
   }
 }

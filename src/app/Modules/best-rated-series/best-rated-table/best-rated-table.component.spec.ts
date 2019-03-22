@@ -4,6 +4,7 @@ import { MatDialog, MatTableModule } from '@angular/material';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BestRatedSeriesComponent } from '../best-rated-series/best-rated-series.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 describe('BestRatedTableComponent', () => {
   let component: BestRatedTableComponent;
@@ -15,6 +16,7 @@ describe('BestRatedTableComponent', () => {
       imports: [
         MatTableModule,
         HttpClientModule,
+        RouterModule.forRoot([]),
       ],
       schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
       providers: [

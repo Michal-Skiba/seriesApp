@@ -29,9 +29,9 @@ export class RequestLimiter {
                 this.requestCounter  = 1;
                 this.currentUrl = url;
             }
-            if (this.requestCounter > this.maxRequests && this.requestCounter < this.maxRequests*2) {
+            if (this.requestCounter > this.maxRequests && this.requestCounter < this.maxRequests*2 && timeDifference > 0) {
                 waitSeconds = timeDifference + this.additionalTimeAfterRefresh;
-            } else if (this.requestCounter >= this.maxRequests*2) {
+            } else if (this.requestCounter >= this.maxRequests*2 && timeDifference > 0) {
                 let additionalTime = Math.floor(this.requestCounter/this.maxRequests) - 1;
                 waitSeconds = this.windowTime + additionalTime * this.windowTime + this.additionalTimeAfterRefresh;
             } 

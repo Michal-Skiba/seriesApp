@@ -1,9 +1,7 @@
 <div *ngIf="!loading" class="table">
-  <app-viev-wrapper
-    [dataSourceTable]='dataSourceTable'
-  >
+  <app-viev-wrapper [dataSourceTable]='dataSourceTable'>
   </app-viev-wrapper>
 </div>
 <div *ngIf="loading" class="loader">
-    <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
