@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 export class SeriesService {
 
   language: string;
+
   readonly limiter = new RequestLimiter(10600, 39);
 
   constructor(private http: HttpClient, private changeLanguageService: ChangeLanguageService, private router: Router) {
@@ -26,12 +27,14 @@ export class SeriesService {
 
   getSeriesDetail(seriesId: number): Observable<SerieDetail> {
     return this.limiter.limit(this.http.get<SerieDetail>(
-      `${environment.apiUrl}tv/${seriesId}?api_key=${environment.apiKey}&language=${this.language}-US`), this.router.url);
+      `${environment.apiUrl}tv/${seriesId}?api_key=${environment.apiKey}&language=${this.language}-US`)
+      , this.router.url);
   }
 
   searchSeries(seriesTitle: string, page: number): Observable<SearchData> {
     return this.limiter.limit(this.http.get<SearchData>(`${environment.apiUrl}search/tv?` +
-      `api_key=${environment.apiKey}&language=${this.language}-US&query=${seriesTitle}&page=${page}`), this.router.url);
+      `api_key=${environment.apiKey}&language=${this.language}-US&query=${seriesTitle}&page=${page}`
+    ), this.router.url);
   }
 
   getCredits(seriesId: number): Observable<Credits> {

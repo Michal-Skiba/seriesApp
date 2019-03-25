@@ -13,10 +13,15 @@ import {
 import { BestRatedTableComponent } from './best-rated-table/best-rated-table.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ComponentsModule } from 'src/app/Components/components.module';
+import { AddTabDirective } from '../../directives/add-tab.directive';
 
 @NgModule({
   declarations: [
     BestRatedSeriesComponent,
+    BestRatedTableComponent,
+    AddTabDirective,
+  ],
+  entryComponents: [
     BestRatedTableComponent,
   ],
   imports: [

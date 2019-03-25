@@ -1,7 +1,9 @@
-import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { SeriesService } from '@services/series.service';
 import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
+import { SerieDetail } from '@models/serieDetail.model';
+import { load } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-movie-till',
@@ -18,6 +20,7 @@ export class MovieTillComponent implements OnChanges {
   fullUrl: string;
   title: string;
   overview: string;
+  serieDetails: SerieDetail;
 
   ngOnChanges(): void {
     this.loading = true;
@@ -32,13 +35,20 @@ export class MovieTillComponent implements OnChanges {
   }
 
   getSeriesInfo(id: number): void {
-    this.getSeriesService.getSeriesDetail(id).subscribe(dataSeries => {
-      this.fullUrl = environment.posterUrl + dataSeries.backdrop_path;
-      this.title = dataSeries.name;
-      this.overview = dataSeries.overview;
-    }, () => null,
-      () => {
-        this.loading = false;
-      })
+    this.serieDetails = JSON.parse(localStorage.getItem(String(id)))
+    if(!this.serieDetails) {
+      this.getSeriesService.getSeriesDetail(id).subscribe(dataSeries => {
+        localStorage.setItem(String(id), JSON.stringify(dataSeries))
+        this.serieDetails = dataSeries;
+        this.fullUrl = environment.posterUrl + dataSeries.backdrop_path;
+      }, () => null,
+        () => {
+          this.loading = false;
+        })
+    } else {
+      this.fullUrl = environment.posterUrl + this.serieDetails.backdrop_path;
+      this.loading = false;
+    }
+   
   }
 }

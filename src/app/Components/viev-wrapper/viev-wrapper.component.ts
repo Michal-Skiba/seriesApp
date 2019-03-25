@@ -10,7 +10,7 @@ export class VievWrapperComponent {
 
   constructor() { }
   tableViev: boolean;
-
+  
   @Input() dataSourceTable: Array<SearchedSerie>;
 
 }
