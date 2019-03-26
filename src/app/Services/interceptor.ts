@@ -1,6 +1,6 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import {  catchError } from 'rxjs/operators';
 
 export class InterceptorService implements HttpInterceptor {
 

@@ -13,6 +13,6 @@ export class GetTabService {
       new AddTabComponent(BestRatedTableComponent, 3),
       new AddTabComponent(BestRatedTableComponent, 4),
       new AddTabComponent(BestRatedTableComponent, 5),
-    ]
+    ];
   }
 }

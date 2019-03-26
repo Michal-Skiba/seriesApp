@@ -1,4 +1,11 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ComponentFactoryResolver,
+  AfterViewInit,
+  ViewChildren,
+  QueryList
+} from '@angular/core';
 import { TabEvent } from '@models/tabEvent.model.ts';
 import { GetTabService } from '@services/get-tab.service';
 import { AddTabComponent } from 'src/app/classes/add-tab/add-tab';
@@ -11,35 +18,34 @@ import { TabComponent } from '@models/tabComponent.model';
   templateUrl: './best-rated-series.component.html',
   styleUrls: ['./best-rated-series.component.scss']
 })
-export class BestRatedSeriesComponent implements OnInit {
+export class BestRatedSeriesComponent implements OnInit, AfterViewInit {
 
   tab: AddTabComponent[];
-  actualTab: number = 1;
-  @ViewChild(AddTabDirective) adHost: AddTabDirective;
+  actualTab = 1;
+  @ViewChildren(AddTabDirective) adHost: QueryList<AddTabDirective>;
   constructor(private getTabService: GetTabService, private componentFactoryResolver: ComponentFactoryResolver) {  }
 
-  ngOnInit() { 
-    this.tab = this.getTabService.getBestRatedComponent()
+  ngOnInit() {
+    this.tab = this.getTabService.getBestRatedComponent();
+  }
+  ngAfterViewInit() {
     this.loadComponent();
   }
+  private loadComponent() {
+    setTimeout(() => {
+      const viewChildren = this.adHost.toArray();
+      const currentIndex = this.actualTab - 1;
+      const addComponent = this.tab[currentIndex];
 
-  loadComponent() {
-    let addComponent = this.tab[this.actualTab -1]
-
-    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(addComponent.component);
-
-    let viewContainerRef = this.adHost.viewContainerRef;
-    viewContainerRef.clear();
-
-    let componentRef = viewContainerRef.createComponent(componentFactory);
-    (<TabComponent>componentRef.instance).tab = addComponent.tab;
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(addComponent.component);
+      const viewContainerRef = viewChildren[currentIndex].viewContainerRef;
+      viewContainerRef.clear();
+      const componentRef = viewContainerRef.createComponent(componentFactory);
+      (<TabComponent> componentRef.instance).tab = addComponent.tab;
+    }, 0);
   }
-
-  
-  tabClick($tab: TabEvent) {
+  public tabClick($tab: TabEvent) {
     this.actualTab = $tab.index + 1;
-    console.log(this.actualTab,' indeksik')
-    this.loadComponent()
+    this.loadComponent();
   }
-  
 }

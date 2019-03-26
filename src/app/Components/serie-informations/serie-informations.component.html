@@ -4,7 +4,7 @@
       <p><b>Premiera: </b>{{ dataSeries.first_air_date }}</p>
       <p><b>Liczba sezonów: </b>{{ dataSeries.number_of_seasons }}</p>
       <p><b>Liczba odcinków: </b>{{ dataSeries.number_of_episodes }}</p>
-      <p><b>Popularność: </b>{{ dataSeries.popularity }}</p>
+      <p><b>Popularność: </b>{{ dataSeries.popularity | PopularityToString }} </p>
       <p><b>Opis: </b>{{ dataSeries.overview }}</p>
       <p><b>Status: </b>{{ dataSeries.status }}</p>
       <p>

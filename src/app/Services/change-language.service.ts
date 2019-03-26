@@ -6,27 +6,23 @@ import { Subject, Observable } from 'rxjs';
 })
 export class ChangeLanguageService {
   private language: string;
-  private choosenLanguage = new Subject<string>();
+  private chosenLanguage = new Subject<string>();
   constructor() {
-    if (localStorage.getItem('language')) {
-      this.language = localStorage.getItem('language')
-      this.choosenLanguage.next(this.language);
+    if (sessionStorage.getItem('language')) {
+      this.language = sessionStorage.getItem('language');
+      this.chosenLanguage.next(this.language);
     } else {
-      this.language = 'en'
+      this.language = 'en';
     }
   }
 
-  changeLanguage(choosenLanguage: string): void {
-    this.language = choosenLanguage;
-    this.choosenLanguage.next(this.language);
-    localStorage.setItem('language', choosenLanguage);
-  }
-
-  getLanguageInfoObs(): Observable<string> {
-    return this.choosenLanguage.asObservable();
+  changeLanguage(chosenLanguage: string): void {
+    this.language = chosenLanguage;
+    this.chosenLanguage.next(this.language);
+    sessionStorage.setItem('language', chosenLanguage);
   }
 
   getInfoLanguage(): string {
-    return this.language
+    return this.language;
   }
 }

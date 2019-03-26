@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import 'rxjs/Rx'; 
+import 'rxjs/Rx';
 
 export class FakeShowSeriesDetalService {
 

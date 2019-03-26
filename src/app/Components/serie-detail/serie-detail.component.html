@@ -18,7 +18,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <div *ngFor="let serie of similarSeries; let i = index" class="similarSeriesRow">
-                            <p class="similarSerieName" routerLink="/search/{{serie.id}}" (click)="reload()">{{i+1}}.
+                            <p class="similarSerieName" (click)="changeRouteBySeries(serie.id)">{{i+1}}.
                                 {{serie.name}}</p>
                             <p>{{serie.first_air_date}}</p>
                         </div>

@@ -14,28 +14,30 @@ import {
   MatExpansionModule,
   MatSlideToggleModule,
 } from '@angular/material';
-import { TableVievComponent } from './table-viev/table-viev.component';
-import { VievWrapperComponent } from './viev-wrapper/viev-wrapper.component';
+import { TableViewComponent } from './table-view/table-view.component';
+import { ViewWrapperComponent } from './view-wrapper/view-wrapper.component';
 import { CountdownDirective } from '../directives/countdown.directive';
 import { MovieTillComponent } from './movie-till/movie-till.component';
-import { TillVievComponent } from './till-viev/till-viev.component';
+import { TillViewComponent } from './till-view/till-view.component';
 import { SerieInformationsComponent } from './serie-informations/serie-informations.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SerieDetailComponent } from './serie-detail/serie-detail.component';
+import { PopularityToStringPipe } from '@pipes/populatiry-to-string.pipe';
 
 @NgModule({
   declarations: [
     PageNotFoundComponent,
     LastWeekTrendsComponent,
     FooterComponent,
-    TableVievComponent,
-    VievWrapperComponent,
+    TableViewComponent,
+    ViewWrapperComponent,
     CountdownDirective,
     MovieTillComponent,
-    TillVievComponent,
+    TillViewComponent,
     SerieInformationsComponent,
     SerieDetailComponent,
+    PopularityToStringPipe,
   ],
   imports: [
     CommonModule,
@@ -55,11 +57,11 @@ import { SerieDetailComponent } from './serie-detail/serie-detail.component';
     PageNotFoundComponent,
     LastWeekTrendsComponent,
     FooterComponent,
-    TableVievComponent,
-    VievWrapperComponent,
+    TableViewComponent,
+    ViewWrapperComponent,
     CountdownDirective,
     MovieTillComponent,
-    TillVievComponent,
+    TillViewComponent,
     SerieInformationsComponent,
     SerieDetailComponent
   ],

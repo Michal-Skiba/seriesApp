@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SeriesSearchComponent } from './series-search/series-search.component';
-import { SeriesService } from '../../Services/series.service'
+import { SeriesService } from '@services/series.service';
 import { routing } from './serie-search.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -16,9 +16,7 @@ import {
   MatExpansionModule,
 } from '@angular/material';
 
-import { TranslateGenrePipe } from '@pipes/translate-genre.pipe';
 import { StatusTranslatePipe } from '@pipes/status-translate.pipe';
-import { PopulatiryToStringPipe } from '@pipes/populatiry-to-string.pipe';
 import { PremiereComponent } from './premiere/premiere.component';
 import { ComponentsModule } from 'src/app/Components/components.module';
 
@@ -26,9 +24,7 @@ import { ComponentsModule } from 'src/app/Components/components.module';
 @NgModule({
   declarations: [
     SeriesSearchComponent,
-    TranslateGenrePipe,
     StatusTranslatePipe,
-    PopulatiryToStringPipe,
     PremiereComponent,
 
   ],

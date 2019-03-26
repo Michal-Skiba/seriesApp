@@ -13,7 +13,7 @@ import {
   MatProgressSpinnerModule,
 } from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorService } from './Services/interceptor';
+import { InterceptorService } from '@services/interceptor';
 import { ComponentsModule } from './Components/components.module';
 
 @NgModule({

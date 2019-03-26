@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { trigger, transition, useAnimation } from '@angular/animations';
-import { slideInLeft, slideInRight } from 'ng-animate';
-import { SearchedSerie } from '@models/searchedSerie.model';
+import {Component, OnInit} from '@angular/core';
+import {trigger, transition, useAnimation} from '@angular/animations';
+import {slideInLeft, slideInRight} from 'ng-animate';
+import {SearchedSerie} from '@models/searchedSerie.model';
 import * as moment from 'moment';
-import { SearchData } from '@models/searchData.model';
-import { environment } from '@environments/environment';
-import { SeriesService } from '@services/series.service'
+import {SearchData} from '@models/searchData.model';
+import {environment} from '@environments/environment';
+import {SeriesService} from '@services/series.service';
 
 @Component({
   selector: 'app-premiere',
@@ -23,66 +23,63 @@ import { SeriesService } from '@services/series.service'
   ],
 })
 export class PremiereComponent implements OnInit {
-
-  constructor(private seriesService: SeriesService) { }
-
-  ngOnInit() {
-    this.getPremieres()
-  }
-
-  isOpen: string = 'nothing';
+  isOpen = 'nothing';
   date: string = moment().format('YYYY-MM-DD');
   series: Array<SearchedSerie> = [];
-  loading: boolean = true;
+  loading = true;
   url: string = environment.posterUrl;
-  fullUrl: string;
   title: string;
 
-  dayLater(): void {
-    this.loading = true;
-    this.date = moment(this.date).add("days", 1).format('YYYY-MM-DD');
+  constructor(private seriesService: SeriesService) {
+  }
+
+  ngOnInit() {
     this.getPremieres();
+  }
+
+  public dayLater(): void {
+    this.getPremieres();
+    this.date = moment(this.date).add('days', 1).format('YYYY-MM-DD');
     this.isOpen = 'right';
     setTimeout(() => {
       this.isOpen = 'nothing';
     }, 900);
   }
 
-  dayBefore(): void {
-    this.loading = true;
-    this.date = moment(this.date).subtract("days", 1).format('YYYY-MM-DD');
+  public dayBefore(): void {
     this.getPremieres();
+    this.date = moment(this.date).subtract('days', 1).format('YYYY-MM-DD');
     this.isOpen = 'left';
     setTimeout(() => {
       this.isOpen = 'nothing';
     }, 900);
   }
 
-  getPremieres(): void {
+  private getPremieres(): void {
     this.series = [];
     this.loading = true;
     let numberOfPages: number;
     this.seriesService.getPremieres(this.date, 1).subscribe((data: SearchData) => {
-      numberOfPages = data.total_pages;
-      for (let i = 0; data.results.length - 1 >= i; i++) {
-        this.series.push(data.results[i])
-      }
-    }, () => null,
+        numberOfPages = data.total_pages;
+        for (let i = 0; data.results.length - 1 >= i; i++) {
+          this.series.push(data.results[i]);
+        }
+      }, () => null,
       () => {
         if (numberOfPages > 1) {
           for (let i = 2; numberOfPages <= 1; i++) {
             this.seriesService.getPremieres(this.date, i).subscribe((data: SearchData) => {
-              for (let i = 0; data.results.length - 1 >= i; i++) {
-                this.series.push(data.results[i])
+              for ( i = 0; data.results.length - 1 >= i; i++) {
+                this.series.push(data.results[i]);
               }
             }), () => null,
               () => {
-                this.loading = false
-              }
+                this.loading = false;
+              };
           }
         } else {
-          this.loading = false
+          this.loading = false;
         }
-      })
+      });
   }
 }

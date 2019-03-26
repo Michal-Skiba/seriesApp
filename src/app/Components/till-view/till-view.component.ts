@@ -2,20 +2,18 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { SearchedSerie } from '@models/searchedSerie.model';
 
 @Component({
-  selector: 'app-till-viev',
-  templateUrl: './till-viev.component.html',
-  styleUrls: ['./till-viev.component.scss']
+  selector: 'app-till-view',
+  templateUrl: './till-view.component.html',
+  styleUrls: ['./till-view.component.scss']
 })
-export class TillVievComponent {
-
-  constructor() { }
+export class TillViewComponent {
 
   @Input() dataSource: Array<SearchedSerie>;
   @Output() showDetails = new EventEmitter<boolean>();
 
-  showDetailsFlag($event: boolean) {
+  private showDetailsFlag($event: boolean) {
     if ($event === true) {
-      this.showDetails.emit(true)
+      this.showDetails.emit(true);
     }
   }
 }

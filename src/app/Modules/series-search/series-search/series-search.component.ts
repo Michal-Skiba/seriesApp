@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SeriesService } from '@services/series.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { ShowSeriesDetalService } from '@services/show-series-detail.service';
 import { environment } from '@environments/environment.ts';
 import { SearchedSerie } from '@models/searchedSerie.model';
@@ -22,11 +22,11 @@ export class SeriesSearchComponent implements OnInit {
   ) { }
 
   inputValue: string;
-  loadingSeries: boolean = false;
-  showPremiere: boolean = true;
-  showSearchedItems: boolean = true;
+  loadingSeries = false;
+  showPremiere = true;
+  showSearchedItems = true;
   searchForm: FormGroup;
-  searchSeriesTitle: string = '';
+  searchSeriesTitle = '';
   dataSourceTable: Array<SearchedSerie> = [];
   value: string;
   isSerieDetailThere: boolean;
@@ -36,11 +36,13 @@ export class SeriesSearchComponent implements OnInit {
   }
 
   get errorCondition() {
-    return !this.isSerieDetailThere && !this.showPremiere && !this.loadingSeries && this.dataSourceTable.length <= 0 && (this.searchSeriesTitle.length <= 3 || !this.searchSeriesTitle)
+    return !this.isSerieDetailThere && !this.showPremiere && !this.loadingSeries &&
+      this.dataSourceTable.length <= 0 && (this.searchSeriesTitle.length <= 3 || !this.searchSeriesTitle);
   }
 
-  get vievCondition() {
-    return !this.loadingSeries && this.dataSourceTable.length > 0 && this.dataSourceTable.length <= 39 && this.showSearchedItems && !this.showPremiere
+  get viewCondition() {
+    return !this.loadingSeries && this.dataSourceTable.length > 0 &&
+      this.dataSourceTable.length <= 39 && this.showSearchedItems && !this.showPremiere;
   }
 
   ngOnInit() {
@@ -51,13 +53,13 @@ export class SeriesSearchComponent implements OnInit {
           this.showPremiere = false;
         }
       }, 0);
-    })
+    });
     this.searchForm = new FormGroup({
       seriesTitle: new FormControl()
-    })
+    });
   }
 
-  inputListener(event: any): void {
+  public inputListener(event: any): void {
     this.inputValue = event.target.value;
     if (!event.target.value) {
       this.isSerieDetailThere = false;
@@ -66,7 +68,7 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-  changeRoute(data: string): void {
+  private changeRoute(data: string): void {
     this.router.navigate([data])
   }
 
@@ -76,44 +78,44 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-  searchSeries(searchData: SearchData): void {
+  private searchSeries(searchData: SearchData): void {
     if (this.searchSeriesTitle.length > 3) {
       for (let i = 1; i <= searchData.total_pages; i++) {
         this.seriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
-          this.dataSourceTable = [...this.dataSourceTable, ...dataSeries.results.filter(data => data.popularity > environment.popularity)]
+          this.dataSourceTable = [...this.dataSourceTable, ...dataSeries.results.filter(data => data.popularity > environment.popularity)];
         },
           () => null,
           () => {
             this.loadingSeries = false;
           }
-        )
+        );
       }
     } else {
       this.loadingSeries = false;
     }
   }
 
-  resetValues(): void {
+  private resetValues(): void {
     this.dataSourceTable = [];
     this.showPremiere = false;
     this.showSearchedItems = true;
   }
 
   onSubmit(): void {
-    if (this.router.url != '/search') {
+    if (this.router.url !== '/search') {
       this.router.routeReuseStrategy.shouldReuseRoute = () => {
         return true;
       };
-      this.router.navigate([`/search`])
+      this.router.navigate([`/search`]);
     }
     this.loadingSeries = true;
     this.resetValues();
     this.searchSeriesTitle = this.inputValue;
     this.seriesService.searchSeries(this.searchSeriesTitle, 1).subscribe(dataSeries => {
-      this.searchSeries(dataSeries)
+      this.searchSeries(dataSeries);
     },
       () => null,
-    )
+    );
     if (!this.searchSeriesTitle) {
       this.loadingSeries = false;
     }

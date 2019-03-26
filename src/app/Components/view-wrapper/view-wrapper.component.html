@@ -1,0 +1,13 @@
+<div class="slideToggle">
+  <mat-icon>apps</mat-icon>
+  <mat-slide-toggle color="primary" [(ngModel)]="tableView" id='slideToggle'></mat-slide-toggle>
+  <mat-icon>table_chart</mat-icon>
+</div>
+<div *ngIf='tableView'>
+  <app-table-view [dataSourceTable]=dataSourceTable>
+  </app-table-view>
+</div>
+<div *ngIf='!tableView'>
+  <app-till-view [dataSource]=dataSourceTable>
+  </app-till-view>
+</div>

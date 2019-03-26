@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router'
-import { ShowSeriesDetalService } from '@services/show-series-detail.service'
+import { ActivatedRoute, Params, Router} from '@angular/router';
+import { ShowSeriesDetalService } from '@services/show-series-detail.service';
 import { SeriesService } from '@services/series.service';
 import { SearchedSerie } from '@models/searchedSerie.model';
-import { environment } from '@environments/environment'
+import { environment } from '@environments/environment';
 import { Season } from '@models/season.model';
 import { Episode } from '@models/episode.model';
 import { Actors } from '@models/actors.model';
@@ -17,75 +17,93 @@ export class SerieDetailComponent implements OnInit, OnDestroy {
 
   title: string;
   id: number;
-  loading: boolean = true;
+  loading = true;
   similarSeries: Array<SearchedSerie> = [];
-  similarSeriesLoader: boolean = false;
-  similarSeriesPageNumber: number = 2;
+  similarSeriesLoader = false;
+  similarSeriesPageNumber = 2;
   similarSeriesLastPage: number;
   imageFullUrl: string;
   seasons: Array<Season>;
   seasonsEpisodes: Episode = {} as Episode;
   actors: Array<Actors>;
-  actorsError: boolean = false;
+  actorsError = false;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
-    private showSeriesDetalService: ShowSeriesDetalService,
-    private SeriesService: SeriesService
+    private showSeriesDetailService: ShowSeriesDetalService,
+    private seriesService: SeriesService
   ) { }
 
   ngOnInit() {
-    this.showSeriesDetalService.showUp();
+    this.showSeriesDetailService.showUp();
+    this.fetchRouteParam();
+    this.fetchSeriesDetail();
+    this.fetchSimilarSeries();
+    this.fetchCredits();
+  }
+
+  ngOnDestroy(): void {
+    this.showSeriesDetailService.showDown();
+  }
+
+  private fetchRouteParam(): void {
     this.route.paramMap.subscribe((param: Params) => {
-      this.id = param.get('id')
-    })
-    this.SeriesService.getSeriesDetail(this.id).subscribe(dataSerie => {
-      this.title = dataSerie.name;
-      this.imageFullUrl = environment.posterUrl + dataSerie.backdrop_path;
-      this.seasons = dataSerie.seasons;
-    }, () => null,
+      this.id = param.get('id');
+    });
+  }
+
+  private fetchSeriesDetail(): void {
+    this.seriesService.getSeriesDetail(this.id).subscribe(dataSerie => {
+        this.title = dataSerie.name;
+        this.imageFullUrl = environment.posterUrl + dataSerie.backdrop_path;
+        this.seasons = dataSerie.seasons;
+      }, () => null,
       () => {
         this.getEpisodesInfo();
         this.loading = false;
-      })
-    this.SeriesService.getSimilarSeries(this.id).subscribe(data => {
+      });
+  }
+
+  private fetchSimilarSeries(): void {
+    this.seriesService.getSimilarSeries(this.id).subscribe(data => {
       this.similarSeries = data.results;
       this.similarSeriesLastPage = data.total_pages;
-    })
-    this.SeriesService.getCredits(this.id).subscribe(dataCredits => {
+    });
+  }
+
+  private fetchCredits(): void {
+    this.seriesService.getCredits(this.id).subscribe(dataCredits => {
       this.actors = dataCredits.cast;
     }, () => {
       this.actorsError = true;
-    })
+    });
   }
 
-  getEpisodesInfo(): void {
+  private getEpisodesInfo(): void {
     for (let i = 0; i < this.seasons.length; i++) {
-      this.SeriesService.getSeasonEpisode(this.id, i).subscribe(seasonsInfo => {
+      this.seriesService.getSeasonEpisode(this.id, i).subscribe(seasonsInfo => {
         this.seasonsEpisodes[i] = seasonsInfo.episodes;
       }
-      )
+      );
     }
   }
 
-
-  loadMore(): void {
+  private loadMore(): void {
     this.similarSeriesLoader = true;
-    this.SeriesService.getSimilarSeries(this.id, this.similarSeriesPageNumber).subscribe(data => {
+    this.seriesService.getSimilarSeries(this.id, this.similarSeriesPageNumber).subscribe(data => {
       this.similarSeries.push(...data.results);
     }, () => null,
       () => {
         this.similarSeriesLoader = false;
-      })
+      });
     this.similarSeriesPageNumber += 1;
   }
 
-  reload(): void {
-    location.reload();
+  private changeRouteBySeries(id): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+    this.router.navigateByUrl(`/search/${id}`);
   }
-
-  ngOnDestroy(): void {
-    this.showSeriesDetalService.showDown();
-  }
-
 }

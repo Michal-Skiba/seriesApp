@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { SearchedSerie } from '@models/searchedSerie.model';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-table-viev',
-  templateUrl: './table-viev.component.html',
-  styleUrls: ['./table-viev.component.scss']
+  selector: 'app-table-view',
+  templateUrl: './table-view.component.html',
+  styleUrls: ['./table-view.component.scss']
 })
-export class TableVievComponent {
+export class TableViewComponent {
   constructor(private router: Router) { }
 
   @Input() dataSourceTable: Array<SearchedSerie>;

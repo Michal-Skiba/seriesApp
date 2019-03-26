@@ -10,4 +10,4 @@ export class NextEpisode {
     still_path: string;
     vote_average: number;
     vote_count: number;
-  }
+}

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchedSerie } from '@models/searchedSerie.model';
-import { SeriesService } from '@services/series.service';
+import {Component, OnInit} from '@angular/core';
+import {SearchedSerie} from '@models/searchedSerie.model';
+import {SeriesService} from '@services/series.service';
 
 @Component({
   selector: 'app-last-trends',
@@ -9,17 +9,27 @@ import { SeriesService } from '@services/series.service';
 })
 export class LastTrendsComponent implements OnInit {
 
-  constructor(private seriesService: SeriesService) { }
+  constructor(private seriesService: SeriesService) {}
 
   dataSourceTable: Array<SearchedSerie>;
-  loading: boolean = true;
+  loading = true;
 
   ngOnInit() {
+    const dataSource = sessionStorage.getItem(String('lastTrends'));
+    if (!dataSource) {
+      this.loadData();
+    } else {
+      this.dataSourceTable = JSON.parse(dataSource);
+      this.loading = false;
+    }
+  }
+  loadData(): void {
     this.seriesService.getLastTrends(1).subscribe((data) => {
-      this.dataSourceTable = data.results;
-    }, () => null,
+        sessionStorage.setItem('lastTrends', JSON.stringify(data.results));
+        this.dataSourceTable = data.results;
+      }, () => null,
       () => {
         this.loading = false;
-      })
+      });
   }
 }

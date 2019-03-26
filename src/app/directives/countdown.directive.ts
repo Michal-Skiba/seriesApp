@@ -16,25 +16,24 @@ export class CountdownDirective implements OnInit, OnDestroy {
 
   getTime() {
     let time: string;
-    const countDownDate = new Date(this.serieTime.air_date + " " + " 10:00:00").getTime();
+    const countDownDate = new Date(this.serieTime.air_date + ' ' + ' 10:00:00').getTime();
     const now = new Date().getTime();
     const distance = countDownDate - now;
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    time = days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s "
-    this.renderer.setProperty(this.el.nativeElement, 'innerHTML', ` ${time}`)
+    time = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+    this.renderer.setProperty(this.el.nativeElement, 'innerHTML', ` ${time}`);
   }
 
   ngOnInit() {
     this.getTime();
-    this.subscription = this.timer.subscribe(() => this.getTime())
+    this.subscription = this.timer.subscribe(() => this.getTime());
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
   }
 
 }

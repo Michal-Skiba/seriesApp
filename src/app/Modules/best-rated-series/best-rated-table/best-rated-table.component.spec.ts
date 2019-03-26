@@ -20,8 +20,8 @@ describe('BestRatedTableComponent', () => {
       ],
       schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
-        { provide: MatDialog, useValue: {} }, 
-      ] 
+        { provide: MatDialog, useValue: {} },
+      ],
     })
     .compileComponents();
   }));

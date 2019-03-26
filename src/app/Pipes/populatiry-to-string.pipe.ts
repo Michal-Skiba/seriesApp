@@ -1,18 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'populatiryToString'
+  name: 'PopularityToString'
 })
-export class PopulatiryToStringPipe implements PipeTransform {
+export class PopularityToStringPipe implements PipeTransform {
   transform(value: number): string {
     if (value > 200) {
-      return 'bardzo popularne'
+      return 'bardzo popularne';
     } else if (value > 100) {
-      return 'popularne'
+      return 'popularne';
     } else if (value > 50) {
-      return 'średnio popularne'
+      return 'średnio popularne';
     } else {
-      return 'nie popularne'
+      return 'nie popularne';
     }
   }
 }

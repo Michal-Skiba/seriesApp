@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { SeriesService } from '@services/series.service'
+import { SeriesService } from '@services/series.service';
 import { environment } from '@environments/environment';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-last-week-trends',
@@ -15,11 +15,11 @@ export class LastWeekTrendsComponent {
   lastWeekTrends$ = this.getSeriesService.getLastWeekTrends();
   posterUrl = environment.posterUrl;
 
-  showInfo(id: number) {
+  private showInfo(id: number) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-    this.router.navigate([`/search/${id}`])
+    this.router.navigate([`/search/${id}`]);
   }
 
 }

@@ -16,7 +16,7 @@ describe('SeriesService', () => {
       providers: [
         SeriesService,
       ]
-    })
+    });
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     service = TestBed.get(SeriesService);
@@ -40,7 +40,7 @@ describe('SeriesService', () => {
       expect(error.status).not.toEqual(404);
       done();
     });
-  })
+  });
 
   it('getSeriesDetail', (done) => {
     service.getSeriesDetail(12609).subscribe((data) => {
@@ -51,7 +51,7 @@ describe('SeriesService', () => {
       expect(error.status).not.toEqual(404);
       done();
     });
-  })
+  });
 
   it('searchSeries', (done) => {
     service.searchSeries('dragon', 1).subscribe((data) => {
@@ -62,7 +62,7 @@ describe('SeriesService', () => {
       expect(error.status).not.toEqual(404);
       done();
     });
-  })
+  });
 
   it('getCredits', (done) => {
     service.getCredits(12609).subscribe((data) => {
@@ -72,8 +72,8 @@ describe('SeriesService', () => {
       expect(error.status).not.toEqual(429);
       expect(error.status).not.toEqual(404);
       done();
-    })
-  })
+    });
+  });
 
   it('getSeasonEpisode', (done) => {
     service.getSeasonEpisode(12609, 1).subscribe((data) => {
@@ -83,19 +83,19 @@ describe('SeriesService', () => {
       expect(error.status).not.toEqual(429);
       expect(error.status).not.toEqual(404);
       done();
-    })
-  })
+    });
+  });
 
   it('getSimilarSeries', (done) => {
     service.getSimilarSeries(12609, 1).subscribe((data) => {
-      expect(data).toBeTruthy()
+      expect(data).toBeTruthy();
       done();
     }, (error) => {
       expect(error.status).not.toEqual(429);
       expect(error.status).not.toEqual(404);
       done();
-    })
-  })
+    });
+  });
 
   it('getLastTrends', (done) => {
     service.getLastTrends(1).subscribe((data) => {
@@ -105,8 +105,8 @@ describe('SeriesService', () => {
       expect(error.status).not.toEqual(429);
       expect(error.status).not.toEqual(404);
       done();
-    })
-  })
+    });
+  });
 
   it('getPremieres', (done) => {
     service.getPremieres('2019-03-20' ,1).subscribe((data) => {
@@ -116,8 +116,8 @@ describe('SeriesService', () => {
       expect(error.status).not.toEqual(429);
       expect(error.status).not.toEqual(404);
       done();
-    })
-  })
+    });
+  });
 
   it('getTopratedSeries', (done) => {
     service.getTopratedSeries(1).subscribe((data) => {
@@ -127,6 +127,6 @@ describe('SeriesService', () => {
       expect(error.status).not.toEqual(429);
       expect(error.status).not.toEqual(404);
       done();
-    })
-  })
+    });
+  });
 });

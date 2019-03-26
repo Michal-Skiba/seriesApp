@@ -1,13 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TillVievComponent } from './till-viev.component';
+import { TillViewComponent } from './till-view.component';
 import { MovieTillComponent } from '../movie-till/movie-till.component';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-describe('TillVievComponent', () => {
-  let component: TillVievComponent;
-  let fixture: ComponentFixture<TillVievComponent>;
+describe('TillViewComponent', () => {
+  let component: TillViewComponent;
+  let fixture: ComponentFixture<TillViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,14 +15,14 @@ describe('TillVievComponent', () => {
         RouterModule.forRoot([]),
         MatCardModule,
       ],
-      declarations: [TillVievComponent, MovieTillComponent],
+      declarations: [TillViewComponent, MovieTillComponent],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TillVievComponent);
+    fixture = TestBed.createComponent(TillViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

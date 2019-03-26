@@ -1,7 +1,7 @@
 <ng-container *ngIf="lastWeekTrends$ | async as dataSeries; else loading">
   <p class="title">Trendy ostatniego tygodnia</p>
   <div class="lastWeekTrendsWrapper">
-    <div *ngFor="let serie of dataSeries.results | slice:0:10 ; let i = index" class="seriesRow"
+    <div *ngFor="let serie of dataSeries.results | slice:0:10" class="seriesRow"
       (click)="showInfo(serie.id)">
       <img src="{{ posterUrl + serie.poster_path}}" alt="poster">
       <p class="name">{{serie.name}}</p>

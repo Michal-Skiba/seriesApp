@@ -1,8 +1,8 @@
-import { PopulatiryToStringPipe } from './populatiry-to-string.pipe';
+import { PopularityToStringPipe } from './populatiry-to-string.pipe';
 
-describe('PopulatiryToStringPipe', () => {
+describe('PopularityToStringPipe', () => {
   it('create an instance', () => {
-    const pipe = new PopulatiryToStringPipe();
+    const pipe = new PopularityToStringPipe();
     expect(pipe).toBeTruthy();
   });
 });

@@ -1,7 +1,7 @@
-import { Directive, ViewContainerRef, Input } from '@angular/core';
+import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[addTab]'
+  selector: '[appAddTab]',
 })
 export class AddTabDirective {
   constructor(public viewContainerRef: ViewContainerRef) { }

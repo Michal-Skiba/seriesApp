@@ -10,12 +10,12 @@ describe('RequestLimiter', () => {
     beforeEach(() => {
         component = new RequestLimiter(10600, 39);
         service = new FakeSeriesService;
-    })
+    });
 
     beforeEach(async () => {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 70000;
-    })
+    });
 
     afterEach(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
@@ -25,13 +25,13 @@ describe('RequestLimiter', () => {
         expect(component).toBeTruthy();
     });
 
-    it('RequestLimiter shoul have limit method', () => {
+    it('RequestLimiter should have limit method', () => {
         expect(component.limit(service.searchSeries(), 'test')).toBeTruthy();
     });
 
-    it('should return a valu from service, request counter should be bigger one time when limit' +
-        'method whas call, should be add to timestampCollection currentUrl shoul be that like ' +
-        'parameter on fuction, counter should be one bigger after call function', () => {
+    it('should return a value from service, request counter should be bigger one time when limit' +
+        'method what call, should be add to timestampCollection currentUrl should be that like ' +
+        'parameter on function, counter should be one bigger after call function', () => {
             expect(component.requestCounter).toBe(1);
             component.limit(service.searchSeries(), 'test').subscribe((data) => {
                 expect(data.results).toBeTruthy();
@@ -50,12 +50,12 @@ describe('RequestLimiter', () => {
         for (let i = 0; i < 120; i++) {
             const o = Observable.of(null);
             component.limit(o, '').subscribe(e => {
-                ts.push(e)
+                ts.push(e);
                 if (i === 119) {
                     expect(ts.length).toBe(120);
                     done();
                 }
-            })   
+            });
         }
-    })
+    });
 });

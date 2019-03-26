@@ -6,7 +6,7 @@ import { Subject, Observable } from 'rxjs';
 })
 export class ShowSeriesDetalService {
 
-  private showSeriesDetail: boolean = false;
+  private showSeriesDetail = false;
   private show = new Subject<boolean>();
 
   constructor() { }

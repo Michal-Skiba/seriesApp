@@ -1,7 +1,6 @@
-import { Component, Input, DoCheck, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SearchedSerie } from '@models/searchedSerie.model';
 import { SeriesService } from '@services/series.service';
-import { TabComponent } from '@models/tabComponent.model';
 
 @Component({
   selector: 'app-best-rated-table',
@@ -11,42 +10,28 @@ import { TabComponent } from '@models/tabComponent.model';
 export class BestRatedTableComponent implements OnInit {
 
   @Input() tab: number;
-  // @Input() actualTab: number;
-  // @Input() pageNumber: number;
-  dataSourceTable: Array<SearchedSerie>
-  loading: boolean = true;
-  // contentLoad = false;
+  dataSourceTable: Array<SearchedSerie> = [];
+  loading = true;
 
   constructor(private seriesService: SeriesService) { }
 
   ngOnInit() {
-    const dataSource = localStorage.getItem(String(this.tab))
-    if(dataSource) {
+    const dataSource = sessionStorage.getItem(String(this.tab));
+    if (dataSource) {
       this.dataSourceTable = JSON.parse(dataSource);
       this.loading = false;
     } else {
-      this.seriesService.getTopratedSeries(this.tab).subscribe(dataSeries => {
-        this.dataSourceTable = dataSeries.results;
-        localStorage.setItem(String(this.tab), JSON.stringify(this.dataSourceTable))
-      }, () => null,
-        () => {
-          this.loading = false;
-        })
+      this.fetchTopRatedSeries();
     }
-    
   }
 
-  // ngDoCheck() {
-  //   if ((!this.contentLoad && this.tab === this.actualTab) ||   (this.tab === 1 && !this.contentLoad)) {
-  //     console.log(`loading ${this.tab}`);
-  //     this.seriesService.getTopratedSeries(this.tab).subscribe(dataSeries => {
-  //       this.dataSourceTable = dataSeries.results;
-  //     }, () => null,
-  //       () => {
-  //         this.loading = false;
-  //       })
-  //     this.contentLoad = true;
-  //   }
-  // }
-
+  private fetchTopRatedSeries(): void {
+    this.seriesService.getTopratedSeries(this.tab).subscribe(dataSeries => {
+        this.dataSourceTable = dataSeries.results;
+        sessionStorage.setItem(String(this.tab), JSON.stringify(this.dataSourceTable));
+      }, () => null,
+      () => {
+        this.loading = false;
+      });
+  }
 }

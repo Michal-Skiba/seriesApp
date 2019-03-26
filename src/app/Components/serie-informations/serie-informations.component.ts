@@ -17,7 +17,7 @@ export class SerieInformationsComponent implements OnInit {
   filmwebLink: string = environment.filmwebLink;
   imdbLink: string = environment.imdbLink;
   similarSeries$: Observable<SearchData>;
-  serieInformations$: Observable<SerieDetail>
+  serieInformations$: Observable<SerieDetail>;
 
   constructor(private seriesService: SeriesService) { }
 

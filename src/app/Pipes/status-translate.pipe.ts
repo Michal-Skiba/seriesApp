@@ -7,11 +7,11 @@ export class StatusTranslatePipe implements PipeTransform {
   transform(value: string): string {
     switch (value) {
       case 'Returning Series':
-        return 'Powracający serial'
+        return 'Powracający serial';
       case 'Ended':
-        return 'Zakończona'
+        return 'Zakończona';
       default:
-        return 'brak danych'
+        return 'brak danych';
     }
   }
 }

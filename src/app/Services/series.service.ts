@@ -60,7 +60,7 @@ export class SeriesService {
 
   getLastWeekTrends(): Observable<SearchData> {
     return this.limiter.limit(this.http.get<SearchData>(`${environment.apiUrl}trending/tv/week?api_key=${environment.apiKey}`
-    ), this.router.url)
+    ), this.router.url);
   }
 
   getLastTrends(page: number): Observable<SearchData> {

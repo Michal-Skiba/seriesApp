@@ -25,9 +25,9 @@
     <mat-icon>warning</mat-icon>Brak znalezionych filmów
   </mat-card>
 </div>
-<div *ngIf="vievCondition" id='displayViev'>
-  <app-viev-wrapper [dataSourceTable]='dataSourceTable'>
-  </app-viev-wrapper>
+<div *ngIf="viewCondition" id='displayViev'>
+  <app-view-wrapper [dataSourceTable]='dataSourceTable'>
+  </app-view-wrapper>
 </div>
 <div *ngIf='showPremiere'>
   <app-premiere>

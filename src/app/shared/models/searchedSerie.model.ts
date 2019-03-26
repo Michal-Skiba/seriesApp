@@ -4,7 +4,7 @@ export class SearchedSerie {
     genre_ids: Array<number>;
     id: number;
     name: string;
-    origin_country: Array<string>
+    origin_country: Array<string>;
     original_language: string;
     original_name: string;
     overview: string;

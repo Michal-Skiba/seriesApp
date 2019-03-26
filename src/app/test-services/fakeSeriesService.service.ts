@@ -1,6 +1,6 @@
 import { SearchData } from '@models/searchData.model';
 import { Observable } from 'rxjs';
-import 'rxjs/Rx';
+
 
 export const fakeSearchSeriesData = {
     page: 1,
@@ -11,7 +11,7 @@ export const fakeSearchSeriesData = {
             genre_ids: [1, 2, 3],
             id: 100,
             name: 'test1',
-            origin_country: ["JP"],
+            origin_country: ['JP'],
             original_language: 'JP',
             original_name: 'testowyJanusz1',
             overview: 'opis',
@@ -26,7 +26,7 @@ export const fakeSearchSeriesData = {
             genre_ids: [1, 2, 3],
             id: 102,
             name: 'test2',
-            origin_country: ["JP"],
+            origin_country: ['JP'],
             original_language: 'JP',
             original_name: 'testowyJanusz2',
             overview: 'opis',
@@ -41,7 +41,7 @@ export const fakeSearchSeriesData = {
             genre_ids: [1, 2, 3],
             id: 103,
             name: 'test3',
-            origin_country: ["JP"],
+            origin_country: ['JP'],
             original_language: 'JP',
             original_name: 'testowyJanusz3',
             overview: 'opis',
@@ -56,7 +56,7 @@ export const fakeSearchSeriesData = {
             genre_ids: [1, 2, 3],
             id: 104,
             name: 'test4',
-            origin_country: ["JP"],
+            origin_country: ['JP'],
             original_language: 'JP',
             original_name: 'testowyJanusz4',
             overview: 'opis',
@@ -71,7 +71,7 @@ export const fakeSearchSeriesData = {
             genre_ids: [1, 2, 3],
             id: 105,
             name: 'test5',
-            origin_country: ["JP"],
+            origin_country: ['JP'],
             original_language: 'JP',
             original_name: 'testowyJanusz5',
             overview: 'opis',
@@ -87,7 +87,7 @@ export const fakeSearchSeriesData = {
 
 export class FakeSeriesService {
     static searchSeries(): Observable<any> {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
 
     constructor() { }

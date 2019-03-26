@@ -38,6 +38,7 @@ import { AddTabDirective } from '../../directives/add-tab.directive';
   ],
   exports: [
     BestRatedSeriesComponent,
+    BestRatedTableComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
