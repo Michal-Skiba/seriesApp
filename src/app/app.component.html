@@ -34,9 +34,9 @@
       </div>
     </mat-toolbar>
     <div class="langaugeSwitch">
-      <img [src]='"../assets/pl.png"' alt="pl" [className]="(getLanguage()=== 'pl') && 'flagBorder'"
+      <img [src]='"assets/pl.png"' alt="pl" [className]="(getLanguage()=== 'pl') && 'flagBorder'"
         (click)='changeLanguage("pl")'>
-      <img [src]='"../assets/en.png"' alt="en" [className]="(getLanguage() === 'en') && 'flagBorder'"
+      <img [src]='"assets/en.png"' alt="en" [className]="(getLanguage() === 'en') && 'flagBorder'"
         (click)='changeLanguage("en")'>
     </div>
     <router-outlet></router-outlet>
