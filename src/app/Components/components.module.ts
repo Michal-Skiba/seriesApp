@@ -63,7 +63,7 @@ import { PopularityToStringPipe } from '@pipes/populatiry-to-string.pipe';
     MovieTillComponent,
     TillViewComponent,
     SerieInformationsComponent,
-    SerieDetailComponent
+    SerieDetailComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })

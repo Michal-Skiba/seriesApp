@@ -68,7 +68,7 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-  private changeRoute(data: string): void {
+  changeRoute(data: string): void {
     this.router.navigate([data])
   }
 
@@ -78,7 +78,7 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-  private searchSeries(searchData: SearchData): void {
+  searchSeries(searchData: SearchData): void {
     if (this.searchSeriesTitle.length > 3) {
       for (let i = 1; i <= searchData.total_pages; i++) {
         this.seriesService.searchSeries(this.searchSeriesTitle, i).subscribe(dataSeries => {
@@ -95,7 +95,7 @@ export class SeriesSearchComponent implements OnInit {
     }
   }
 
-  private resetValues(): void {
+  resetValues(): void {
     this.dataSourceTable = [];
     this.showPremiere = false;
     this.showSearchedItems = true;

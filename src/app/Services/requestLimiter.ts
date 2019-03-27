@@ -2,11 +2,11 @@ import { Observable, of } from 'rxjs';
 import { delay, switchMapTo, concatMap } from 'rxjs/operators';
 
 export class RequestLimiter {
-  private timestampCollection: { [t: number]: number; } = {};
-  private additionalTimeAfterRefresh = 0;
-  private currentUrl = '';
-  private requestCounter = 1;
-  private timeDifference = 0;
+  timestampCollection: { [t: number]: number; } = {};
+  additionalTimeAfterRefresh = 0;
+  currentUrl = '';
+  requestCounter = 1;
+  timeDifference = 0;
 
   constructor(private windowTime: number, private maxRequests: number) {}
 
@@ -34,7 +34,7 @@ export class RequestLimiter {
     }));
   }
 
-  private waitSecondsCalculate(): number {
+  waitSecondsCalculate(): number {
     if (this.requestCounter > this.maxRequests && this.requestCounter < this.maxRequests * 2 && this.timeDifference > 0) {
       return this.timeDifference + this.additionalTimeAfterRefresh;
     } else if (this.requestCounter >= this.maxRequests * 2 && this.timeDifference > 0) {
@@ -45,7 +45,7 @@ export class RequestLimiter {
     }
   }
 
-  private resetValues(url) {
+  resetValues(url) {
     if (url !== this.currentUrl) {
       this.timestampCollection = {};
       this.requestCounter = 1;
@@ -53,7 +53,7 @@ export class RequestLimiter {
     }
   }
 
-  private timesDifferenceCalculate(currentTime) {
+  timesDifferenceCalculate(currentTime) {
     this.timeDifference = (this.windowTime - (currentTime -
       +this.timestampCollection[this.requestCounter - this.maxRequests + 1]) * 1000);
   }

@@ -5,6 +5,8 @@ import { MatExpansionModule } from '@angular/material';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { PopularityToStringPipe } from '@pipes/populatiry-to-string.pipe';
+
 
 describe('SerieDetailComponent', () => {
   let component: SerieDetailComponent;
@@ -12,13 +14,17 @@ describe('SerieDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SerieDetailComponent, SerieInformationsComponent],
+      declarations: [
+        SerieDetailComponent,
+        SerieInformationsComponent,
+        PopularityToStringPipe,
+      ],
       imports: [
         HttpClientModule,
         MatExpansionModule,
         RouterModule.forRoot([]),
       ],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();
   }));
