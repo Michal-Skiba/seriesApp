@@ -18,7 +18,7 @@ export class TableViewComponent {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-    this.router.navigate([`./search/${id}`])
+    this.router.navigate([`./search/${id}`]);
   }
 }
 

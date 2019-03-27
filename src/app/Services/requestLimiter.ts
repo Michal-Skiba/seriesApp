@@ -1,5 +1,5 @@
-import {Observable, of} from 'rxjs';
-import {delay, switchMapTo, concatMap} from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { delay, switchMapTo, concatMap } from 'rxjs/operators';
 
 export class RequestLimiter {
   private timestampCollection: { [t: number]: number; } = {};
@@ -21,7 +21,8 @@ export class RequestLimiter {
       if (this.requestCounter > 10) {
         localStorage.setItem('timeOfLastReq', JSON.stringify(currentTime));
       }
-      if (lastRequestDelay > 0 && this.requestCounter === 1) {
+      if (lastRequestDelay > 0 && this.requestCounter < 2) {
+        this.additionalTimeAfterRefresh = lastRequestDelay;
       }
       this.timesDifferenceCalculate(currentTime);
       this.resetValues(url);
@@ -43,6 +44,7 @@ export class RequestLimiter {
       return this.additionalTimeAfterRefresh;
     }
   }
+
   private resetValues(url) {
     if (url !== this.currentUrl) {
       this.timestampCollection = {};
@@ -50,6 +52,7 @@ export class RequestLimiter {
       this.currentUrl = url;
     }
   }
+
   private timesDifferenceCalculate(currentTime) {
     this.timeDifference = (this.windowTime - (currentTime -
       +this.timestampCollection[this.requestCounter - this.maxRequests + 1]) * 1000);
