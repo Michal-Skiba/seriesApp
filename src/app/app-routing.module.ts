@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -11,15 +11,15 @@ const routes: Routes = [
   },
   {
     path: 'search',
-    loadChildren: './Modules/series-search/series-search.module#SeriesSearchModule',
+    loadChildren: './series-search/series-search.module#SeriesSearchModule',
   },
   {
     path: 'trends',
-    loadChildren: './Modules/last-trends/last-trends.module#LastTrendsModule'
+    loadChildren: './last-trends/last-trends.module#LastTrendsModule'
   },
   {
     path: 'best-rated',
-    loadChildren: './Modules/best-rated-series/best-rated-series.module#BestRatedSeriesModule'
+    loadChildren: './best-rated-series/best-rated-series.module#BestRatedSeriesModule'
   },
   {
     path: '**',

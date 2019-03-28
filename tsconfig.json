@@ -4,8 +4,7 @@
     "baseUrl": "./",
     "paths": {
       "@models/*":["src/app/shared/models/*"],
-      "@pipes/*":["src/app/Pipes/*"],
-      "@services/*":["src/app/Services/*"],
+      "@services/*":["src/app/shared/services/*"],
       "@environments/*":["src/environments/*"]
     },
     "outDir": "./dist/out-tsc",

@@ -1,6 +1,10 @@
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
+
+  static getTextTrendsBtn() {
+    return element(by.css('.menu [routerLink="/trends"] span')).getText();
+  }
   navigateToFullWidth() {
     const width = 1580;
     const height = 800;
@@ -20,10 +24,6 @@ export class AppPage {
 
   getTextBestRatedBtn() {
     return element(by.css('.menu [routerLink="/best-rated"] span')).getText();
-  }
-
-  getTextTrendsBtn() {
-    return element(by.css('.menu [routerLink="/trends"] span')).getText();
   }
 
   getMobileMenuBtn() {

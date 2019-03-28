@@ -37,7 +37,7 @@ export class SerieDetail {
       }
   }
 
-  export class CreatedBy {
+export class CreatedBy {
     credit_id: string;
     gender: number;
     id: number;
