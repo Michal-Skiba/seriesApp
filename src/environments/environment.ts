@@ -11,6 +11,8 @@ export const environment = {
   filmwebLink: 'https://www.filmweb.pl/search?q=',
   imdbLink: 'https://www.imdb.com/find?ref_=nv_sr_fn&q=',
   requestLimitTime: 10,
+  requestsTimeLimit: 10600,
+  requestsLimit: 39,
 };
 
 /*

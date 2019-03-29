@@ -1,16 +1,21 @@
 import { Observable, of } from 'rxjs';
 import { delay, switchMapTo, concatMap } from 'rxjs/operators';
+import { environment} from '@environments/environment';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class RequestLimiter {
   timestampCollection: { [t: number]: number; } = {};
   additionalTimeAfterRefresh = 0;
   currentUrl = '';
   requestCounter = 1;
   timeDifference = 0;
+  windowTime = environment.requestLimitTime;
+  maxRequests = environment.requestsLimit;
 
-  constructor(private windowTime: number, private maxRequests: number) {}
-
-  public limit(stream: Observable<any>, url: string) {
+  limit(stream: Observable<any>, url: string) {
     return of(null).pipe(concatMap(() => {
       const currentTime = new Date().getTime() / 1000;
       const lastReqTime = localStorage.getItem('timeOfLastReq');
@@ -57,4 +62,5 @@ export class RequestLimiter {
     this.timeDifference = (this.windowTime - (currentTime -
       +this.timestampCollection[this.requestCounter - this.maxRequests + 1]) * 1000);
   }
+
 }

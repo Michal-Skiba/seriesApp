@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SeriesService } from '../../shared/services/series.service';
+import { SeriesService } from '@services/series.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ShowSeriesDetailService } from '../shared/show-series-detail.service';

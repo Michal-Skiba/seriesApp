@@ -8,7 +8,7 @@ describe('RequestLimiter', () => {
     let originalTimeout;
 
     beforeEach(() => {
-        component = new RequestLimiter(10600, 39);
+        component = new RequestLimiter;
         service = new FakeSeriesService;
     });
 

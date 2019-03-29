@@ -1,132 +1,116 @@
-import { TestBed } from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
 import { SeriesService } from './series.service';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { RequestLimiter } from '@services/requestLimiter';
 
 describe('SeriesService', () => {
+  let injector: TestBed;
   let service: SeriesService;
-  let originalTimeout;
+  let httpMock: HttpTestingController;
+  let requestLimiter: RequestLimiter;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientModule,
-        RouterModule.forRoot([]),
-      ],
-      providers: [
-        SeriesService,
-      ]
-    });
-    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-    service = TestBed.get(SeriesService);
-  }
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+        ],
+        providers: [
+          SeriesService,
+          { provide: RequestLimiter, useValue: { limit: (x) => x }},
+        ],
+      });
+      injector = getTestBed();
+      service = TestBed.get(SeriesService);
+      httpMock = injector.get(HttpTestingController);
+      requestLimiter = injector.get(RequestLimiter);
+    }
   );
 
   afterEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+    httpMock.verify();
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getLastWeekTrends', (done) => {
-    service.getLastWeekTrends().subscribe((data) => {
-      expect(data.results).toBeTruthy();
-      done();
-    }, (error) => {
-      expect(error.status).not.toEqual(429);
-      expect(error.status).not.toEqual(404);
-      done();
-    });
+  // it('class spy example', () => {
+  // w before eachu //limiter = TestBed.get(RequestLimiter);
+  //
+  //   const data = [1, 2, 3];
+  //   spyOn(limiter, 'limit').and.callThrough();  // pójdzie do metody z mocka
+  //   spyOn(limiter, 'limit').and.callFake(y => y);  // podmienia metodę z mocka na tą tutaj (y => y)
+  //   spyOn(limiter, 'limit').and.returnValue(data);  // nie odpala metody, od razu zwraca to co w nawiasie
+  //
+  //   expect(limiter.limit).toHaveBeenCalled();
+  // });
+
+  it('if getLastWeekTrends have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.getLastWeekTrends();
+
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.getLastWeekTrends(), '/');
   });
 
-  it('getSeriesDetail', (done) => {
-    service.getSeriesDetail(12609).subscribe((data) => {
-      expect(data).toBeTruthy();
-      done();
-    }, (error) => {
-      expect(error.status).not.toEqual(429);
-      expect(error.status).not.toEqual(404);
-      done();
-    });
+  it('if getSeriesDetail have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.getSeriesDetail(1000);
+
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.getSeriesDetail(1000), '/');
   });
 
-  it('searchSeries', (done) => {
-    service.searchSeries('dragon', 1).subscribe((data) => {
-      expect(data).toBeTruthy();
-      done();
-    }, (error) => {
-      expect(error.status).not.toEqual(429);
-      expect(error.status).not.toEqual(404);
-      done();
-    });
+  it('if searchSeries have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.searchSeries('test', 1000);
+
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.searchSeries('test', 1000), '/');
   });
 
-  it('getCredits', (done) => {
-    service.getCredits(12609).subscribe((data) => {
-      expect(data).toBeTruthy()
-      done();
-    }, (error) => {
-      expect(error.status).not.toEqual(429);
-      expect(error.status).not.toEqual(404);
-      done();
-    });
+  it('if getCredits have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.getCredits(1000);
+
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.getCredits(1000), '/');
   });
 
-  it('getSeasonEpisode', (done) => {
-    service.getSeasonEpisode(12609, 1).subscribe((data) => {
-      expect(data).toBeTruthy()
-      done();
-    }, (error) => {
-      expect(error.status).not.toEqual(429);
-      expect(error.status).not.toEqual(404);
-      done();
-    });
+  it('if getSeasonEpisode have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.getSeasonEpisode(1000, 1000);
+
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.getSeasonEpisode(1000, 1000), '/');
   });
 
-  it('getSimilarSeries', (done) => {
-    service.getSimilarSeries(12609, 1).subscribe((data) => {
-      expect(data).toBeTruthy();
-      done();
-    }, (error) => {
-      expect(error.status).not.toEqual(429);
-      expect(error.status).not.toEqual(404);
-      done();
-    });
+  it('if getSimilarSeries have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.getSimilarSeries(1000, 1);
+
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.getSimilarSeries(1000, 1), '/');
   });
 
-  it('getLastTrends', (done) => {
-    service.getLastTrends(1).subscribe((data) => {
-      expect(data).toBeTruthy()
-      done();
-    }, (error) => {
-      expect(error.status).not.toEqual(429);
-      expect(error.status).not.toEqual(404);
-      done();
-    });
+  it('if searchSeries have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.searchSeries('test', 1000);
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.searchSeries('test', 1000), '/');
   });
 
-  it('getPremieres', (done) => {
-    service.getPremieres('2019-03-20' ,1).subscribe((data) => {
-      expect(data).toBeTruthy()
-      done();
-    }, (error) => {
-      expect(error.status).not.toEqual(429);
-      expect(error.status).not.toEqual(404);
-      done();
-    });
+  it('if getLastTrends have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.getLastTrends(1000);
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.getLastTrends(1000), '/');
   });
 
-  it('getTopratedSeries', (done) => {
-    service.getTopratedSeries(1).subscribe((data) => {
-      expect(data).toBeTruthy()
-      done();
-    }, (error) => {
-      expect(error.status).not.toEqual(429);
-      expect(error.status).not.toEqual(404);
-      done();
-    });
+  it('if getPremieres have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.getPremieres('test', 1);
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.getPremieres('test', 1), '/');
+  });
+
+  it('if getTopratedSeries have been called, requestLimiter should be called with correct data', () => {
+    spyOn(requestLimiter, 'limit').and.callThrough();
+    service.getTopratedSeries(1000);
+    expect(requestLimiter.limit).toHaveBeenCalledWith(service.getTopratedSeries(1000), '/');
   });
 });
+

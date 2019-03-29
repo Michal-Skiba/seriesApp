@@ -24,6 +24,3 @@ export class ShowSeriesDetailService {
   }
 
 }
-
-export class ShowSeriesDetalService {
-}

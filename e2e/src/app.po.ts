@@ -83,7 +83,7 @@ export class AppPage {
 
   addTextToSearchinput(text: string) {
     element(by.css('.formWrapper input')).clear();
-    element(by.css('.formWrapper input')).sendKeys(text)
+    element(by.css('.formWrapper input')).sendKeys(text);
   }
 
   getSubmitBtn() {

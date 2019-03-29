@@ -91,7 +91,6 @@ export class FakeSeriesService {
     }
 
     constructor() { }
-
     searchSeries(): Observable<SearchData> {
         return Observable.of(fakeSearchSeriesData);
     }
