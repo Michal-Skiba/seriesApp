@@ -27,11 +27,9 @@ export class PremiereComponent implements OnInit {
   date: string = moment().format('YYYY-MM-DD');
   series: Array<SearchedSerie> = [];
   loading = true;
-  url: string = environment.posterUrl;
-  title: string;
+  url = environment.posterUrl;
 
-  constructor(private seriesService: SeriesService) {
-  }
+  constructor(private seriesService: SeriesService) {}
 
   ngOnInit() {
     this.getPremieres();
@@ -67,15 +65,15 @@ export class PremiereComponent implements OnInit {
       }, () => null,
       () => {
         if (numberOfPages > 1) {
-          for (let i = 2; numberOfPages <= 1; i++) {
+          for (let i = 2; numberOfPages >= i; i++) {
             this.seriesService.getPremieres(this.date, i).subscribe((data: SearchData) => {
               for ( i = 0; data.results.length - 1 >= i; i++) {
                 this.series.push(data.results[i]);
               }
-            }), () => null,
+            }, () => null,
               () => {
                 this.loading = false;
-              };
+              });
           }
         } else {
           this.loading = false;

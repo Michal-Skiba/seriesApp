@@ -6,7 +6,6 @@ export const environment = {
   posterUrl: 'https://image.tmdb.org/t/p/w500/',
   filmwebLink: 'https://www.filmweb.pl/search?q=',
   imdbLink: 'https://www.imdb.com/find?ref_=nv_sr_fn&q=',
-  requestLimitTime: 10,
   requestsTimeLimit: 10600,
   requestsLimit: 39,
 };

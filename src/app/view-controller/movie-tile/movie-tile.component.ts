@@ -11,17 +11,14 @@ import { SerieDetail } from '@models/serieDetail.model';
 })
 export class MovieTileComponent implements OnChanges {
 
-  constructor(private getSeriesService: SeriesService, private router: Router) {
-  }
+  constructor(private getSeriesService: SeriesService, private router: Router) {}
 
   @Input() id: number;
 
-  loading = true;
-  fullUrl: string;
-  title: string;
-  overview: string;
-  serieDetails: SerieDetail;
-x
+  public loading = true;
+  private fullUrl: string;
+  private serieDetails: SerieDetail;
+
   ngOnChanges(): void {
     this.loading = true;
     this.getSeriesInfo(this.id);

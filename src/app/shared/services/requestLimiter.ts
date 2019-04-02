@@ -12,7 +12,7 @@ export class RequestLimiter {
   currentUrl = '';
   requestCounter = 1;
   timeDifference = 0;
-  windowTime = environment.requestLimitTime;
+  windowTime = environment.requestsTimeLimit;
   maxRequests = environment.requestsLimit;
 
   limit(stream: Observable<any>, url: string) {
@@ -21,7 +21,6 @@ export class RequestLimiter {
       const lastReqTime = localStorage.getItem('timeOfLastReq');
       const lastRequestDelay = (this.windowTime - (currentTime -
         +lastReqTime) * 1000);
-
       this.timestampCollection[this.requestCounter] = currentTime;
       if (this.requestCounter > 10) {
         localStorage.setItem('timeOfLastReq', JSON.stringify(currentTime));

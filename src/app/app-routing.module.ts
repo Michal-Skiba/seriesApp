@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: 'search',
