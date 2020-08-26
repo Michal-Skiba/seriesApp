@@ -1,9 +1,10 @@
 # MovieApp
 
 
-An application created to learn angular.
+
+The application was created to search for your favorite movies.
 
 
-u can launch app here: 
+You can launch app here: 
 
 https://michal-skiba.github.io/seriesApp/search
